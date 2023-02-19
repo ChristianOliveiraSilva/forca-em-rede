@@ -22,6 +22,12 @@ div.main-layout {
 
         .main-content {
             width: 50%;
+
+            .post-container { // mudar isso para um SCSS da pagina App
+                img {
+                    max-width: 100%;
+                }
+            }
         }
 
         .contacts-container {

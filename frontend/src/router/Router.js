@@ -3,6 +3,7 @@ import {
 } from "react-router-dom"
 
 import Apps from './routes/Apps'
+import Chat from './routes/Chat'
 
 const router = createBrowserRouter([
     {
@@ -17,7 +18,8 @@ const router = createBrowserRouter([
         path: "about",
         element: <div>About</div>
     },
-    ...Apps
+    ...Apps,
+    ...Chat
 ])
 
 export default router

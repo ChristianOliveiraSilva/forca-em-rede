@@ -1,4 +1,7 @@
 import Card from 'react-bootstrap/Card'
+import Button from 'react-bootstrap/Button'
+import ButtonGroup from 'react-bootstrap/ButtonGroup'
+
 
 const HeaderApp = () => {
     return (
@@ -11,23 +14,40 @@ const HeaderApp = () => {
 }
 
 const PostsComponent = () => {
+    const totalComments = 2e1
+
     return (
-        <Card className='my-3'>
+        <Card className='my-3 post-container'>
             <Card.Body>
                 <h3>Título</h3>
+                <p>Descrição</p>
                 <img src="https://static.vecteezy.com/ti/fotos-gratis/p3/6671766-fantastica-lua-magica-luz-e-agua-barco-com-arvore-papel-de-parede-gratis-foto.jpg" />
-                <p>Comentário</p>
+                
+                <ButtonGroup className='my-2'>
+                    <Button variant="primary">Like</Button>
+                    <Button variant="primary">Comentários</Button>
+                    <Button variant="primary">Compartilhar</Button>
+                </ButtonGroup>
+
+                <p>({totalComments}) Comentários</p>
+                <hr />
+
+                {(new Array(totalComments)).fill(1).map(
+                    (e, i) => <div key={i}>
+                                <h5>Nome do sujeito</h5>
+                                <p>Comentario em si</p>
+                            </div>
+                )}
             </Card.Body>
         </Card>
     )
 }
 
 const App = () => {
-    const a = [1, 2, 3, 4]
     return (
         <div>
             <HeaderApp />
-            {(new Array(1e3)).fill(1).map((e, i) => <PostsComponent key={i} />)}
+            {(new Array(2)).fill(1).map((e, i) => <PostsComponent key={i} />)}
         </div>
     )
 }
