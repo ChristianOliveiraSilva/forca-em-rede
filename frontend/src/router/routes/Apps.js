@@ -1,4 +1,4 @@
-import MainLayout from '../../layouts/MainLayout'
+import MainLayout from '../../layouts/MainLayout/index'
 
 import AppComponent from '../../views/App/index'
 

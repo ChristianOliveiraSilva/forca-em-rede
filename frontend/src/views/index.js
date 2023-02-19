@@ -5,6 +5,8 @@ import {
 } from "react-router-dom"
 
 import 'bootstrap/dist/css/bootstrap.min.css'
+import '../assets/scss/style.scss'
+
 
 export default () => {
     return (
