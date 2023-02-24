@@ -4,6 +4,8 @@ import {
 
 import Apps from './routes/Apps'
 import Chat from './routes/Chat'
+import Blog from './routes/Blog'
+import Auth from './routes/Auth'
 
 const router = createBrowserRouter([
     {
@@ -19,7 +21,9 @@ const router = createBrowserRouter([
         element: <div>About</div>
     },
     ...Apps,
-    ...Chat
+    ...Chat,
+    ...Blog,
+    ...Auth
 ])
 
 export default router

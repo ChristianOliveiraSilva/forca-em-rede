@@ -1,22 +1,22 @@
-import MainLayout from '../../layouts/MainLayout/index'
+import BlankLayout from '../../layouts/BlankLayout/index'
 
 import ChatComponent from '../../views/Chat/index'
 
-const MainLayoutWrapper = (props) => {
+const BlankLayoutWrapper = (props) => {
     return (
-        <MainLayout>
+        <BlankLayout>
             {props.children}
-        </MainLayout>
+        </BlankLayout>
     )
 }
 
 export default [
     {
         path: "chat",
-        element: <MainLayoutWrapper><ChatComponent /></MainLayoutWrapper>
+        element: <BlankLayoutWrapper><ChatComponent /></BlankLayoutWrapper>
     },
     {
         path: "chat/:contactId",
-        element: <MainLayoutWrapper><ChatComponent /></MainLayoutWrapper>
+        element: <BlankLayoutWrapper><ChatComponent /></BlankLayoutWrapper>
     }
 ]

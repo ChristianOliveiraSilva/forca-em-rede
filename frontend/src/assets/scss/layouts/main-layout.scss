@@ -1,7 +1,7 @@
 
 @import "../_base.scss";
 
-div.main-layout {
+.main-layout {
 
     header.main-header {
         background-color: $primary-color;
@@ -22,16 +22,12 @@ div.main-layout {
 
         .main-content {
             width: 50%;
-
-            .post-container { // mudar isso para um SCSS da pagina App
-                img {
-                    max-width: 100%;
-                }
-            }
         }
 
         .contacts-container {
             width: 20%;
+            max-height: 90vh;
+            overflow-y: auto;
         }
     }
 }
