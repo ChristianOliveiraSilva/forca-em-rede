@@ -1,0 +1,18 @@
+
+.stage-counter-container {
+    text-align: center;
+
+    .dot {
+        height: 12px;
+        width: 12px;
+        background-color: #ddd;
+        border-radius: 50%;
+        display: inline-block;
+        margin: 3px;
+        cursor: pointer;
+
+        &.active {
+            background-color: #333;
+        }
+    }
+}

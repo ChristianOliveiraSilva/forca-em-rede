@@ -5,7 +5,41 @@ body {
   font-family: $primary-font;
 }
 
+html {
+  scroll-behavior: smooth;
+}
+
+::-webkit-scrollbar {
+  width: 7px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #9e9da0;
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #474053;
+}
+
 p {
   margin: 0;
   padding: 0;
+}
+
+.form-control {
+  border: 0;
+  background-color: #f4f4f4;
+
+  &.error {
+    border: 2px solid rgb(var(--bs-danger-rgb));
+  }
+
+  &:focus {
+    box-shadow: unset;
+  }
 }

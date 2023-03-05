@@ -3,14 +3,12 @@
 
 .auth-layout {
     display: flex;
-    flex-wrap: no-wrap;
+    flex-wrap: wrap;
+    justify-content: center;
     
-
     .promo-container,
     .content-container {
-        width: 100%;
-        // border: 1px solid; // remove
-        min-height: 100vh;
+        flex: 1 1 50vw;
     }
 
     .promo-container {
@@ -19,7 +17,16 @@
     }
 
     .content-container {
-        padding: 2rem;
         background-color: $primary-color;
+        overflow-y: auto;
+        height: 100vh;
+    }
+}
+
+.form-container {
+    padding: 20vh 2rem 0px;
+
+    &.bigger-container {
+        padding-block: 4rem;
     }
 }
