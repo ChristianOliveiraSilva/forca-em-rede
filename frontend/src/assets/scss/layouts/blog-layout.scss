@@ -2,5 +2,44 @@
 @import "../_base.scss";
 
 .blog-layout {
+    header.main-blog-header {
+        display: flex;
+        flex-wrap: nowrap;
+        justify-content: space-between;
+        align-items: center;
+        padding: 1.5rem;
+        background-color: $primary-color;
+        color: $secondary-color;
 
+        .title {
+            font-size: 1.8em;
+            font-weight: bold;
+        }
+
+        a {
+            margin-inline: 1rem;
+        }
+    }
+
+    .blog-content {
+        padding: 4rem 3rem;
+        min-height: 50vh;
+    }
+
+    footer.main-blog-footer{
+        display: flex;
+        justify-content: space-between;
+        padding: 3rem;
+        background-color: $primary-color;
+        border-top: 5rem solid #603cba;
+        color: $secondary-color;
+
+        a {
+            text-decoration: underline;
+
+            &:hover {
+                text-decoration: underline;
+            }
+        }
+    }
 }

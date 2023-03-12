@@ -26,6 +26,16 @@ html {
   background: #474053;
 }
 
+a {
+  color: unset;
+  text-decoration: none;
+  cursor: pointer;
+
+  &.link {
+    text-decoration: underline;
+  }
+}
+
 p {
   margin: 0;
   padding: 0;

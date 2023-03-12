@@ -1,16 +1,13 @@
-import BlogLayout from '../../layouts/BlogLayout/index'
-
-const BlogLayoutWrapper = (props) => {
-    return (
-        <BlogLayout>
-            {props.children}
-        </BlogLayout>
-    )
-}
+import BlogComponent from '../../views/Blog/index'
+import BlogPageComponent from '../../views/Blog/blogpage'
 
 export default [
     {
         path: "blog",
-        element: <BlogLayoutWrapper><h1>Blog</h1></BlogLayoutWrapper>
+        element: <BlogComponent />
+    },
+    {
+        path: "blog/pages/:page",
+        element: <BlogPageComponent />
     }
 ]

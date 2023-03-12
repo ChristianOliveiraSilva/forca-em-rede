@@ -1,0 +1,61 @@
+@import "../_base.scss";
+
+.main-blog-container {
+    display: flex;
+
+    .content {
+        flex: 4;
+        padding: 0.5rem;
+
+        .blog-post-sample-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-block: 2rem;
+            padding: 1rem;
+            cursor: pointer;
+
+            &:hover {
+                background-color: $tertiary-color;
+                opacity: 0.85;
+            }
+
+            .blog-post-sample-content {
+                flex: 4;
+
+                .title {
+                    font-size: 1.75rem;
+                }
+
+                .subtitle {
+                    font-size: 1.25rem;
+                }
+
+                .description {
+                    font-size: 1rem;
+                }
+            }
+
+            .blog-post-sample-image {
+                flex: 1;
+
+                img {
+                    width: 100%;
+                }
+            }
+        }
+    }
+
+    aside {
+        flex: 1;
+        padding: 0.5rem;
+
+        .ad-container {
+            border: 1px solid #ccc;
+            display: grid;
+            place-items: center;
+            height: 100px;
+            margin-bottom: 1rem;
+        }
+    }
+}
