@@ -1,0 +1,92 @@
+
+@import "../_base.scss";
+
+$header-container-height: 10vh;
+
+.chat-container {
+
+    
+    
+    .header-container {
+        background-color: aquamarine;
+        padding: 1rem;
+        height: $header-container-height;
+    }
+
+    .chat-content {
+        display: flex;
+        flex-wrap: wrap;
+        height: calc(100vh - $header-container-height);
+
+        .chat-display-container {
+            flex: 75%;
+            padding: 1rem;
+            border-left: 1px solid #ccc;
+            height: 100%;
+
+            .chat-display {
+                margin: 0.25rem;
+                height: calc(100vh - $header-container-height - 18vh);
+                background-image: url('../../../assets/images/whats-app-background.jpg');
+                padding: 2rem;
+                overflow-y: auto;
+                
+                .chat-dialog {
+                    display: block;
+                    max-width: 40%;
+                    padding: 1rem;
+                    margin-block: 1rem;
+                    border-radius: 1rem;
+                    width: initial;
+
+                    &.me {
+                        margin-left: auto;
+                        background-color: darkkhaki;
+                    }
+
+                    &.to {
+                        background-color: indianred;
+                    }
+                }
+            }
+
+            footer.chat-footer {
+                padding: 0.25rem;
+                display: flex;
+                flex-wrap: nowrap;
+
+                input, button {
+                    border: 0;
+                    outline: none;
+                    padding: 1rem;
+                }
+
+                input {
+                    width: 100%;
+                }
+
+                button {
+                    width: 100px;
+                    background-color: #ddd;
+                }
+            }
+        }
+
+        .contect-list-container {
+            padding: 1rem;
+            flex: 25%;
+            height: 100%;
+            overflow: auto;
+
+            .contact-item {
+                cursor: pointer;
+                padding: 1rem;
+
+                &:hover {
+                    background-color: #ddd;
+                }
+            }
+        }
+    }
+
+}

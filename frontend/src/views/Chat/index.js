@@ -1,25 +1,25 @@
+import BlankLayout from '../../layouts/BlankLayout/index'
+
 import Card from 'react-bootstrap/Card'
 
-const Chat = () => {
-    return (
-        <div>
-            
-        </div>
-    )
-}
+import Chat from './components/Chat.js'
+import ContactList from './components/ContactList.js'
+import Header from './components/Header.js'
+
+import '../../assets/scss/pages/chat.scss'
 
 const App = () => {
     return (
-        <div>
-            <Card>
-                <Card.Body>
-                    <h5>Nome do contato</h5>
-                    <hr />
+        <BlankLayout>
+            <div className='chat-container'>
+                <Header />
 
+                <div className='chat-content'>
+                    <ContactList />
                     <Chat />
-                </Card.Body>
-            </Card>
-        </div>
+                </div>
+            </div>
+        </BlankLayout>
     )
 }
 
