@@ -2,6 +2,8 @@ import {
     createBrowserRouter
 } from "react-router-dom"
 
+import BlankLayout from '../layouts/BlankLayout'
+
 import Apps from './routes/Apps'
 import Chat from './routes/Chat'
 import Blog from './routes/Blog'
@@ -18,7 +20,7 @@ const router = createBrowserRouter([
     },
     {
         path: "about",
-        element: <div>About</div>
+        element: <BlankLayout>About</BlankLayout>
     },
     ...Apps,
     ...Chat,

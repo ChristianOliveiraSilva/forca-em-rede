@@ -1,7 +1,5 @@
 import BlankLayout from '../../layouts/BlankLayout/index'
 
-import Card from 'react-bootstrap/Card'
-
 import Chat from './components/Chat.js'
 import ContactList from './components/ContactList.js'
 import Header from './components/Header.js'
