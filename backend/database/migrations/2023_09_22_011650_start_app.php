@@ -8,11 +8,16 @@ return new class extends Migration
 {
     public function up()
     {
+        Schema::table('users', function (Blueprint $table) {
+            $table->softDeletes();
+        });
+
         Schema::create('posts', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('user_id');
             $table->text('content');
             $table->timestamps();
+            $table->softDeletes();
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
         });
 
@@ -22,6 +27,7 @@ return new class extends Migration
             $table->unsignedBigInteger('post_id');
             $table->text('content');
             $table->timestamps();
+            $table->softDeletes();
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->foreign('post_id')->references('id')->on('posts')->onDelete('cascade');
         });
@@ -31,6 +37,7 @@ return new class extends Migration
             $table->unsignedBigInteger('user_id');
             $table->unsignedBigInteger('post_id');
             $table->timestamps();
+            $table->softDeletes();
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->foreign('post_id')->references('id')->on('posts')->onDelete('cascade');
         });
@@ -39,10 +46,11 @@ return new class extends Migration
             $table->id();
             $table->unsignedBigInteger('user_id');
             $table->string('title');
-            $table->text('description');
+            $table->text('description')->nullable(true);
             $table->dateTime('start_date');
-            $table->dateTime('end_date');
+            $table->dateTime('end_date')->nullable(true);
             $table->timestamps();
+            $table->softDeletes();
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
         });
 
@@ -50,6 +58,8 @@ return new class extends Migration
             $table->id();
             $table->unsignedBigInteger('user_id');
             $table->unsignedBigInteger('event_id');
+            $table->timestamps();
+            $table->softDeletes();
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->foreign('event_id')->references('id')->on('events')->onDelete('cascade');
         });
@@ -58,6 +68,7 @@ return new class extends Migration
             $table->id();
             $table->unsignedBigInteger('user_id');
             $table->timestamps();
+            $table->softDeletes();
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
         });
 
@@ -66,6 +77,7 @@ return new class extends Migration
             $table->unsignedBigInteger('user_id');
             $table->unsignedBigInteger('friend_id');
             $table->timestamps();
+            $table->softDeletes();
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->foreign('friend_id')->references('id')->on('users')->onDelete('cascade');
         });
@@ -75,8 +87,9 @@ return new class extends Migration
             $table->unsignedBigInteger('sender_id');
             $table->unsignedBigInteger('receiver_id');
             $table->text('message_content');
-            $table->dateTime('seeb_at');
+            $table->dateTime('seen_at')->nullable(true);
             $table->timestamps();
+            $table->softDeletes();
             $table->foreign('sender_id')->references('id')->on('users')->onDelete('cascade');
             $table->foreign('receiver_id')->references('id')->on('users')->onDelete('cascade');
         });
@@ -85,8 +98,9 @@ return new class extends Migration
             $table->id();
             $table->unsignedBigInteger('user_id');
             $table->text('notification_content');
-            $table->dateTime('seeb_at');
+            $table->dateTime('seen_at')->nullable(true);
             $table->timestamps();
+            $table->softDeletes();
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
         });
 
@@ -95,6 +109,7 @@ return new class extends Migration
             $table->unsignedBigInteger('post_id');
             $table->string('media_url');
             $table->timestamps();
+            $table->softDeletes();
             $table->foreign('post_id')->references('id')->on('users')->onDelete('cascade');
         });
     }
@@ -110,5 +125,9 @@ return new class extends Migration
         Schema::dropIfExists('likes');
         Schema::dropIfExists('comments');
         Schema::dropIfExists('posts');
+
+        Schema::table('users', function (Blueprint $table) {
+            $table->dropSoftDeletes();
+        });
     }
 };

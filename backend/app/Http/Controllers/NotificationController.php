@@ -9,21 +9,6 @@ use App\Models\User;
 class NotificationController extends Controller
 {
 
-    public function  getFriendship()
-    {
-        //
-    }
-    
-    public function  verifyFriendship()
-    {
-        //
-    }
-    
-    public function  makeFriendship(Request $request)
-    {
-        //
-    }
-    
     public function show($id)
     {
         //
