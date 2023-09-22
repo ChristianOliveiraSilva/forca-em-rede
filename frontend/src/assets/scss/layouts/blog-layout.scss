@@ -2,6 +2,8 @@
 @import "../_base.scss";
 
 .blog-layout {
+    background-color: $background-color;
+    
     header.main-blog-header {
         display: flex;
         flex-wrap: nowrap;

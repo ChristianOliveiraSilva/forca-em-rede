@@ -1,9 +1,11 @@
 import '../../assets/scss/layouts/auth-layout.scss'
+import image from '../../assets/images/logo-cortada.svg'
 
 const DefaultComponent = () => {
-
     return (
-        <p>Colocar seu SVG bonito aqui</p>
+        <div>
+            <img src={image} />
+        </div>
     )
 }
 

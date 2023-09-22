@@ -21,7 +21,7 @@ const Component = () => {
             <button type="button" className="btn btn-primary btn-block mb-4">Confirmar</button>
 
             <div className="text-center">
-                <p>Ainda não é um membro? 🤔 <a href="#!">Registre-se</a></p>
+                <p>Ainda não é um membro? 💜 <a href="#!">Registre-se</a></p>
             </div>
         </>
     )

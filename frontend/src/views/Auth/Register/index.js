@@ -10,13 +10,7 @@ import Stage4 from './components/stages/Stage4'
 import Stage5 from './components/stages/Stage5'
 
 const Component = () => {
-    const STAGE_1 = 0
-    const STAGE_2 = 1
-    const STAGE_3 = 2
-    const STAGE_4 = 3
-    const STAGE_5 = 4
-
-    const [stage, setStage] = useState(STAGE_1)
+    const [stage, setStage] = useState(0)
 
     const components = [
         Stage1,
@@ -36,15 +30,16 @@ const Component = () => {
 
     return (
         <AuthLayout>
-            <form className='form-container bigger-container'>
-                <h1 className='mb-4'>Cadastre-se</h1>
+            <form className='form-container'>
+                <section>
+                    <h1 className='mb-4'>Cadastre-se</h1>
+                    {component()}
+                    <LoadingBox stage={stage} totalStage={components.length} buttonLabel={buttonLabel} nextStage={nextStage} backStage={backStage} />
+                </section>
 
-                {component()}
-
-                <LoadingBox stage={stage} totalStage={components.length} buttonLabel={buttonLabel} nextStage={nextStage} backStage={backStage} />
 
                 <div className="text-center">
-                    <p>Já é um membro? 🤔 <a href="#!">Logue-se</a></p>
+                    <p>Já é um membro? 💜 <a href="#!">Logue-se</a></p>
                 </div>
             </form>
         </AuthLayout>
