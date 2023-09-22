@@ -21,7 +21,7 @@ class FriendshipController extends Controller
             if ($result) {
                 return $this->sendSuccess($result, 'Friendship found');
             } else {
-                return $this->sendError('Friendship not found', null, 404);
+                return $this->sendSuccess(null, 'Friendship not found');
             }
         } catch (\Throwable $th) {
             return $this->sendError('Error while fetching friendship', $th);
