@@ -89,8 +89,13 @@ class User extends Authenticatable
         return $this->hasMany(UserProfile::class);
     }
 
-    public function media()
+    public function responsibleEvents()
     {
-        return $this->hasMany(UserProfile::class);
+        return $this->hasMany(Event::class);
+    }
+
+    public function participations()
+    {
+        return $this->hasMany(Participant::class);
     }
 }
