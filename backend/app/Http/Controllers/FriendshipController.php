@@ -5,82 +5,64 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\User;
+use App\Models\Friendship;
 
 class FriendshipController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
+    public function show(Request $request)
     {
-        //
+        try {
+            $userId = $request->userId;
+            $friendId = $request->friendId;
+
+            $friendship = new Friendship();
+            $result = $friendship->getFriendship($userId, $friendId);
+
+            if ($result) {
+                return $this->sendSuccess($result, 'Friendship found');
+            } else {
+                return $this->sendError('Friendship not found', null, 404);
+            }
+        } catch (\Throwable $th) {
+            return $this->sendError('Error while fetching friendship', $th);
+        }
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
+    public function verify(Request $request)
     {
-        //
+        try {
+            $userId = $request->userId;
+            $friendId = $request->friendId;
+
+            $friendship = new Friendship();
+            $result = $friendship->verifyFriendship($userId, $friendId);
+
+            if ($result) {
+                return $this->sendSuccess(['areFriends' => true], 'Users are friends');
+            } else {
+                return $this->sendSuccess(['areFriends' => false], 'Users are not friends');
+            }
+        } catch (\Throwable $th) {
+            return $this->sendError('Error while verifying friendship', $th);
+        }
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
     public function store(Request $request)
     {
-        //
-    }
+        try {
+            $userId = $request->userId;
+            $friendId = $request->friendId;
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
+            $friendship = new Friendship();
+            $success = $friendship->makeFriendship($userId, $friendId);
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        //
+            if ($success) {
+                return $this->sendSuccess([], 'Friendship created', 201);
+            } else {
+                return $this->sendError('Error creating friendship', 400);
+            }
+        } catch (\Throwable $th) {
+            return $this->sendError('Error while creating friendship', $th);
+        }
     }
 }

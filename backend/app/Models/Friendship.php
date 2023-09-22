@@ -23,4 +23,35 @@ class Friendship extends Model
     {
         return $this->belongsTo(User::class, 'friend_id');
     }
+
+    public function getFriendship(int $userId, int $friendId): ?Friendship
+    {
+        return self::where('user_id', $userId)
+            ->where('friend_id', $friendId)
+            ->orWhere(function ($query) use ($userId, $friendId) {
+                $query->where('user_id', $friendId)
+                    ->where('friend_id', $userId);
+            })
+            ->first();
+    }
+
+    public function verifyFriendship(int $userId, int $friendId): bool
+    {
+        return !is_null($this->getFriendship($userId, $friendId));
+    }
+
+    public function makeFriendship(int $userId, int $friendId): ?Friendship
+    {
+        $friendship = $this->getFriendship($userId, $friendId);
+        if ($friendship) {
+            return $friendship;
+        }
+    
+        $friendship = new Friendship();
+        $friendship->user_id = $userId;
+        $friendship->friend_id = $friendId;
+        $friendship->save();
+    
+        return $friendship;
+    }
 }
