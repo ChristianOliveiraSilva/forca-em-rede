@@ -9,6 +9,10 @@ return new class extends Migration
     public function up()
     {
         Schema::table('users', function (Blueprint $table) {
+            $table->string('username');
+            $table->string('phone')->nullable();
+            $table->boolean('is_memory')->default(false);
+            $table->timestamp('phone_verified_at')->nullable();
             $table->softDeletes();
         });
 
@@ -46,9 +50,9 @@ return new class extends Migration
             $table->id();
             $table->unsignedBigInteger('user_id');
             $table->string('title');
-            $table->text('description')->nullable(true);
+            $table->text('description')->nullable();
             $table->dateTime('start_date');
-            $table->dateTime('end_date')->nullable(true);
+            $table->dateTime('end_date')->nullable();
             $table->timestamps();
             $table->softDeletes();
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
@@ -67,6 +71,20 @@ return new class extends Migration
         Schema::create('user_profiles', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('user_id');
+            $table->string('gender');
+            $table->string('birthday');
+            $table->string('pronouns')->nullable();
+            $table->string('social_name')->nullable();
+            $table->string('disease')->nullable();
+            $table->string('stage')->nullable();
+            $table->string('place_treatment')->nullable();
+            $table->string('address')->nullable();
+            $table->string('city')->nullable();
+            $table->string('state')->nullable();
+            $table->string('job')->nullable();
+            $table->string('workplace')->nullable();
+            $table->string('cpf')->nullable();
+            $table->string('rg')->nullable();
             $table->timestamps();
             $table->softDeletes();
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
@@ -87,7 +105,7 @@ return new class extends Migration
             $table->unsignedBigInteger('sender_id');
             $table->unsignedBigInteger('receiver_id');
             $table->text('message_content');
-            $table->dateTime('seen_at')->nullable(true);
+            $table->dateTime('seen_at')->nullable();
             $table->timestamps();
             $table->softDeletes();
             $table->foreign('sender_id')->references('id')->on('users')->onDelete('cascade');
@@ -98,7 +116,7 @@ return new class extends Migration
             $table->id();
             $table->unsignedBigInteger('user_id');
             $table->text('notification_content');
-            $table->dateTime('seen_at')->nullable(true);
+            $table->dateTime('seen_at')->nullable();
             $table->timestamps();
             $table->softDeletes();
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');

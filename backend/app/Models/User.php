@@ -9,6 +9,7 @@ use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Laratrust\Traits\LaratrustUserTrait;
+use Illuminate\Database\Eloquent\Casts\Attribute;
 
 class User extends Authenticatable
 {
@@ -99,5 +100,21 @@ class User extends Authenticatable
     public function participations()
     {
         return $this->hasMany(Participant::class);
+    }
+    
+    protected function name(): Attribute
+    {
+        return Attribute::make(
+            get: fn (string $value) => $this->info->social_name ?? $value,
+        );
+    }
+
+    public function seeNotification(Notification $notification): bool
+    {
+        if ($this->id === $notification->user_id) {
+            return $notification->update(['seen_at' => true]);
+        }
+        
+        throw new \App\Exceptions\UnauthorizedException("Error Processing Request", 1);
     }
 }
