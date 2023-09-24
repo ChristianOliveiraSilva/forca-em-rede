@@ -5,7 +5,9 @@ namespace App\Http\Controllers;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Post;
+use App\Models\Media;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class PostController extends Controller
 {
@@ -14,86 +16,82 @@ class PostController extends Controller
         try {
             $posts = Post::all();
 
-            return sendSuccess($posts, 'Posts retrieved', 200);
+            return $this->sendSuccess($posts, 'Posts retrieved');
         } catch (\Throwable $th) {
-            return sendError('Error retrieving posts', $th);
+            return $this->sendError('Error retrieving posts', $th);
         }
     }
 
     public function store(Request $request)
     {
         try {
+            DB::beginTransaction();
+
             $post = new Post();
             $post->title = $request->title;
             $post->content = $request->content;
             $post->user_id = Auth::id();
             $post->save();
 
-            return sendSuccess($post, 'Post created', 201);
-        } catch (\Throwable $th) {
-            return sendError('Error creating post', $th);
-        }
-    }
+            foreach ($request->file('medias') as $media) {
+                $path = Storage::putFile('media', $media);
 
-    public function show($id)
-    {
-        try {
-            $post = Post::find($id);
-
-            if (!$post) {
-                return sendError('Post not found', null, 404);
+                $media = new Media();
+                $media->media_url = $path;
+                $media->post_id = $post->id;
+                $media->save();
             }
 
-            return sendSuccess($post, 'Post retrieved', 200);
+            $post->refresh();
+            
+            DB::commit();
+
+            return $this->sendSuccess($post, 'Post created', 201);
         } catch (\Throwable $th) {
-            return sendError('Error retrieving post', $th);
+            DB::rollback();
+            return $this->sendError('Error creating post', $th);
         }
     }
 
-    public function showByUser($id)
+    public function show(Post $post)
     {
         try {
-            $posts = Post::where('user_id', $id)->get();
-
-            return sendSuccess($posts, 'Posts retrieved by user', 200);
+            return $this->sendSuccess($post, 'Post retrieved');
         } catch (\Throwable $th) {
-            return sendError('Error retrieving posts by user', $th);
+            return $this->sendError('Error retrieving post', $th);
         }
     }
 
-    public function update(Request $request, $id)
+    public function showByUser($userId)
     {
         try {
-            $post = Post::find($id);
+            $posts = Post::where('user_id', $userId)->get();
 
-            if (!$post) {
-                return sendError('Post not found', null, 404);
-            }
+            return $this->sendSuccess($posts, 'Posts retrieved by user');
+        } catch (\Throwable $th) {
+            return $this->sendError('Error retrieving posts by user', $th);
+        }
+    }
 
+    public function update(Request $request, Post $post)
+    {
+        try {
             $post->title = $request->title;
             $post->content = $request->content;
             $post->save();
 
-            return sendSuccess($post, 'Post updated', 200);
+            return $this->sendSuccess($post, 'Post updated');
         } catch (\Throwable $th) {
-            return sendError('Error updating post', $th);
+            return $this->sendError('Error updating post', $th);
         }
     }
 
-    public function destroy($id)
+    public function destroy(Post $post)
     {
         try {
-            $post = Post::find($id);
-
-            if (!$post) {
-                return sendError('Post not found', null, 404);
-            }
-
-            $post->delete();
-
-            return sendSuccess(null, 'Post deleted', 200);
+            return $this->sendSuccess(['result' => $post->delete()], 'Post deleted');
         } catch (\Throwable $th) {
-            return sendError('Error deleting post', $th);
+            return $this->sendError('Error deleting post', $th);
         }
     }
 }

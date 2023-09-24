@@ -9,30 +9,28 @@ use App\Models\Friendship;
 
 class FriendshipController extends Controller
 {
-    public function show(Request $request)
+    public function show(Request $request, int $friendId)
     {
         try {
-            $userId = $request->userId;
-            $friendId = $request->friendId;
-
+            $userId = Auth::id();
+            
             $friendship = new Friendship();
             $result = $friendship->getFriendship($userId, $friendId);
 
             if ($result) {
                 return $this->sendSuccess($result, 'Friendship found');
             } else {
-                return $this->sendSuccess(null, 'Friendship not found');
+                return $this->sendError(null, 'Friendship not found');
             }
         } catch (\Throwable $th) {
             return $this->sendError('Error while fetching friendship', $th);
         }
     }
 
-    public function verify(Request $request)
+    public function verify(Request $request, int $friendId)
     {
         try {
-            $userId = $request->userId;
-            $friendId = $request->friendId;
+            $userId = Auth::id();
 
             $friendship = new Friendship();
             $result = $friendship->verifyFriendship($userId, $friendId);
@@ -47,17 +45,16 @@ class FriendshipController extends Controller
         }
     }
 
-    public function store(Request $request)
+    public function store(Request $request, int $friendId)
     {
         try {
-            $userId = $request->userId;
-            $friendId = $request->friendId;
+            $userId = Auth::id();
 
             $friendship = new Friendship();
             $success = $friendship->makeFriendship($userId, $friendId);
 
             if ($success) {
-                return $this->sendSuccess([], 'Friendship created', 201);
+                return $this->sendSuccess($friendship, 'Friendship created', 201);
             } else {
                 return $this->sendError('Error creating friendship', 400);
             }

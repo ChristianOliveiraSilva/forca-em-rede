@@ -18,81 +18,61 @@ class CommentController extends Controller
             $comment->content = $request->content;
             $comment->save();
 
-            return sendSuccess($comment, 'Comment created', 201);
+            return $this->sendSuccess($comment, 'Comment created', 201);
         } catch (\Throwable $th) {
-            return sendError('Error creating comment', $th);
+            return $this->sendError('Error creating comment', $th);
         }
     }
 
-    public function show($id)
+    public function show(Comment $comment)
     {
         try {
-            $comment = Comment::find($id);
-
-            if (!$comment) {
-                return sendError('Comment not found', null, 404);
-            }
-
-            return sendSuccess($comment, 'Comment retrieved', 200);
+            return $this->sendSuccess($comment, 'Comment retrieved');
         } catch (\Throwable $th) {
-            return sendError('Error retrieving comment', $th);
+            return $this->sendError('Error retrieving comment', $th);
         }
     }
 
-    public function showByUser($id)
+    public function showByUser(int $userId)
     {
         try {
-            $comments = Comment::where('user_id', $id)->get();
+            $comments = Comment::where('user_id', $userId)->get();
 
-            return sendSuccess($comments, 'Comments retrieved by user', 200);
+            return $this->sendSuccess($comments, 'Comments retrieved by user');
         } catch (\Throwable $th) {
-            return sendError('Error retrieving comments by user', $th);
+            return $this->sendError('Error retrieving comments by user', $th);
         }
     }
 
-    public function showByPost($id)
+    public function showByPost(int $postId)
     {
         try {
-            $comments = Comment::where('post_id', $id)->get();
+            $comments = Comment::where('post_id', $postId)->get();
 
-            return sendSuccess($comments, 'Comments retrieved by post', 200);
+            return $this->sendSuccess($comments, 'Comments retrieved by post');
         } catch (\Throwable $th) {
-            return sendError('Error retrieving comments by post', $th);
+            return $this->sendError('Error retrieving comments by post', $th);
         }
     }
 
-    public function update(Request $request, $id)
+    public function update(Request $request, Comment $comment)
     {
         try {
-            $comment = Comment::find($id);
-
-            if (!$comment) {
-                return sendError('Comment not found', null, 404);
-            }
-
             $comment->content = $request->content;
             $comment->save();
 
-            return sendSuccess($comment, 'Comment updated', 200);
+            return $this->sendSuccess($comment, 'Comment updated');
         } catch (\Throwable $th) {
-            return sendError('Error updating comment', $th);
+            return $this->sendError('Error updating comment', $th);
         }
     }
 
-    public function destroy($id)
+    public function destroy(Comment $comment)
     {
         try {
-            $comment = Comment::find($id);
-
-            if (!$comment) {
-                return sendError('Comment not found', null, 404);
-            }
-
-            $comment->delete();
-
-            return sendSuccess(null, 'Comment deleted', 200);
+            return $this->sendSuccess(['result' => $comment->delete()], 'Comment deleted');
         } catch (\Throwable $th) {
-            return sendError('Error deleting comment', $th);
+            return $this->sendError('Error deleting comment', $th);
         }
     }
 }

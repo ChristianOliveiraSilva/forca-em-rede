@@ -17,24 +17,18 @@ class LikeController extends Controller
             $like->post_id = $request->post_id;
             $like->save();
     
-            return sendSuccess($like, 'Like created', 201);
+            return $this->sendSuccess($like, 'Like created', 201);
         } catch (\Throwable $th) {
-            return sendError('Error to create like', $th);
+            return $this->sendError('Error to create like', $th);
         }
     }
 
-    public function show($id)
+    public function show(Like $like)
     {
         try {
-            $like = Like::find($id);
-
-            if (!$like) {
-                return sendError('Like not found', null, 404);
-            }
-
-            return sendSuccess($like, 'Like returned');
+            return $this->sendSuccess($like, 'Like returned');
         } catch (\Throwable $th) {
-            return sendError('Error to get like', $th);
+            return $this->sendError('Error to get like', $th);
         }
     }
 
@@ -43,26 +37,18 @@ class LikeController extends Controller
         try {
             $comments = Like::where('user_id', $id)->get();
 
-            return sendSuccess($like, 'Likes returned');
+            return $this->sendSuccess($like, 'Likes returned');
         } catch (\Throwable $th) {
-            return sendError('Error to get likes', $th);
+            return $this->sendError('Error to get likes', $th);
         }
     }
 
-    public function destroy($id)
+    public function destroy(Like $like)
     {
         try {
-            $like = Like::find($id);
-
-            if (!$like) {
-                return sendError('Like not found', null, 404);
-            }
-
-            $like->delete();
-
-            return sendSuccess($id, 'Like deleted');
+            return $this->sendSuccess(['result' => $like->delete()], 'Like deleted');
         } catch (\Throwable $th) {
-            return sendError('Error to delete like', $th);
+            return $this->sendError('Error to delete like', $th);
         }
     }
 }

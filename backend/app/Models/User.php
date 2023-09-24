@@ -17,34 +17,23 @@ class User extends Authenticatable
     use LaratrustUserTrait;
     use HasApiTokens, HasFactory, Notifiable;
 
-    /**
-     * The attributes that are mass assignable.
-     *
-     * @var array<int, string>
-     */
     protected $fillable = [
         'name',
         'email',
         'password',
     ];
 
-    /**
-     * The attributes that should be hidden for serialization.
-     *
-     * @var array<int, string>
-     */
     protected $hidden = [
         'password',
         'remember_token',
     ];
 
-    /**
-     * The attributes that should be cast.
-     *
-     * @var array<string, string>
-     */
     protected $casts = [
         'email_verified_at' => 'datetime',
+    ];
+
+    protected $with = [
+        'info'
     ];
 
     public function info()
@@ -54,17 +43,17 @@ class User extends Authenticatable
 
     public function posts()
     {
-        return $this->hasMany(UserProfile::class);
+        return $this->hasMany(Post::class);
     }
 
     public function comments()
     {
-        return $this->hasMany(UserProfile::class);
+        return $this->hasMany(Comment::class);
     }
 
     public function likes()
     {
-        return $this->hasMany(UserProfile::class);
+        return $this->hasMany(Like::class);
     }
 
     public function friendships()
@@ -84,12 +73,12 @@ class User extends Authenticatable
 
     public function privateMessages()
     {
-        return $this->hasMany(UserProfile::class);
+        return $this->hasMany(PrivateMessage::class);
     }
 
     public function notification()
     {
-        return $this->hasMany(UserProfile::class);
+        return $this->hasMany(Notification::class);
     }
 
     public function responsibleEvents()
@@ -116,5 +105,42 @@ class User extends Authenticatable
         }
         
         throw new \App\Exceptions\UnauthorizedException("Error Processing Request", 1);
+    }
+
+    public function getAgeAttribute()
+    {
+        return now()->diffInYears($this->info->birthday);
+    }
+
+    public function getSignAttribute()
+    {
+        $day = $this->info->birthday->format('j');
+        $month = $this->info->birthday->format('n');
+
+        $signs = [
+            ['name' => 'Áries', 'begin' => '03-21', 'end' => '04-19'],
+            ['name' => 'Touro', 'begin' => '04-20', 'end' => '05-20'],
+            ['name' => 'Gêmeos', 'begin' => '05-21', 'end' => '06-20'],
+            ['name' => 'Câncer', 'begin' => '06-21', 'end' => '07-22'],
+            ['name' => 'Leão', 'begin' => '07-23', 'end' => '08-22'],
+            ['name' => 'Virgem', 'begin' => '08-23', 'end' => '09-22'],
+            ['name' => 'Libra', 'begin' => '09-23', 'end' => '10-22'],
+            ['name' => 'Escorpião', 'begin' => '10-23', 'end' => '11-21'],
+            ['name' => 'Sagitário', 'begin' => '11-22', 'end' => '12-21'],
+            ['name' => 'Capricórnio', 'begin' => '12-22', 'end' => '01-19'],
+            ['name' => 'Aquário', 'begin' => '01-20', 'end' => '02-18'],
+            ['name' => 'Peixes', 'begin' => '02-19', 'end' => '03-20'],
+        ];
+
+        foreach ($signs as $sign) {
+            $begin = \Carbon\Carbon::createFromFormat('m-d', $sign['begin']);
+            $end = \Carbon\Carbon::createFromFormat('m-d', $sign['end']);
+
+            if (($day >= $begin->day && $month == $begin->month) || ($day <= $end->day && $month == $end->month)) {
+                return $sign['name'];
+            }
+        }
+
+        return 'Desconhecido';
     }
 }
