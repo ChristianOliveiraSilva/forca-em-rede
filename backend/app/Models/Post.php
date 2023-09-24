@@ -11,6 +11,10 @@ class Post extends Model
     use SoftDeletes;
     use HasFactory;
 
+    protected $with = [
+        'medias'
+    ];
+
     public function user()
     {
         return $this->belongsTo(User::class);

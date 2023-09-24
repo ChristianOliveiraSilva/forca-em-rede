@@ -32,10 +32,10 @@ class LikeController extends Controller
         }
     }
 
-    public function showByUser($id)
+    public function showByUser($userId)
     {
         try {
-            $comments = Like::where('user_id', $id)->get();
+            $comments = Like::where('user_id', $userId)->get();
 
             return $this->sendSuccess($like, 'Likes returned');
         } catch (\Throwable $th) {

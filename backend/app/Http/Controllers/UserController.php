@@ -171,6 +171,10 @@ class UserController extends Controller
     public function registerDeath(User $user)
     {
         try {
+            if (Auth::id() != $user->id) {
+                return $this->sendError("User is not yours", null, 403);
+            }
+
             $user->is_memory = true;
             $user->save();
 
