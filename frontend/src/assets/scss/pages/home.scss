@@ -1,0 +1,88 @@
+
+@import "../_base.scss";
+
+.home-container {
+    .above-the-fold-container {
+        position: relative;
+        height: calc(100vh - 105px - 25px + 1px);
+        background-image: url('../../images/home.jpg');
+        background-size: cover;
+        background-position: center;
+        border-bottom: 1rem solid $secondary-color;
+
+        .box-container {
+            position: absolute;
+            top: 2vh;
+            right: 10vw;
+            width: 729px;
+            height: 700px;
+            background-color: white;
+            border-radius: 2rem;
+            padding: 6rem;
+            padding-top: 0;
+            text-align: center;
+            transition: transform 1s;
+
+            &:hover {
+                transform: scale(1.025);
+            }
+
+            .subtitle {
+                font-size: 1.2em;
+            }
+
+            .logo {
+                max-height: 450px;
+                transition: transform 1s;
+    
+                &:hover {
+                    transform: scale(1.05);
+                }
+            }
+            
+            button {
+                margin-block: 2rem;
+                padding: 1rem;
+                background-color: $primary-color;
+                color: white;
+                border: 0;
+                border-radius: 1rem;
+                transition: transform 1s;
+
+                &:hover {
+                    transform: scale(1.2);
+                }
+            }
+        }
+    }
+
+    .block-container {
+        padding: 2rem;
+        margin-block: 5rem;
+        color: white;
+
+        // remover depois
+        min-height: 50vh; 
+
+        &.supporters-container {
+            background-color: #a29bfe;
+        }
+
+        &.creators-container {
+            background-color: #2980b9;
+        }
+
+        &.promoters-container {
+            background-color: #27ae60;
+        }
+
+        &.xxxxx-container {
+            background-color: #e74c3c;
+        }
+
+        &.thanks-container {
+            background-color: #16a085;
+        }
+
+    }
+}

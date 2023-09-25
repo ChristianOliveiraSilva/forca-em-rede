@@ -1,8 +1,14 @@
-import '../../assets/scss/layouts/blog-layout.scss'
+import { useEffect, useState } from 'react'
+import '../../assets/scss/layouts/miscellaneous-layout.scss'
+import logo from '../../assets/images/logo.svg'
 
-const BlogLayout = (props) => {
+const MiscellaneousLayout = (props) => {
+
     return (
-        <div className='blog-layout'>
+        <div className='miscellaneous-layout'>
+            <header className='minimal-header'>
+                AAAAAA AAAAAA AAAAAA AAAAAA AAAAAA
+            </header>
             <header className='main-header'>
                 <h3 className='title'>Força em Rede</h3>
 
@@ -17,6 +23,12 @@ const BlogLayout = (props) => {
                     <a href='#'>Link</a>
                     <a href='#'>Link</a>
                     <a href='#'>Link</a>
+                    
+                    <button className='btn btn-auth'>
+                        Logar
+                    </button>
+
+                    <a href='#' className='auth-link'>Cadastrar</a>
                 </nav>
             </header>
 
@@ -26,7 +38,8 @@ const BlogLayout = (props) => {
 
             <footer className='main-footer'>
                 <div className='footer-column'>
-                    <h3 title=''>Teste</h3>
+                    <img src={logo} className='logo' alt='Logo da Força em rede' title='Logo da Força em rede' />
+
                     <p>Teste <a>aaaa</a> </p>
                     <p>Teste</p>
                     <p>Teste</p>
@@ -54,4 +67,4 @@ const BlogLayout = (props) => {
     )
 }
 
-export default BlogLayout
+export default MiscellaneousLayout

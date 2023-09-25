@@ -4,7 +4,7 @@
 .blog-layout {
     background-color: $background-color;
     
-    header.main-blog-header {
+    header.main-header {
         display: flex;
         flex-wrap: nowrap;
         justify-content: space-between;
@@ -16,6 +16,8 @@
         .title {
             font-size: 1.8em;
             font-weight: bold;
+            line-height: normal !important;
+            margin-bottom: 0;
         }
 
         a {
@@ -23,12 +25,12 @@
         }
     }
 
-    .blog-content {
+    .content-container {
         padding: 4rem 3rem;
         min-height: 50vh;
     }
 
-    footer.main-blog-footer{
+    footer.main-footer{
         display: flex;
         justify-content: space-between;
         padding: 3rem;
