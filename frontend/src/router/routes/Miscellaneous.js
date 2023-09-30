@@ -4,6 +4,8 @@ import Terms from '../../views/Miscellaneous/Terms'
 import InformationsMidia from '../../views/Miscellaneous/InformationsMidia'
 import About from '../../views/Miscellaneous/About'
 import BugReport from '../../views/Miscellaneous/BugReport'
+import Contact from '../../views/Miscellaneous/Contact'
+import ReportingCenter from '../../views/Miscellaneous/ReportingCenter'
 
 export default [
     {
@@ -23,7 +25,15 @@ export default [
         element: <InformationsMidia />
     },
     {
+        path: "/contact",
+        element: <Contact />
+    },
+    {
         path: "/bug-report",
         element: <BugReport />
+    },
+    {
+        path: "/reporting-center",
+        element: <ReportingCenter />
     }
 ]

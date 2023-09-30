@@ -14,11 +14,11 @@ const Page = () => {
                         <img src={logo} className='logo' alt='Logo da Força em rede' title='Logo da Força em rede' />
                         <h3 className='title'>Força em rede</h3>
                         <h3 className='subtitle'>Juntos, somos mais fortes! Conecte-se à Força em Rede e encontre apoio para sua jornada contra o câncer.</h3>
-                        <button>
-                            <Link to="/login">
-                                Entre na plataforma
-                            </Link>
-                        </button>
+                        <Link to="/login">
+                            <button>
+                                    Entre na plataforma
+                            </button>
+                        </Link>
                     </div>
                 </div>
 

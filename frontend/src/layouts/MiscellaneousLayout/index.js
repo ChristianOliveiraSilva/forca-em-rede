@@ -1,5 +1,8 @@
 import '../../assets/scss/layouts/miscellaneous-layout.scss'
 import logo from '../../assets/images/logo.svg'
+import facebook from '../../assets/images/social-media/icons8-facebook.svg'
+import instagram from '../../assets/images/social-media/icons8-instagram.svg'
+import twitter from '../../assets/images/social-media/icons8-twitter.svg'
 import { Link } from 'react-router-dom'
 
 const MiscellaneousLayout = (props) => {
@@ -10,7 +13,9 @@ const MiscellaneousLayout = (props) => {
                 <b>Atenção!</b> Você está em um ambiente de demonstração da plataforma! <Link to='/bug-report'>Reporte bugs aqui</Link>
             </header>
             <header className='main-header'>
-                <h3 className='title'>Força em Rede</h3>
+                <Link to='/'>
+                    <h3 className='title'>Força em Rede</h3>
+                </Link>
 
                 <nav>
                     <Link to="/blog">Blog</Link>
@@ -37,23 +42,39 @@ const MiscellaneousLayout = (props) => {
                 </div>
                 <div className='footer-column'>
                     <h3 title='Links'>Links</h3>
+
+                    <p><Link to="/">Home</Link></p>
                     <p><Link to="/blog">Blog</Link></p>
                     <p><Link to="/about">Sobre</Link></p>
-                    <p><Link to="/terms">Termos</Link></p>
+                    <p><Link to="/terms">Termos de uso da plataforma</Link></p>
+                    <p><Link to="/informations-for-midia">Informações para a mídia</Link></p>
+                    <p><Link to="/contact">Contate a gente!</Link></p>
+                    <p><Link to="/bug-report">Relate bugs</Link></p>
+                    <p><Link to="/reporting-center">Central de Denúncias</Link></p>
+
                 </div>
                 <div className='footer-column'>
                     <h3 title='Informações para contato'>Informações para contato</h3>
-                    <p>Email institucional: </p>
-                    <p>Telefone institucional: </p>
-                    <p>Whatsapp institucional: </p>
+                    <table className='table text-light small'>
+                        <tr>
+                            <td>Email institucional:</td>
+                            <td>institucional@forcaemrede.com</td>
+                        </tr>
+                        <tr>
+                            <td>Telefone institucional:</td>
+                            <td>(XX) XXXX-XXXX</td>
+                        </tr>
+                        <tr>
+                            <td>Whatsapp institucional:</td>
+                            <td>(XX) XXXXX-XXXX</td>
+                        </tr>
+                    </table>
 
-                    <h5 title='Informações para contato' className='mt-4'>Nossas rede sociais</h5>
-                    <p>-</p>
-                    <p>-</p>
-                    <p>-</p>
-                    <p>-</p>
-                    <p>-</p>
-                    <p>-</p>
+                    <h3 title='Informações para contato' className='mt-4'>Nossas rede sociais</h3>
+                    <Link to="https://www.facebook.com/"><img src={facebook} className='social-img' /></Link>
+                    <Link to="https://www.instagram.com/"><img src={instagram} className='social-img' /></Link>
+                    <Link to="https://www.twitter.com/"><img src={twitter} className='social-img' /></Link>
+
                 </div>
             </footer>
         </div>
