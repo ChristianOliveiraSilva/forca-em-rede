@@ -14,7 +14,7 @@ const Component = () => {
             {fail && <p className='text-danger'>Falha ao verificar seu e-mail, por favor tente novamente</p>}
 
             <div className="form-outline mb-4">
-                <input type="text" id="form2Example1" className="form-control" />
+                <input type="text" id="form2Example1" className="form-control" placeholder="aaaaaa" />
                 <label className="form-label" htmlFor="form2Example1">Qual foi o código enviado no seu e-email?</label>
             </div>
 

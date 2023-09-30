@@ -4,7 +4,7 @@
 .home-container {
     .above-the-fold-container {
         position: relative;
-        height: calc(100vh - 105px - 25px + 1px);
+        height: calc(100vh - 105px - 25px);
         background-image: url('../../images/home.jpg');
         background-size: cover;
         background-position: center;

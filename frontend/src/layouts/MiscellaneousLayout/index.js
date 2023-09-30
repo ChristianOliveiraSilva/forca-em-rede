@@ -1,6 +1,6 @@
-import { useEffect, useState } from 'react'
 import '../../assets/scss/layouts/miscellaneous-layout.scss'
 import logo from '../../assets/images/logo.svg'
+import { Link } from 'react-router-dom'
 
 const MiscellaneousLayout = (props) => {
 
@@ -13,22 +13,17 @@ const MiscellaneousLayout = (props) => {
                 <h3 className='title'>Força em Rede</h3>
 
                 <nav>
-                    <a href='#'>Link</a>
-                    <a href='#'>Link</a>
-                    <a href='#'>Link</a>
-                    <a href='#'>Link</a>
-                    <a href='#'>Link</a>
-                    <a href='#'>Link</a>
-                    <a href='#'>Link</a>
-                    <a href='#'>Link</a>
-                    <a href='#'>Link</a>
-                    <a href='#'>Link</a>
+                    <Link to="/blog">Blog</Link>
+                    <Link to="/about">Sobre</Link>
+                    <Link to="/terms">Termos</Link>
                     
-                    <button className='btn btn-auth'>
-                        Logar
-                    </button>
-
-                    <a href='#' className='auth-link'>Cadastrar</a>
+                    <Link to="/login" className='btn btn-auth'>
+                            Logar
+                    </Link>
+                    
+                    <Link to="/register" className='auth-link'>
+                        Cadastrar
+                    </Link>
                 </nav>
             </header>
 
@@ -39,28 +34,26 @@ const MiscellaneousLayout = (props) => {
             <footer className='main-footer'>
                 <div className='footer-column'>
                     <img src={logo} className='logo' alt='Logo da Força em rede' title='Logo da Força em rede' />
+                </div>
+                <div className='footer-column'>
+                    <h3 title='Links'>Links</h3>
+                    <p><Link to="/blog">Blog</Link></p>
+                    <p><Link to="/about">Sobre</Link></p>
+                    <p><Link to="/terms">Termos</Link></p>
+                </div>
+                <div className='footer-column'>
+                    <h3 title='Informações para contato'>Informações para contato</h3>
+                    <p>Email institucional: </p>
+                    <p>Telefone institucional: </p>
+                    <p>Whatsapp institucional: </p>
 
-                    <p>Teste <a>aaaa</a> </p>
-                    <p>Teste</p>
-                    <p>Teste</p>
-                    <p>Teste</p>
-                    <p>Teste</p>
-                </div>
-                <div className='footer-column'>
-                    <h3 title=''>Teste</h3>
-                    <p>Teste <a>aaaa</a> </p>
-                    <p>Teste</p>
-                    <p>Teste</p>
-                    <p>Teste</p>
-                    <p>Teste</p>
-                </div>
-                <div className='footer-column'>
-                    <h3 title=''>Teste</h3>
-                    <p>Teste <a>aaaa</a> </p>
-                    <p>Teste</p>
-                    <p>Teste</p>
-                    <p>Teste</p>
-                    <p>Teste</p>
+                    <h5 title='Informações para contato' className='mt-4'>Nossas rede sociais</h5>
+                    <p>-</p>
+                    <p>-</p>
+                    <p>-</p>
+                    <p>-</p>
+                    <p>-</p>
+                    <p>-</p>
                 </div>
             </footer>
         </div>

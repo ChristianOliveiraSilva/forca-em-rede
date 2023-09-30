@@ -7,7 +7,8 @@ import Stage1 from './components/stages/Stage1'
 import Stage2 from './components/stages/Stage2'
 import Stage3 from './components/stages/Stage3'
 import Stage4 from './components/stages/Stage4'
-import Stage5 from './components/stages/Stage5'
+
+import { Link } from 'react-router-dom'
 
 const Component = () => {
     const [stage, setStage] = useState(0)
@@ -16,8 +17,7 @@ const Component = () => {
         Stage1,
         Stage2,
         Stage3,
-        Stage4,
-        Stage5
+        Stage4
     ]
 
     const component = components[stage]
@@ -32,14 +32,16 @@ const Component = () => {
         <AuthLayout>
             <form className='form-container'>
                 <section>
-                    <h1 className='mb-4'>Cadastre-se</h1>
+                    <h1 className='mb-4 text-light'>Cadastre-se</h1>
+                    {isFirstStage && <h5>Aqui, a esperança se multiplica. Una-se à nossa comunidade de guerreiros contra o câncer no Força em Rede.</h5>}
+                </section>
+                <section>
                     {component()}
                     <LoadingBox stage={stage} totalStage={components.length} buttonLabel={buttonLabel} nextStage={nextStage} backStage={backStage} />
                 </section>
 
-
-                <div className="text-center">
-                    <p>Já é um membro? 💜 <a href="#!">Logue-se</a></p>
+                <div className="text-center text-light">
+                    <p>Já é um membro? 💜 <Link to="/login">Logue-se</Link></p>
                 </div>
             </form>
         </AuthLayout>

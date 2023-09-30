@@ -8,7 +8,7 @@
         padding: 0px 5rem;
         background-color: $tertiary-color;
         color: white;
-        max-height: 25px;
+        height: 25px;
         border: 0;
     }
     
@@ -21,7 +21,7 @@
         padding: 1.5rem;
         background-color: $primary-color;
         color: white;
-        max-height: 105px;
+        height: 105px;
 
         .title {
             font-size: 1.8em;
@@ -62,12 +62,17 @@
         padding: 3rem;
         background-color: $primary-color;
         border-top: 12rem solid $secondary-color;
-        color: $secondary-color;
+        color: white;
+
+        p {
+            margin-block: 1rem;
+        }
 
         a {
             text-decoration: underline;
 
             &:hover {
+                color: $secondary-color;
                 text-decoration: underline;
             }
         }

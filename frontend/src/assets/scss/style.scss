@@ -45,7 +45,7 @@ p {
   background-color: #f4f4f4;
 
   &.error {
-    border: 2px solid rgb(var(--bs-danger-rgb));
+    border: 1px solid rgb(var(--bs-danger-rgb));
   }
 
   &:focus {

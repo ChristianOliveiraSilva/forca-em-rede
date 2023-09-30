@@ -26,7 +26,7 @@ const Page = () => {
                 </div>
 
                 <section>
-
+                    
                 </section>
 
                 <div className='block-container promoters-container'>

@@ -21,7 +21,7 @@ const StageCounter = ({stage, totalStage, canSetState, setState}) => {
                         }
 
                         return (
-                            <span className={className} key={i} onClick={() => clickFunction(i)}></span>
+                            <span className={className} key={i} onClick={() => clickFunction(i)}>💜</span>
                         )
                     }
                 )}

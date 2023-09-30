@@ -1,92 +1,162 @@
 
 @import "../_base.scss";
 
-$header-container-height: 10vh;
 
 .chat-container {
+    display: flex;
+    align-items: flex-start;
 
-    
-    
-    .header-container {
-        background-color: aquamarine;
-        padding: 1rem;
-        height: $header-container-height;
-    }
+    .contact-left-container {
+        padding: 2rem;
+        margin: 2rem;
+        background-color: #f4f5f9;
+        border-radius: 1rem;
+        width: 40%;
 
-    .chat-content {
-        display: flex;
-        flex-wrap: wrap;
-        height: calc(100vh - $header-container-height);
-
-        .chat-display-container {
-            flex: 75%;
-            padding: 1rem;
-            border-left: 1px solid #ccc;
-            height: 100%;
-
-            .chat-display {
-                margin: 0.25rem;
-                height: calc(100vh - $header-container-height - 18vh);
-                background-image: url('../../../assets/images/whats-app-background.jpg');
-                padding: 2rem;
-                overflow-y: auto;
-                
-                .chat-dialog {
-                    display: block;
-                    max-width: 40%;
-                    padding: 1rem;
-                    margin-block: 1rem;
-                    border-radius: 1rem;
-                    width: initial;
-
-                    &.me {
-                        margin-left: auto;
-                        background-color: darkkhaki;
-                    }
-
-                    &.to {
-                        background-color: indianred;
-                    }
-                }
-            }
-
-            footer.chat-footer {
-                padding: 0.25rem;
-                display: flex;
-                flex-wrap: nowrap;
-
-                input, button {
-                    border: 0;
-                    outline: none;
-                    padding: 1rem;
-                }
-
-                input {
-                    width: 100%;
-                }
-
-                button {
-                    width: 100px;
-                    background-color: #ddd;
-                }
+        .header-container {
+            .title {
+                font-size: 40px;
             }
         }
 
-        .contect-list-container {
-            padding: 1rem;
-            flex: 25%;
-            height: 100%;
-            overflow: auto;
+        .contact-list-container {
+            max-height: 75vh;
+            overflow-y: auto;
+            padding-inline: 1rem;
+            user-select: none;
 
             .contact-item {
-                cursor: pointer;
+                margin-block: 0.25rem;
                 padding: 1rem;
+                border-radius: 1rem;
+                cursor: pointer;
+                display: flex;
+                gap: 10px;
 
-                &:hover {
-                    background-color: #ddd;
+                .contact-image {
+                    border-radius: 1rem;
+                    display: block;
+                    margin: auto;
+                    max-height: 100px;
+                }
+    
+                .contact-name {
+                    font-size: 1.6em;
+                    white-space: nowrap;
+                    overflow: hidden;
+                    text-overflow: ellipsis;
+                }
+
+                .last-msg-time {
+                    float: right;
+                    font-size: 0.9em;
+                }
+    
+                .last-msg {
+                    font-size: 1em;
+                    color: lightgray;
+                    white-space: nowrap;
+                    overflow: hidden;
+                    text-overflow: ellipsis;
+                }
+
+                &:hover, &.active {
+                    background-color: $primary-color;
+                    color: white;
+                }
+            }
+
+        }
+    }
+
+    .chat-display-container {
+        padding: 4rem;
+        width: 100%;
+
+        .header-chat-display-container {
+            display: flex;
+            justify-content: flex-start;
+            align-items: center;
+            padding-bottom: 1rem;
+            margin-bottom: 1rem;
+            width: 100%;
+            border-bottom: 3px solid #eee;
+
+            .contact-image {
+                border-radius: 1rem;
+                max-height: 100px;
+            }
+
+            .contact-name {
+                width: 100%;
+                padding-inline: 2rem;
+                font-size: 1.6em;
+                white-space: nowrap;
+                overflow: hidden;
+                text-overflow: ellipsis;
+            }
+
+            button {
+                padding-inline: 2rem;
+                background-color: #a00;
+                color: white;
+            }
+        }
+
+        .chat-display {
+            padding: 1rem;
+            max-height: 100%;
+            max-height: 50vh;
+            overflow: auto;
+
+            .chat-dialog {
+                padding: 1rem;
+                margin: 1rem;
+                color: white;
+                border-radius: 1rem;
+                max-width: 70%;
+
+                &.me {
+                    background-color: $primary-color;
+                    text-align: end;
+                    margin-left: auto;
+                }
+
+                &.to {
+                    background-color: #c2befd;
                 }
             }
         }
+
+        .chat-footer {
+            margin-block: 1rem;
+
+            textarea {
+                padding: 1rem;
+                width: 100%;
+                max-height: 100%;
+                max-height: 15vh;
+                outline: none;
+                resize: none;
+                border: 2px solid #eee;
+                background-color: #fafafa;
+                border-radius: 1rem;
+            }
+
+            button {
+                display: block;
+                margin-left: auto;
+                border: 2px solid #ddd;
+                color: #444;
+                background-color: #f1f1f1;
+                padding: 1rem;
+                border-radius: 1rem;
+            }
+        }
+
     }
+}
+
+@media screen and (min-width: 970px) {
 
 }

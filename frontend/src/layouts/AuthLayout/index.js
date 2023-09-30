@@ -1,5 +1,5 @@
 import '../../assets/scss/layouts/auth-layout.scss'
-import image from '../../assets/images/logo-cortada.svg'
+import image from '../../assets/images/logo.svg'
 
 const DefaultComponent = () => {
     return (

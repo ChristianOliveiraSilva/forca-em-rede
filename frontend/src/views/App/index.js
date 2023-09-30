@@ -2,6 +2,8 @@ import Card from 'react-bootstrap/Card'
 import Button from 'react-bootstrap/Button'
 import ButtonGroup from 'react-bootstrap/ButtonGroup'
 
+import MainLayout from '../../layouts/MainLayout/index'
+
 import '../../assets/scss/pages/app.scss'
 
 const HeaderApp = () => {
@@ -46,10 +48,10 @@ const PostsComponent = () => {
 
 const App = () => {
     return (
-        <div>
+        <MainLayout>
             <HeaderApp />
             {(new Array(2)).fill(1).map((e, i) => <PostsComponent key={i} />)}
-        </div>
+        </MainLayout>
     )
 }
 
