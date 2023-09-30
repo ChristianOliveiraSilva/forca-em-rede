@@ -7,7 +7,7 @@ const MiscellaneousLayout = (props) => {
     return (
         <div className='miscellaneous-layout'>
             <header className='minimal-header'>
-                AAAAAA AAAAAA AAAAAA AAAAAA AAAAAA
+                <b>Atenção!</b> Você está em um ambiente de demonstração da plataforma! <Link to='/bug-report'>Reporte bugs aqui</Link>
             </header>
             <header className='main-header'>
                 <h3 className='title'>Força em Rede</h3>

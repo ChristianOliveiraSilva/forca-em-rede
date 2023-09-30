@@ -1,31 +1,29 @@
-import BlankLayout from '../../layouts/BlankLayout'
 
 import Home from '../../views/Miscellaneous/Home'
 import Terms from '../../views/Miscellaneous/Terms'
-
-const BlankLayoutWrapper = (props) => {
-    return (
-        <BlankLayout>
-            {props.children}
-        </BlankLayout>
-    )
-}
+import InformationsMidia from '../../views/Miscellaneous/InformationsMidia'
+import About from '../../views/Miscellaneous/About'
+import BugReport from '../../views/Miscellaneous/BugReport'
 
 export default [
     {
         path: "/",
-        element: <BlankLayoutWrapper><Home /></BlankLayoutWrapper>
+        element: <Home />
     },
     {
         path: "/about",
-        element: <BlankLayoutWrapper><Terms /></BlankLayoutWrapper>
+        element: <About />
     },
     {
         path: "/terms",
-        element: <BlankLayoutWrapper><Terms /></BlankLayoutWrapper>
+        element: <Terms />
     },
     {
         path: "/informations-for-midia",
-        element: <BlankLayoutWrapper><Terms /></BlankLayoutWrapper>
+        element: <InformationsMidia />
+    },
+    {
+        path: "/bug-report",
+        element: <BugReport />
     }
 ]

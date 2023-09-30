@@ -5,11 +5,14 @@
     background-color: $background-color;
 
     header.minimal-header {
-        padding: 0px 5rem;
-        background-color: $tertiary-color;
+        padding: 3px 5rem;
+        background-color: $secondary-color;
         color: white;
         height: 25px;
+        font-size: 12px;
         border: 0;
+        text-align: center;
+        vertical-align: middle;
     }
     
     header.main-header {

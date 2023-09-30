@@ -2,6 +2,7 @@ import MiscellaneousLayout from '../../../layouts/MiscellaneousLayout'
 
 import '../../../assets/scss/pages/home.scss'
 import logo from '../../../assets/images/logo.svg'
+import { Link } from 'react-router-dom'
 
 const Page = () => {
     return (
@@ -13,7 +14,11 @@ const Page = () => {
                         <img src={logo} className='logo' alt='Logo da Força em rede' title='Logo da Força em rede' />
                         <h3 className='title'>Força em rede</h3>
                         <h3 className='subtitle'>Juntos, somos mais fortes! Conecte-se à Força em Rede e encontre apoio para sua jornada contra o câncer.</h3>
-                        <button>Conhecer</button>
+                        <button>
+                            <Link to="/login">
+                                Entre na plataforma
+                            </Link>
+                        </button>
                     </div>
                 </div>
 
