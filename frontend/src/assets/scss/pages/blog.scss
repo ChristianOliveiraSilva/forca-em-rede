@@ -7,20 +7,17 @@
         flex: 4;
         padding: 0.5rem;
 
-        .blog-post-sample-container {
+        .blog-post-container {
             display: flex;
             justify-content: space-between;
             align-items: center;
             margin-block: 2rem;
-            padding: 1rem;
+            padding: 2rem;
             cursor: pointer;
+            background-color: #f4f4f4;
+            border-radius: 1rem;
 
-            &:hover {
-                background-color: $tertiary-color;
-                opacity: 0.85;
-            }
-
-            .blog-post-sample-content {
+            .blog-post-content {
                 flex: 4;
 
                 .title {
@@ -36,7 +33,7 @@
                 }
             }
 
-            .blog-post-sample-image {
+            .blog-post-image {
                 flex: 1;
 
                 img {

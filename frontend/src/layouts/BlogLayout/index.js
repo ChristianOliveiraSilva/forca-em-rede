@@ -1,22 +1,17 @@
+import { Link } from 'react-router-dom'
 import '../../assets/scss/layouts/blog-layout.scss'
 
 const BlogLayout = (props) => {
     return (
         <div className='blog-layout'>
             <header className='main-header'>
-                <h3 className='title'>Força em Rede</h3>
+                <h3 className='title'>Força em Rede - Blog</h3>
 
                 <nav>
-                    <a href='#'>Link</a>
-                    <a href='#'>Link</a>
-                    <a href='#'>Link</a>
-                    <a href='#'>Link</a>
-                    <a href='#'>Link</a>
-                    <a href='#'>Link</a>
-                    <a href='#'>Link</a>
-                    <a href='#'>Link</a>
-                    <a href='#'>Link</a>
-                    <a href='#'>Link</a>
+                    <Link to='/'>Home</Link>
+                    <Link to='/blog'>Todos</Link>
+                    <Link to='/blog/search'>Pesquisar</Link>
+                    
                 </nav>
             </header>
 

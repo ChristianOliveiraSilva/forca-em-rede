@@ -1,5 +1,6 @@
 import BlogComponent from '../../views/Blog/index'
-import BlogPageComponent from '../../views/Blog/blogpage'
+import SearchBlog from '../../views/Blog/SearchBlog'
+import BlogPageComponent from '../../views/Blog/BlogPage'
 
 export default [
     {
@@ -7,7 +8,11 @@ export default [
         element: <BlogComponent />
     },
     {
-        path: "blog/pages/:page",
+        path: "blog/search",
+        element: <SearchBlog />
+    },
+    {
+        path: "blog/pages/:slug",
         element: <BlogPageComponent />
     }
 ]

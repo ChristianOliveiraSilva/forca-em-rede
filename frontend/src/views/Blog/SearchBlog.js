@@ -1,12 +1,9 @@
 import BlogLayout from '../../layouts/BlogLayout/index'
 
 import BlogPost from './components/BlogPost'
-import '../../assets/scss/pages/blog.scss'
 import { Link } from 'react-router-dom'
 
-import BlogService from '../../services/BlogService'
-
-const Blog = () => {
+const SearchBlog = () => {
     return (
         <BlogLayout>
             <main className='main-blog-container'>
@@ -14,10 +11,10 @@ const Blog = () => {
                     <h3>Este é o blog do força em rede</h3>
                     <p>Compartilhe, comente e interaja com as postagens</p>
 
-                    {BlogService.blogs.map(
-                        (blog, i) => (
-                            <Link to={`/blog/pages/${blog.slug}`}>
-                                <BlogPost key={blog.slug} blog={blog} />
+                    {(new Array(1e2 / 4)).fill(1).map(
+                        (e, i) => (
+                            <Link to="/blog/pages/page">
+                                <BlogPost key={i} />
                             </Link>
                         )
                     )}
@@ -34,4 +31,4 @@ const Blog = () => {
     )
 }
 
-export default Blog
+export default SearchBlog
