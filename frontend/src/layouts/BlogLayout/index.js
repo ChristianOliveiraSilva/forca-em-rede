@@ -8,10 +8,9 @@ const BlogLayout = (props) => {
                 <h3 className='title'>Força em Rede - Blog</h3>
 
                 <nav>
-                    <Link to='/'>Home</Link>
                     <Link to='/blog'>Todos</Link>
                     <Link to='/blog/search'>Pesquisar</Link>
-                    
+                    <Link to='/'>Home</Link>                    
                 </nav>
             </header>
 
@@ -19,7 +18,7 @@ const BlogLayout = (props) => {
                 {props.children}
             </section>
 
-            <footer className='main-footer'>
+            {/* <footer className='main-footer'>
                 <div className='footer-column'>
                     <h3 title=''>Teste</h3>
                     <p>Teste <a>aaaa</a> </p>
@@ -44,7 +43,7 @@ const BlogLayout = (props) => {
                     <p>Teste</p>
                     <p>Teste</p>
                 </div>
-            </footer>
+            </footer> */}
         </div>
     )
 }

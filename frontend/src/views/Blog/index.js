@@ -16,8 +16,8 @@ const Blog = () => {
 
                     {BlogService.blogs.map(
                         (blog, i) => (
-                            <Link to={`/blog/pages/${blog.slug}`}>
-                                <BlogPost key={blog.slug} blog={blog} />
+                            <Link to={`/blog/pages/${blog.slug}`} key={blog.slug}>
+                                <BlogPost blog={blog} />
                             </Link>
                         )
                     )}

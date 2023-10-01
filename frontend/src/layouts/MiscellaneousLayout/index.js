@@ -56,18 +56,20 @@ const MiscellaneousLayout = (props) => {
                 <div className='footer-column'>
                     <h3 title='Informações para contato'>Informações para contato</h3>
                     <table className='table text-light small'>
-                        <tr>
-                            <td>Email institucional:</td>
-                            <td>institucional@forcaemrede.com</td>
-                        </tr>
-                        <tr>
-                            <td>Telefone institucional:</td>
-                            <td>(XX) XXXX-XXXX</td>
-                        </tr>
-                        <tr>
-                            <td>Whatsapp institucional:</td>
-                            <td>(XX) XXXXX-XXXX</td>
-                        </tr>
+                        <tbody>
+                            <tr>
+                                <td>Email institucional:</td>
+                                <td>institucional@forcaemrede.com</td>
+                            </tr>
+                            <tr>
+                                <td>Telefone institucional:</td>
+                                <td>(XX) XXXX-XXXX</td>
+                            </tr>
+                            <tr>
+                                <td>Whatsapp institucional:</td>
+                                <td>(XX) XXXXX-XXXX</td>
+                            </tr>
+                        </tbody>
                     </table>
 
                     <h3 title='Informações para contato' className='mt-4'>Nossas rede sociais</h3>
