@@ -14,7 +14,7 @@ const Blog = () => {
                     <h3>Este é o blog do força em rede</h3>
                     <p>Compartilhe, comente e interaja com as postagens</p>
 
-                    {BlogService.blogs.map(
+                    {BlogService.blogs.slice(0, 10).map(
                         (blog, i) => (
                             <Link to={`/blog/pages/${blog.slug}`} key={blog.slug}>
                                 <BlogPost blog={blog} />

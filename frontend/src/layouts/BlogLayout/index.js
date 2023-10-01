@@ -18,8 +18,8 @@ const BlogLayout = (props) => {
                 {props.children}
             </section>
 
-            {/* <footer className='main-footer'>
-                <div className='footer-column'>
+            <footer className='main-footer'>
+                {/* <div className='footer-column'>
                     <h3 title=''>Teste</h3>
                     <p>Teste <a>aaaa</a> </p>
                     <p>Teste</p>
@@ -42,8 +42,8 @@ const BlogLayout = (props) => {
                     <p>Teste</p>
                     <p>Teste</p>
                     <p>Teste</p>
-                </div>
-            </footer> */}
+                </div> */}
+            </footer>
         </div>
     )
 }
