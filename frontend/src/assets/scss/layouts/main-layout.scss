@@ -5,30 +5,95 @@
     background-color: $background-color;
 
     header.main-header {
-        background-color: $primary-color;
         display: flex;
         justify-content: space-between;
+        align-items: center;
         padding: 1rem;
+
+        .logo-container {
+            width: 20%;
+
+            img {
+                max-height: 50px;
+            }
+        }
+
+        .nav-container {
+            width: 30%;
+            display: flex;
+            gap: 2rem;
+        }
+
+        .search-container {
+            width: 100%;
+            padding-inline: 1rem;
+            
+            .icon-container {
+                background-color: #eee;
+                width: 100%;
+                border-radius: 1rem;
+                display: flex;
+                gap: 30px;
+                padding-inline: 2rem;
+                justify-content: center;
+                align-items: center;
+
+                input {
+                    outline: none;
+                    border: 0;
+                    width: 100%;
+                    padding: 1rem;
+                    padding-left: 0px;
+                    background-color: #eee;
+                }
+    
+                .input-icon {
+                    padding-bottom: 25px;
+                    width: 20px;
+                    height: 20px;
+                }
+            }
+
+        }
+
+        .auth-container {
+            width: 20%;
+            text-align: right;
+
+            .notification-icon {
+                margin-inline: 1rem;
+                font-size: 1.2rem;
+                cursor: pointer;
+
+                &.notificated::after {
+                    content: "";
+                    display: inline-block;
+                    width: 5px;
+                    height: 5px;
+                    border-radius: 100%;
+                    transform: translateY(-250%);
+                    background-color: red;
+                    margin-right: 5px;
+                }
+            }
+
+            .contact-image {
+                width: 60px;
+                border-radius: 100%;
+                cursor: pointer;
+                transition: .25s;
+
+                &:hover {
+                    transform: scale(1.15);
+                }
+            }
+        }
     }
 
-    main.content {
-        display: flex;
-        justify-content: space-between;
+    .content {
+        max-width: 820px;
+        display: block;
+        margin: 0 auto;
         padding: 1rem;
-
-        aside.menu-aside-container {
-            width: 20%;
-
-        }
-
-        .main-content {
-            width: 50%;
-        }
-
-        .contacts-container {
-            width: 20%;
-            max-height: 90vh;
-            overflow-y: auto;
-        }
     }
 }

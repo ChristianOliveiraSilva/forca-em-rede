@@ -9,9 +9,7 @@ const MainLayout = (props) => {
             <Header />
 
             <main className='content'>
-                <section className='main-content'>
-                    {props.children}
-                </section>
+                {props.children}
             </main>
         </div>
     )
