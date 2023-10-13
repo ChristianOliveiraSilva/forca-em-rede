@@ -1,0 +1,90 @@
+
+@import "../_base.scss";
+
+.profile-container {
+
+    header {
+        text-align: center;
+
+        img.picture {
+            width: 100%;
+            max-width: 300px;
+            border-radius: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            margin-bottom: 1rem;
+        }
+
+        .title {
+            font-size: 2rem;
+        }
+
+        .in-memory-text {
+            display: none;
+            font-size: 1.4rem;
+            color: #777;
+
+            &.active {
+                display: block;
+            }
+        }
+    }
+
+    .card-container {
+        background-color: white;
+        box-shadow: 0px 5px 10px #ccc;
+        border-radius: 1rem;
+        margin-block: 2rem;
+        padding: 2rem;
+        border: 0;
+    }
+
+    .info-container {
+        .row {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            margin-block: 3rem 1rem;
+
+            .item {
+                width: calc(20% - 1rem);
+            }
+        }
+    }
+
+    .event-container {
+        display: flex;
+        gap: 1rem;
+        flex-wrap: wrap;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+        margin-block: 3rem 1rem;
+
+        .event {
+            width: calc(50% - 1rem);
+
+            img {
+                max-width: 100%;
+            }
+
+            .image-wrapper {
+                position: relative;
+
+                .date {
+                    position: absolute;
+                    background-color: white;
+                    top: 10px;
+                    left: 10px;
+                    padding: 5px 10px;
+                }
+            }
+        }
+    }
+
+    .posts-container {
+
+    }
+}

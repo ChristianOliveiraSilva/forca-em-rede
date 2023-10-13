@@ -1,0 +1,26 @@
+
+@import "../_base.scss";
+
+.config-container {
+    .config-list-container {
+        border-radius: 1rem;
+        border: 1px solid #ddd;
+        
+        .item {
+            border-bottom: 1px solid #ddd;
+            padding: 1rem;
+
+            &:last-child {
+                border-bottom: 0;
+            }
+        }
+    }
+    
+    .config-panel-container {
+        margin-top: 2rem;
+        border-radius: 1rem;
+        border: 1px solid #ddd;
+        padding: 1rem;
+
+    }
+}
