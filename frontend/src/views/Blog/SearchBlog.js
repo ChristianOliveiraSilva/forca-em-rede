@@ -49,7 +49,7 @@ const Blog = () => {
                 <aside>
                     {(new Array(10)).fill(1).map(
                         (e, i) => (
-                            <div key={i} className='ad-container'>box de algum anuncio</div>
+                            <div key={i} className='ad-container'>Anúncio</div>
                         )
                     )}
                 </aside>

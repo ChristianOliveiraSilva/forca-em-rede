@@ -9,13 +9,18 @@ const Stage = ({addData}) => {
     return (
         <>
             <div className="form-outline mb-4">
-                <input id="gender-input" className="form-control" placeholder="Gênero" name='gender' onChange={handleChange} />
+                <select id="gender-input" className="form-control" name='gender' onChange={handleChange}>
+                    <option value="">Selecione uma opção</option>
+                    <option value="male">Masculino</option>
+                    <option value="femmale">Feminino</option>
+                    <option value="other">Outro</option>
+                </select>
                 <label className="form-label" htmlFor="gender-input">Gênero</label>
                 
-                <input id="birthdate-input" className="form-control" placeholder="Data de nascimento" name='birthdate' onChange={handleChange} />
+                <input type="date" id="birthdate-input" className="form-control" placeholder="Data de nascimento" name='birthdate' onChange={handleChange} />
                 <label className="form-label" htmlFor="birthdate-input">Data de nascimento</label>
                 
-                <input id="pronouns-input" className="form-control" placeholder="Pronomes" name='pronouns' onChange={handleChange} />
+                <input id="pronouns-input" className="form-control" placeholder="Pronomes, exemplo: ele/dele" name='pronouns' onChange={handleChange} />
                 <label className="form-label" htmlFor="pronouns-input">Pronomes</label>
                 
                 <input id="address-input" className="form-control" placeholder="Endereço" name='address' onChange={handleChange} />

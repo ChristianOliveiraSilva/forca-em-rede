@@ -1,5 +1,5 @@
 import AuthLayout from '../../../layouts/AuthLayout/index'
-
+import { Link } from 'react-router-dom'
 
 const Component = () => {
     return (
@@ -15,7 +15,7 @@ const Component = () => {
                 <button type="button" className="btn btn-primary btn-block mb-4">Resetar</button>
 
                 <div className="text-center text-light">
-                    <p>Ainda não é um membro? 💜 <a href="#!">Registre-se</a></p>
+                    <p>Já é um membro? 💜 <Link to="/login">Logue-se</Link></p>
                 </div>
             </form>
         </AuthLayout>

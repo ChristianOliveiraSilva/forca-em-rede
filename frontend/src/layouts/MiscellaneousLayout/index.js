@@ -1,5 +1,5 @@
 import '../../assets/scss/layouts/miscellaneous-layout.scss'
-import logo from '../../assets/images/logo.svg'
+import logo from '../../assets/images/logo.png'
 import facebook from '../../assets/images/social-media/icons8-facebook.svg'
 import instagram from '../../assets/images/social-media/icons8-instagram.svg'
 import twitter from '../../assets/images/social-media/icons8-twitter.svg'

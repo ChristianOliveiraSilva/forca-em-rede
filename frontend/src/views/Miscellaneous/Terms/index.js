@@ -1,7 +1,7 @@
 import MiscellaneousLayout from '../../../layouts/MiscellaneousLayout'
 
 import '../../../assets/scss/pages/terms.scss'
-import logo from '../../../assets/images/logo.svg'
+import logo from '../../../assets/images/logo.png'
 
 
 const Page = () => {

@@ -1,10 +1,13 @@
 import '../../assets/scss/layouts/auth-layout.scss'
-import image from '../../assets/images/logo.svg'
+import image from '../../assets/images/logo.png'
+import { Link } from 'react-router-dom'
 
 const DefaultComponent = () => {
     return (
         <div>
-            <img src={image} />
+            <Link to="/">
+                <img src={image} />
+            </Link>
         </div>
     )
 }
