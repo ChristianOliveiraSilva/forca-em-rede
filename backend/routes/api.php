@@ -12,6 +12,7 @@ use App\Http\Controllers\LikeController;
 use App\Http\Controllers\NotificationController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\ReportController;
 
 Route::prefix('v1')->group(function () {
     Route::get('hi', function () {
@@ -79,9 +80,15 @@ Route::prefix('v1')->group(function () {
 
     Route::prefix('users')->group(function () {
         Route::get('show', [UserController::class, 'show']);
-        Route::post('store', [UserController::class, 'store']);
         Route::put('update/{user}', [UserController::class, 'update']);
         Route::delete('destroy/{user}', [UserController::class, 'destroy']);
         Route::post('registerDeath/{user}', [UserController::class, 'registerDeath']);
+    });
+
+    Route::prefix('report')->group(function () {
+        Route::post('press/contact', [ReportController::class, 'pressContact']);
+        Route::post('contact', [ReportController::class, 'contact']);
+        Route::post('bug', [ReportController::class, 'bug']);
+        Route::post('complaint', [ReportController::class, 'complaint']);
     });
 });

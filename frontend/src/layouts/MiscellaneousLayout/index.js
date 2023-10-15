@@ -6,11 +6,10 @@ import twitter from '../../assets/images/social-media/icons8-twitter.svg'
 import { Link } from 'react-router-dom'
 
 const MiscellaneousLayout = (props) => {
-
     return (
         <div className='miscellaneous-layout'>
             <header className='minimal-header'>
-                <b>Atenção!</b> Você está em um ambiente de demonstração da plataforma! <Link to='/bug-report'>Reporte bugs aqui</Link>
+                <b>Atenção!</b> Você está em um ambiente de demonstração da plataforma! <Link to='/bug-report' className='link'>Reporte bugs aqui</Link>
             </header>
             <header className='main-header'>
                 <Link to='/'>
@@ -51,7 +50,6 @@ const MiscellaneousLayout = (props) => {
                     <p><Link to="/contact">Contate a gente!</Link></p>
                     <p><Link to="/bug-report">Relate bugs</Link></p>
                     <p><Link to="/reporting-center">Central de Denúncias</Link></p>
-
                 </div>
                 <div className='footer-column'>
                     <h3 title='Informações para contato'>Informações para contato</h3>
@@ -76,7 +74,6 @@ const MiscellaneousLayout = (props) => {
                     <Link to="https://www.facebook.com/"><img src={facebook} className='social-img' /></Link>
                     <Link to="https://www.instagram.com/"><img src={instagram} className='social-img' /></Link>
                     <Link to="https://www.twitter.com/"><img src={twitter} className='social-img' /></Link>
-
                 </div>
             </footer>
         </div>

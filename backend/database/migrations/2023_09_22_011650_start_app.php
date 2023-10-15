@@ -130,10 +130,39 @@ return new class extends Migration
             $table->softDeletes();
             $table->foreign('post_id')->references('id')->on('users')->onDelete('cascade');
         });
+
+        Schema::create('contact_message', function (Blueprint $table) {
+            $table->string('name');
+            $table->string('email');
+            $table->string('subject');
+            $table->string('message');
+            $table->boolean('is_press')->default(false);
+            $table->timestamps();
+        });
+
+        Schema::create('bug_report', function (Blueprint $table) {
+            $table->string('name');
+            $table->string('email');
+            $table->string('link');
+            $table->string('bug');
+            $table->timestamps();
+        });
+
+        Schema::create('complaint_report', function (Blueprint $table) {
+            $table->id();
+            $table->string('name')->nullable();
+            $table->string('email')->nullable();
+            $table->string('link');
+            $table->string('complaint');
+            $table->timestamps();
+        });
     }
 
     public function down()
     {
+        Schema::dropIfExists('complaint_report');
+        Schema::dropIfExists('bug_report');
+        Schema::dropIfExists('contact_message');
         Schema::dropIfExists('media');
         Schema::dropIfExists('notifications');
         Schema::dropIfExists('private_messages');

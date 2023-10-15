@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use App\Models\User;
+use App\Models\UserProfile;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\ValidationException;
 
@@ -38,29 +39,42 @@ class AuthController extends Controller
     public function register(Request $request)
     {
         try {
-          $request->validate([
-              'name' => 'required',
-              'email' => 'required|email',
-              'password' => 'required',
-          ]);
-      
-          $user = User::where('email', $request->email)->first();
-      
-          if ($user) {
-              throw ValidationException::withMessages([
-                  ['Usuário já existe'],
-              ]);
-          }
-      
-          $user = User::create($request->all());
-      
-          if (!$user) {
-            throw new \Exception("Erro ao criar usuário");
-          }
-          
-          return $this->sendSuccess($user);
+            DB::beginTransaction();
+
+            $user = new User();
+            $user->email = $request->email;
+            $user->name = $request->name;
+            $user->password = $request->password;
+            $user->username = $request->username;
+            $user->phone = $request->phone;
+            $user->save();
+
+            $userProfile = new UserProfile();
+            $userProfile = $request->gender;
+            $userProfile = $request->birthdate;
+            $userProfile = $request->pronouns;
+            $userProfile = $request->social_name;
+            $userProfile = $request->disease;
+            $userProfile = $request->stage;
+            $userProfile = $request->place_treatment;
+            $userProfile = $request->address;
+            $userProfile = $request->city;
+            $userProfile = $request->state;
+            $userProfile = $request->job;
+            $userProfile = $request->workplace;
+            $userProfile = $request->cpf;
+            $userProfile = $request->rg;
+            $userProfile->user_id = $user->id;
+            $userProfile->save();
+
+            $user->refresh();
+
+            DB::commit();
+
+            return $this->sendSuccess($user, 'User created', 201);
         } catch (\Throwable $th) {
-          return $this->sendError('Erro ao criar usuário', $th);
+            DB::rollback();
+            return $this->sendError('Error creating user', $th);
         }
     }
 
