@@ -1,5 +1,4 @@
 import AuthLayout from '../../../layouts/AuthLayout/index'
-import '../../../assets/scss/pages/login.scss'
 
 import { Link, useHistory } from 'react-router-dom'
 import { useEffect, useState } from 'react'

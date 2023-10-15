@@ -9,6 +9,8 @@ import StageProfile from './components/stages/StageProfile'
 import StageWorkplace from './components/stages/StageWorkplace'
 import StageDisease from './components/stages/StageDisease'
 
+import '../../../assets/scss/pages/register.scss'
+
 import { Link } from 'react-router-dom'
 
 const Component = () => {
@@ -47,7 +49,7 @@ const Component = () => {
 
     return (
         <AuthLayout>
-            <section className='form-container'>
+            <section className='form-container register-container'>
                 <section>
                     <h1 className='mb-4 text-light'>Cadastre-se</h1>
                     {isFirstStage && <h5>Aqui, a esperança se multiplica. Una-se à nossa comunidade de guerreiros contra o câncer no Força em Rede.</h5>}
