@@ -14,6 +14,10 @@ use App\Http\Controllers\PostController;
 use App\Http\Controllers\UserController;
 
 Route::prefix('v1')->group(function () {
+    Route::get('hi', function () {
+        return 'hello';
+    });
+
     Route::prefix('auth')->group(function () {
         Route::post('login', [AuthController::class, 'login']);
         Route::post('register', [AuthController::class, 'register']);

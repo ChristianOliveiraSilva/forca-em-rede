@@ -109,13 +109,13 @@ class User extends Authenticatable
 
     public function getAgeAttribute()
     {
-        return now()->diffInYears($this->info->birthday);
+        return now()->diffInYears($this->info->birthdate);
     }
 
     public function getSignAttribute()
     {
-        $day = $this->info->birthday->format('j');
-        $month = $this->info->birthday->format('n');
+        $day = $this->info->birthdate->format('j');
+        $month = $this->info->birthdate->format('n');
 
         $signs = [
             ['name' => 'Áries', 'begin' => '03-21', 'end' => '04-19'],

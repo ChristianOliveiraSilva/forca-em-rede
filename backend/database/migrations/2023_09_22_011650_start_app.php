@@ -72,7 +72,7 @@ return new class extends Migration
             $table->id();
             $table->unsignedBigInteger('user_id');
             $table->string('gender');
-            $table->string('birthday');
+            $table->string('birthdate');
             $table->string('pronouns')->nullable();
             $table->string('social_name')->nullable();
             $table->string('disease')->nullable();

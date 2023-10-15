@@ -2,6 +2,9 @@
 @import "../_base.scss";
 
 .profile-container {
+    background: linear-gradient(to bottom, #f4f4f4 0%, #fff 10%);
+    border-radius: 10rem;
+    padding-top: 2rem;
 
     header {
         text-align: center;

@@ -2,41 +2,170 @@
 @import "../_base.scss";
 
 .post-container {
-    .header-app-container {
-        display: flex;
-        gap: 30px;
+    width: 100%;
+    margin: 2rem auto;
+    padding: 1rem;
+    box-shadow: 0px 5px 10px #ccc;
+    border: 0;
+    border-radius: 1rem;
 
-        .img-container img {
-            max-width: 80px;
-            border-radius: 100%;
+    .header-container {
+        display: flex;
+        justify-content: space-between;
+        gap: 15px;
+        align-items: center;
+
+        .img-container {
+            img {
+                max-height: 60px;
+                border-radius: 100%;
+            }
         }
 
-        .create-post-container {
-            flex: 1;
-            
-            textarea {
-                width: 100%;
-                height: 10vh;
-                outline: none;
-                resize: none;
-                border: 0;
-                padding-top: 1rem;
+        .info-container {
+            width: 100%;
+            overflow: auto;
+
+            p {
+                white-space: nowrap;
+                overflow: hidden;
+                text-overflow: ellipsis;
+            }
+        }
+    }
+
+    .content-container {
+        .text {
+            font-size: .9em;
+            margin: 1rem 0.25rem;
+        }
+        
+        .media {
+            display: block;
+            margin: 0px auto;
+            max-width: 100%;
+            transition: transform 1s;
+
+            &:hover {
+                transform: scale(1.025);
+            }
+        }
+    }
+
+    .statics-container {
+        display: flex;
+        justify-content: space-between;
+        padding-inline: 10px;
+        align-items: center;
+
+        p {
+            font-size: 12px;
+            cursor: pointer;
+            transition: 1s transform;
+
+            &:hover {
+                transform: scale(1.01);
+            }
+        }
+
+        .like-button {
+            font-size: 18px;
+            cursor: pointer;
+
+            &.liked {
+                color: $primary-color;
             }
 
-            .options-container {
-                display: flex;
-                flex-wrap: wrap;
-                gap: 10px;
-                color: $secondary-color;
+            &:active {
+                transform: scale(1.1);
+            }
+        }
+    }
 
-                .option {
-                    cursor: pointer;
+    .create-comment-container {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-block: 3rem;
+        padding-left: 1rem;
+        border-top: 1px solid #ddd;
+        border-bottom: 1px solid #ddd;
+
+        .profile-picture {
+            width: min(100px, 33%);
+            border-radius: 100%;
+            transition: .4s transform;
+
+            &:hover {
+                transform: scale(1.1);
+            }
+        }
+
+        .create-comment-textarea {
+            width: 100%;
+            padding: 1rem;
+            margin: 2rem;
+            resize: none;
+            border-radius: 1rem;
+            border: 0;
+            background-color: #f5f5f5;
+            outline: none;
+        }
+
+        .publish-button {
+            padding: 12px;
+            background-color: $primary-color;
+            color: white;
+            border-radius: 1rem;
+            border: 0;
+            transition: .4s transform;
+
+            &:hover {
+                transform: scale(1.1);
+            }
+        }
+    }
+
+    .comment-list-container {
+
+        .comment {
+            display: flex;
+            align-items: center;
+            margin: 2rem;
+            gap: 1rem;
+
+            .profile-picture {
+                width: min(70px, 33%);
+                border-radius: 100%;
+                transition: .4s transform;
+    
+                &:hover {
+                    transform: scale(1.1);
                 }
             }
+    
+            .info {
+                font-weight: bold;
+            }
+    
+            .comment-content {
+                padding-top: .5rem;
+                line-height: 1.2em;
+            }
+        }
 
-            button {
-                background-color: $primary-color;
-                color: white;
+    }
+}
+
+@media screen and (min-width: 700px) {
+    .post-container {
+        .statics-container {
+            p {
+                font-size: 1em;
+            }
+    
+            .like-button {
+                font-size: 22px;
             }
         }
     }

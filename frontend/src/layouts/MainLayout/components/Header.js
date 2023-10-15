@@ -30,7 +30,7 @@ const Header = (props) => {
                     <BsBellFill />
                 </Link>
     
-                <Link to='/app/config'>
+                <Link to='/app/profile'>
                     <img src={img} className='contact-image' />
                 </Link>
             </section>

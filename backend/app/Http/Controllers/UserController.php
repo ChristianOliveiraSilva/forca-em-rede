@@ -41,7 +41,7 @@ class UserController extends Controller
 
             $userProfile = new UserProfile();
             $userProfile = $request->gender;
-            $userProfile = $request->birthday;
+            $userProfile = $request->birthdate;
             $userProfile = $request->pronouns;
             $userProfile = $request->social_name;
             $userProfile = $request->disease;
@@ -93,8 +93,8 @@ class UserController extends Controller
                 $userProfile = $request->gender;
             }
             
-            if ($request->birthday) {
-                $userProfile = $request->birthday;
+            if ($request->birthdate) {
+                $userProfile = $request->birthdate;
             }
             
             if ($request->pronouns) {

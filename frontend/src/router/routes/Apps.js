@@ -23,6 +23,10 @@ export default [
         element: <ProfileComponent />
     },
     {
+        path: "app/profile",
+        element: <ProfileComponent />
+    },
+    {
         path: "app/post/:postId",
         element: <PostComponent />
     }

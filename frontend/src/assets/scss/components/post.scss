@@ -58,14 +58,10 @@
         padding-inline: 10px;
         align-items: center;
 
-        p {
+        a {
+            color: unset;
             font-size: 12px;
             cursor: pointer;
-            transition: 1s transform;
-
-            &:hover {
-                transform: scale(1.01);
-            }
         }
 
         .like-button {
@@ -87,16 +83,12 @@
 @media screen and (min-width: 700px) {
     .post {
         .footer-container {
-            p {
+            a {
                 font-size: 1em;
             }
     
             .like-button {
                 font-size: 22px;
-    
-                &.liked {
-                    color: $primary-color;
-                }
             }
         }
     }
