@@ -27,68 +27,70 @@ Route::prefix('v1')->group(function () {
         Route::post('checkPhone', [AuthController::class, 'checkPhone']);
     });
 
-    Route::prefix('chat')->group(function () {
-        Route::post('message', [ChatController::class, 'storeMessage']);
-        Route::post('deleteMessage/{privateMessage}', [ChatController::class, 'deleteMessage']);
-        Route::get('showConversation/{otherUser}', [ChatController::class, 'showConversation']);
-        Route::post('registerSeen/{privateMessage}', [ChatController::class, 'registerSeen']);
-    });
+    Route::group(['middleware' => 'auth:sanctum'], function () {
+        Route::prefix('chat')->group(function () {
+            Route::post('message', [ChatController::class, 'storeMessage']);
+            Route::post('deleteMessage/{privateMessage}', [ChatController::class, 'deleteMessage']);
+            Route::get('showConversation/{otherUser}', [ChatController::class, 'showConversation']);
+            Route::post('registerSeen/{privateMessage}', [ChatController::class, 'registerSeen']);
+        });
 
-    Route::prefix('comments')->group(function () {
-        Route::post('store', [CommentController::class, 'store']);
-        Route::get('show/{comment}', [CommentController::class, 'show']);
-        Route::get('showByUser/{userId}', [CommentController::class, 'showByUser']);
-        Route::get('showByPost/{postId}', [CommentController::class, 'showByPost']);
-        Route::put('update/{comment}', [CommentController::class, 'update']);
-        Route::delete('destroy/{comment}', [CommentController::class, 'destroy']);
-    });
+        Route::prefix('comment')->group(function () {
+            Route::post('store', [CommentController::class, 'store']);
+            Route::get('show/{comment}', [CommentController::class, 'show']);
+            Route::get('showByUser/{userId}', [CommentController::class, 'showByUser']);
+            Route::get('showByPost/{postId}', [CommentController::class, 'showByPost']);
+            Route::put('update/{comment}', [CommentController::class, 'update']);
+            Route::delete('destroy/{comment}', [CommentController::class, 'destroy']);
+        });
 
-    Route::prefix('events')->group(function () {
-        Route::get('index', [EventController::class, 'index']);
-        Route::post('store', [EventController::class, 'store']);
-        Route::get('show/{event}', [EventController::class, 'show']);
-        Route::put('update/{event}', [EventController::class, 'update']);
-        Route::delete('destroy/{event}', [EventController::class, 'destroy']);
-        Route::post('participate/{event}', [EventController::class, 'participate']);
-    });
+        Route::prefix('event')->group(function () {
+            Route::get('index', [EventController::class, 'index']);
+            Route::post('store', [EventController::class, 'store']);
+            Route::get('show/{event}', [EventController::class, 'show']);
+            Route::put('update/{event}', [EventController::class, 'update']);
+            Route::delete('destroy/{event}', [EventController::class, 'destroy']);
+            Route::post('participate/{event}', [EventController::class, 'participate']);
+        });
 
-    Route::prefix('friendship')->group(function () {
-        Route::get('show/{friendId}', [FriendshipController::class, 'show']);
-        Route::post('verify/{friendId}', [FriendshipController::class, 'verify']);
-        Route::post('store/{friendId}', [FriendshipController::class, 'store']);
-    });
+        Route::prefix('friendship')->group(function () {
+            Route::get('show/{friendId}', [FriendshipController::class, 'show']);
+            Route::post('verify/{friendId}', [FriendshipController::class, 'verify']);
+            Route::post('store/{friendId}', [FriendshipController::class, 'store']);
+        });
 
-    Route::prefix('likes')->group(function () {
-        Route::post('store', [LikeController::class, 'store']);
-        Route::get('show/{like}', [LikeController::class, 'show']);
-        Route::get('showByUser/{userId}', [LikeController::class, 'showByUser']);
-        Route::delete('destroy/{like}', [LikeController::class, 'destroy']);
-    });
+        Route::prefix('like')->group(function () {
+            Route::post('store', [LikeController::class, 'store']);
+            Route::get('show/{like}', [LikeController::class, 'show']);
+            Route::get('showByUser/{userId}', [LikeController::class, 'showByUser']);
+            Route::delete('destroy/{like}', [LikeController::class, 'destroy']);
+        });
 
-    Route::prefix('notifications')->group(function () {
-        Route::get('view/{notification}', [NotificationController::class, 'view']);
-    });
+        Route::prefix('notification')->group(function () {
+            Route::get('view/{notification}', [NotificationController::class, 'view']);
+        });
 
-    Route::prefix('posts')->group(function () {
-        Route::get('index', [PostController::class, 'index']);
-        Route::post('store', [PostController::class, 'store']);
-        Route::get('show/{post}', [PostController::class, 'show']);
-        Route::get('showByUser/{userId}', [PostController::class, 'showByUser']);
-        Route::put('update/{post}', [PostController::class, 'update']);
-        Route::delete('destroy/{post}', [PostController::class, 'destroy']);
-    });
+        Route::prefix('post')->group(function () {
+            Route::get('', [PostController::class, 'index']);
+            Route::post('', [PostController::class, 'store']);
+            Route::get('{post}', [PostController::class, 'show']);
+            Route::get('showByUser/{userId}', [PostController::class, 'showByUser']);
+            Route::put('{post}', [PostController::class, 'update']);
+            Route::delete('{post}', [PostController::class, 'destroy']);
+        })->middleware(['auth:sanctum', 'adasds']);
 
-    Route::prefix('users')->group(function () {
-        Route::get('show', [UserController::class, 'show']);
-        Route::put('update/{user}', [UserController::class, 'update']);
-        Route::delete('destroy/{user}', [UserController::class, 'destroy']);
-        Route::post('registerDeath/{user}', [UserController::class, 'registerDeath']);
-    });
-
-    Route::prefix('report')->group(function () {
-        Route::post('press/contact', [ReportController::class, 'pressContact']);
-        Route::post('contact', [ReportController::class, 'contact']);
-        Route::post('bug', [ReportController::class, 'bug']);
-        Route::post('complaint', [ReportController::class, 'complaint']);
+        Route::prefix('user')->group(function () {
+            Route::get('show', [UserController::class, 'show']);
+            Route::put('update/{user}', [UserController::class, 'update']);
+            Route::delete('destroy/{user}', [UserController::class, 'destroy']);
+            Route::post('registerDeath/{user}', [UserController::class, 'registerDeath']);
+        });
+    
+        Route::prefix('report')->group(function () {
+            Route::post('press/contact', [ReportController::class, 'pressContact']);
+            Route::post('contact', [ReportController::class, 'contact']);
+            Route::post('bug', [ReportController::class, 'bug']);
+            Route::post('complaint', [ReportController::class, 'complaint']);
+        });
     });
 });

@@ -1,13 +1,14 @@
 import AuthLayout from '../../../layouts/AuthLayout/index'
 
-import { Link, useHistory } from 'react-router-dom'
-import { useEffect, useState } from 'react'
+import { Link, useNavigate } from 'react-router-dom'
+import { useState } from 'react'
 import api from '../../../services/api'
 
 const Component = () => {
     const [msg, setMsg] = useState('')
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
+    const navigate = useNavigate()
 
     const handleLogin = async () => {
         if (email === '' || password === '') {
@@ -23,7 +24,7 @@ const Component = () => {
     
             if (token) {
                 localStorage.setItem('token', token)
-                history.push('/api')
+                navigate('/app')
             }
         } catch (error) {
             const { data } = error

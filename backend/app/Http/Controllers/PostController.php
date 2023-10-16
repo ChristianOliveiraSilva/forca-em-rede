@@ -14,9 +14,9 @@ class PostController extends Controller
     public function index()
     {
         try {
-            $posts = Post::all();
+            $posts = Post::all()->load('user.info')->load('likes')->load('comments');
 
-            return $this->sendSuccess($posts, 'Posts retrieved');
+            return $this->sendSuccess(['posts' => $posts], 'Posts retrieved');
         } catch (\Throwable $th) {
             return $this->sendError('Error retrieving posts', $th);
         }
@@ -28,25 +28,28 @@ class PostController extends Controller
             DB::beginTransaction();
 
             $post = new Post();
-            $post->title = $request->title;
             $post->content = $request->content;
             $post->user_id = Auth::id();
             $post->save();
 
-            foreach ($request->file('medias') as $media) {
-                $path = Storage::putFile('media', $media);
-
-                $media = new Media();
-                $media->media_url = $path;
-                $media->post_id = $post->id;
-                $media->save();
+            if ($request->file('medias')) {
+                foreach ($request->file('medias') as $media) {
+                    $path = Storage::putFile('media', $media);
+                    
+                    $media = new Media();
+                    $media->media_url = $path;
+                    $media->post_id = $post->id;
+                    $media->save();
+                }
+                
+                $post->refresh();
             }
-
-            $post->refresh();
             
             DB::commit();
 
-            return $this->sendSuccess($post, 'Post created', 201);
+            $post->load('user.info')->load('likes')->load('medias')->load('comments');
+
+            return $this->sendSuccess(['post' => $post], 'Post created', 201);
         } catch (\Throwable $th) {
             DB::rollback();
             return $this->sendError('Error creating post', $th);

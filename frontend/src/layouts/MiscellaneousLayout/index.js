@@ -22,7 +22,7 @@ const MiscellaneousLayout = (props) => {
                     <Link to="/terms">Termos</Link>
                     
                     <Link to="/login" className='btn btn-auth'>
-                            Logar
+                        Logar
                     </Link>
                     
                     <Link to="/register" className='auth-link'>
