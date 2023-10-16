@@ -36,37 +36,38 @@ Route::prefix('v1')->group(function () {
         });
 
         Route::prefix('comment')->group(function () {
-            Route::post('store', [CommentController::class, 'store']);
-            Route::get('show/{comment}', [CommentController::class, 'show']);
+            Route::post('', [CommentController::class, 'store']);
+            Route::get('{comment}', [CommentController::class, 'show']);
             Route::get('showByUser/{userId}', [CommentController::class, 'showByUser']);
             Route::get('showByPost/{postId}', [CommentController::class, 'showByPost']);
-            Route::put('update/{comment}', [CommentController::class, 'update']);
-            Route::delete('destroy/{comment}', [CommentController::class, 'destroy']);
+            Route::put('{comment}', [CommentController::class, 'update']);
+            Route::delete('{comment}', [CommentController::class, 'destroy']);
         });
 
         Route::prefix('event')->group(function () {
-            Route::get('index', [EventController::class, 'index']);
-            Route::post('store', [EventController::class, 'store']);
-            Route::get('show/{event}', [EventController::class, 'show']);
-            Route::put('update/{event}', [EventController::class, 'update']);
-            Route::delete('destroy/{event}', [EventController::class, 'destroy']);
+            Route::get('', [EventController::class, 'index']);
+            Route::post('', [EventController::class, 'store']);
+            Route::get('{event}', [EventController::class, 'show']);
+            Route::put('{event}', [EventController::class, 'update']);
+            Route::delete('{event}', [EventController::class, 'destroy']);
             Route::post('participate/{event}', [EventController::class, 'participate']);
         });
 
         Route::prefix('friendship')->group(function () {
-            Route::get('show/{friendId}', [FriendshipController::class, 'show']);
+            Route::get('{friendId}', [FriendshipController::class, 'show']);
             Route::post('verify/{friendId}', [FriendshipController::class, 'verify']);
             Route::post('store/{friendId}', [FriendshipController::class, 'store']);
         });
 
         Route::prefix('like')->group(function () {
-            Route::post('store', [LikeController::class, 'store']);
-            Route::get('show/{like}', [LikeController::class, 'show']);
+            Route::post('', [LikeController::class, 'store']);
+            Route::get('{like}', [LikeController::class, 'show']);
             Route::get('showByUser/{userId}', [LikeController::class, 'showByUser']);
-            Route::delete('destroy/{like}', [LikeController::class, 'destroy']);
+            Route::delete('{like}', [LikeController::class, 'destroy']);
         });
 
         Route::prefix('notification')->group(function () {
+            Route::get('', [NotificationController::class, 'index']);
             Route::get('view/{notification}', [NotificationController::class, 'view']);
         });
 
@@ -80,9 +81,9 @@ Route::prefix('v1')->group(function () {
         })->middleware(['auth:sanctum', 'adasds']);
 
         Route::prefix('user')->group(function () {
-            Route::get('show', [UserController::class, 'show']);
-            Route::put('update/{user}', [UserController::class, 'update']);
-            Route::delete('destroy/{user}', [UserController::class, 'destroy']);
+            Route::get('', [UserController::class, 'show']);
+            Route::put('{user}', [UserController::class, 'update']);
+            Route::delete('{user}', [UserController::class, 'destroy']);
             Route::post('registerDeath/{user}', [UserController::class, 'registerDeath']);
         });
     

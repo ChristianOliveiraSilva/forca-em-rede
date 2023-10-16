@@ -3,7 +3,7 @@ import MainLayout from '../../../layouts/MainLayout'
 const img = 'http://localhost/media/anonimo.webp'
 const img2 = 'https://img.freepik.com/fotos-gratis/paisagem-de-nevoeiro-matinal-e-montanhas-com-baloes-de-ar-quente-ao-nascer-do-sol_335224-794.jpg'
 import '../../../assets/scss/pages/profile.scss'
-import Post from '../Feed/components/Post'
+import Post from '../../../components/Post'
 import { BsFillGearFill } from 'react-icons/bs'
 import { Link } from 'react-router-dom'
 

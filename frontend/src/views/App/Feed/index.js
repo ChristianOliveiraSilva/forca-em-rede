@@ -1,14 +1,15 @@
 import Card from 'react-bootstrap/Card'
 
 import MainLayout from '../../../layouts/MainLayout'
-import Post from './components/Post'
+import Post from '../../../components/Post'
 const img = 'http://localhost/media/anonimo.webp'
 
 import '../../../assets/scss/pages/feed.scss'
-import { BsFill1CircleFill, BsFill2CircleFill, BsFill3CircleFill } from "react-icons/bs"
+import { BsFillCalendarEventFill, BsFilePlus } from "react-icons/bs"
 import { useEffect, useState } from 'react'
 import { toast } from 'react-toastify'
 import api from '../../../services/api'
+import { Link } from 'react-router-dom'
 
 const HeaderApp = ({addPostToList}) => {
     const [content, setContent] = useState('')
@@ -27,6 +28,10 @@ const HeaderApp = ({addPostToList}) => {
         }
     }
 
+    const handleUpload = (event) => {
+        
+    }
+
     return (
         <Card>
             <Card.Body>
@@ -37,12 +42,12 @@ const HeaderApp = ({addPostToList}) => {
 
                     <div className='create-post-container'>
                         <textarea placeholder='Como você está se sentindo agora?' value={content} onChange={e => setContent(e.target.value)} />
+                        <input type='file' id='file-upload' className='d-none' onChange={handleUpload} />
 
                         <div className='row align-items-center'>
-                            <div className='options-container col-6 col-md-10'>
-                                <div className='option'><BsFill1CircleFill /></div>
-                                <div className='option'><BsFill2CircleFill /></div>
-                                <div className='option'><BsFill3CircleFill /></div>
+                            <div className='options-container col-6 col-md-10 h4'>
+                                <label htmlFor='file-upload' className='option'><BsFilePlus /></label>
+                                <Link to='event/create' className='option'><BsFillCalendarEventFill /></Link>
                             </div>
                             <div className='col'>
                                 <button className='btn' onClick={handlePublish}>Postar</button>

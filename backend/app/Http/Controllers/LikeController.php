@@ -17,7 +17,7 @@ class LikeController extends Controller
             $like->post_id = $request->post_id;
             $like->save();
     
-            return $this->sendSuccess($like, 'Like created', 201);
+            return $this->sendSuccess(['like' => $like], 'Like created', 201);
         } catch (\Throwable $th) {
             return $this->sendError('Error to create like', $th);
         }
@@ -26,7 +26,7 @@ class LikeController extends Controller
     public function show(Like $like)
     {
         try {
-            return $this->sendSuccess($like, 'Like returned');
+            return $this->sendSuccess(['like' => $like], 'Like returned');
         } catch (\Throwable $th) {
             return $this->sendError('Error to get like', $th);
         }
@@ -37,7 +37,7 @@ class LikeController extends Controller
         try {
             $comments = Like::where('user_id', $userId)->get();
 
-            return $this->sendSuccess($like, 'Likes returned');
+            return $this->sendSuccess(['like' => $like], 'Likes returned');
         } catch (\Throwable $th) {
             return $this->sendError('Error to get likes', $th);
         }

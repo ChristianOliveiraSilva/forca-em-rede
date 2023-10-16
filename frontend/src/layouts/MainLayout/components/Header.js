@@ -2,10 +2,38 @@ import { Link } from "react-router-dom"
 
 import logo from '../../../assets/images/logo.png'
 import { BsSearch, BsBellFill } from "react-icons/bs"
+import { useEffect, useState } from "react"
+import { toast } from 'react-toastify'
+import api from '../../../services/api'
 
 const img = 'http://localhost/media/anonimo.webp'
 
 const Header = (props) => {
+    const [notifications, setNotifications] = useState([])
+
+    const loadNotifications = async () => {
+        try {
+            const { data } = await api.get('notification')
+
+            if (data.status === true) {
+                setNotifications(data.data.notifications)
+            } else {
+                toast.error('Erro ao capturar as notificações')
+            }
+        } catch (error) {
+            toast.error('Erro ao capturar as notificações')
+        }
+    }
+
+    useEffect(() => {
+        loadNotifications()
+        const timeout = setInterval(() => {
+            loadNotifications()
+        }, 1e4)
+
+        return () => clearInterval(timeout)
+    }, [])
+
     return (
         <header className="main-header">
             <section className="logo-container">
@@ -26,7 +54,7 @@ const Header = (props) => {
             </section>
 
             <section className="auth-container">
-                <Link to='/app/notifications' className='notification-icon notificated'>
+                <Link to='/app/notifications' className={notifications.every(e => e.seen_at !== null) ? 'notification-icon' : 'notification-icon  notificated'}>
                     <BsBellFill />
                 </Link>
     

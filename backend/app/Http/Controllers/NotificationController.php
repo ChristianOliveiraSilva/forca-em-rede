@@ -10,6 +10,17 @@ use App\Exceptions\UnauthorizedException;
 class NotificationController extends Controller
 {
 
+    public function index()
+    {
+        try {
+            $notifications = Auth::id() ? Notification::where('user_id', Auth::id())->get() : [];
+
+            return $this->sendSuccess(['notifications' => $notifications], 'Notifications retrieved');
+        } catch (\Throwable $th) {
+            return $this->sendError('Error retrieving notifications', $th);
+        }
+    }
+    
     public function view(Notification $notification)
     {
         try {

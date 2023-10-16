@@ -59,7 +59,8 @@ class PostController extends Controller
     public function show(Post $post)
     {
         try {
-            return $this->sendSuccess($post, 'Post retrieved');
+            $post->load('user.info')->load('likes')->load('medias')->load('comments');
+            return $this->sendSuccess(['post' => $post], 'Post retrieved');
         } catch (\Throwable $th) {
             return $this->sendError('Error retrieving post', $th);
         }

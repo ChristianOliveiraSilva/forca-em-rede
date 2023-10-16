@@ -101,7 +101,7 @@ class User extends Authenticatable
     public function seeNotification(Notification $notification): bool
     {
         if ($this->id === $notification->user_id) {
-            return $notification->update(['seen_at' => true]);
+            return $notification->update(['seen_at' => now()]);
         }
         
         throw new \App\Exceptions\UnauthorizedException("Error Processing Request", 1);

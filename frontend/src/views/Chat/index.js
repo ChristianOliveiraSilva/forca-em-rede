@@ -4,13 +4,17 @@ import Chat from './components/Chat.js'
 import ContactList from './components/ContactList.js'
 
 import '../../assets/scss/pages/chat.scss'
+import { useParams } from 'react-router-dom'
 
 const App = () => {
+    const { contactId } = useParams()
+
+
     return (
         <BlankLayout>
             <div className='chat-container'>
                 <ContactList />
-                <Chat />
+                {contactId && <Chat />}
             </div>
         </BlankLayout>
     )

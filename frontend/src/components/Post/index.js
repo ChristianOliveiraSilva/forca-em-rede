@@ -1,9 +1,10 @@
 import { Link } from 'react-router-dom'
-import '../../../../../assets/scss/components/post.scss'
+import '../../assets/scss/components/post.scss'
 import { BsThreeDots, BsHandThumbsUpFill } from "react-icons/bs"
-import { getUser } from '../../../../../utility/Utils'
-import api from '../../../../../services/api'
+import { getUser } from '../../utility/Utils'
+import api from '../../services/api'
 import { toast } from 'react-toastify'
+import { useState } from 'react'
 
 
 const generateLabelHeader = (user) => {
@@ -42,9 +43,11 @@ const generateLabelHeader = (user) => {
     return label
 }
 
-const Post = ({post, removePostFromList}) => {
+const Post = ({post, showAll, removePostFromList}) => {
     const user = getUser()
     let canDelete = user.id === post.user_id
+
+    const [like, setLike] = useState(post.likes.find(e => e.user_id === user.id))
 
     const deleteAction = async () => {
         if (!canDelete) {
@@ -56,8 +59,6 @@ const Post = ({post, removePostFromList}) => {
         try {
             const { data } = await api.delete(`post/${post.id}`)
 
-            console.log(data)
-
             if (data.data.result === true) {
                 removePostFromList(post.id)
             } else {
@@ -66,6 +67,27 @@ const Post = ({post, removePostFromList}) => {
         } catch (error) {
             console.log(error)
             toast.error('Não foi possivel deletar o post')   
+        }
+    }
+
+    const toggleLikeAction = async () => {
+        try {
+            if (!like) {
+                const { data } = await api.post(`like`, {post_id: post.id})
+    
+                if (data.status === true) {
+                    setLike(data.data.like)
+                }
+            } else {
+                const { data } = await api.delete(`like/${like.id}`, {post_id: post.id})
+    
+                if (data.status === true) {
+                    setLike(null)
+                }
+            }
+        } catch (error) {
+            console.log(error)
+            toast.error('Não foi possivel curtir o post')   
         }
     }
 
@@ -93,15 +115,16 @@ const Post = ({post, removePostFromList}) => {
                         {user.id !== post.user_id && (
                             <>
                                 <p>Denunciar</p>
+                                <Link to={`/chat/${post.user_id}`}>Conversar no chat</Link>
                             </>
                         )}
-
 
                         {/* <p>Link 2</p>
                         <p>Link 3</p> */}
                     </div> 
                 </div>
             </div>
+
             <div className='content-container'>
                 <div className='text'>
                     {post.content}
@@ -109,13 +132,41 @@ const Post = ({post, removePostFromList}) => {
 
                 {post.medias.map(e => <img className='media' src={e} />)}
             </div>
-            <div className='footer-container'>
-                <Link to='/app/post/asdad'>
-                    <p>{post.likes.length} curtida(s) • {post.likes.length} comentário(s)</p>
+
+            <div className='statics-container'>
+                <Link to={`/app/post/${post.id}`}>
+                    <p>{post.likes.length} curtida(s) • {post.comments.length} comentário(s)</p>
                 </Link>
 
-                <BsHandThumbsUpFill className='like-button liked' />
+                <BsHandThumbsUpFill
+                    className={like ? 'like-button liked' : 'like-button'}
+                    onClick={toggleLikeAction}
+                />
             </div>
+            
+            {showAll && (
+                <>
+                    <div className='create-comment-container'>
+                        <img src='https://web.whatsapp.com/img/native-desktop-hero_a22b846aefcd2de817624e95873b2064.png' className='profile-picture' />
+                        <textarea className='create-comment-textarea' placeholder='Publique sua ideia sobre o post'></textarea>
+                        <button className='publish-button'>Publicar</button>
+                    </div>
+
+                    <div className='comment-list-container'>
+                        {(new Array(3)).fill().map((e, i) => (
+                            <div key={i} className='comment'>
+                                <img src='https://web.whatsapp.com/img/native-desktop-hero_a22b846aefcd2de817624e95873b2064.png' className='profile-picture' />
+                                <section>
+                                    <p className='info'>@nickname • dados</p>
+                                    <p className='comment-content'>
+                                        Oii boa tarde, queria sabe se vc pode me ajuda na última coisa,🤦🏻‍♀️ seu pai tem carretinha n é? Será q ele te emprestava pra trazer minhas coisas
+                                    </p>
+                                </section>
+                            </div>
+                        ))}
+                    </div>
+                </>
+            )}
         </section>
     )
 }
