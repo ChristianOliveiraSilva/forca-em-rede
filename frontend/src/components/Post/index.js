@@ -1,4 +1,4 @@
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import '../../assets/scss/components/post.scss'
 import { BsThreeDots, BsHandThumbsUpFill } from "react-icons/bs"
 import { getUser } from '../../utility/Utils'
@@ -45,6 +45,7 @@ const generateLabelHeader = (user) => {
 
 const Post = ({post, showAll, removePostFromList}) => {
     const user = getUser()
+    const navigate = useNavigate()
     let canDelete = user.id === post.user_id
 
     const [like, setLike] = useState(post.likes.find(e => e.user_id === user.id))
@@ -60,7 +61,11 @@ const Post = ({post, showAll, removePostFromList}) => {
             const { data } = await api.delete(`post/${post.id}`)
 
             if (data.data.result === true) {
-                removePostFromList(post.id)
+                if (removePostFromList) {
+                    removePostFromList(post.id)
+                } else {
+                    navigate('/app')
+                }
             } else {
                 toast.error('Não foi possivel deletar o post')   
             }
@@ -118,10 +123,7 @@ const Post = ({post, showAll, removePostFromList}) => {
                                 <Link to={`/chat/${post.user_id}`}>Conversar no chat</Link>
                             </>
                         )}
-
-                        {/* <p>Link 2</p>
-                        <p>Link 3</p> */}
-                    </div> 
+                    </div>
                 </div>
             </div>
 

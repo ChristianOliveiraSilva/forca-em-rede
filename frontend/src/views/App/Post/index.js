@@ -31,7 +31,8 @@ const App = () => {
 
     return (
         <MainLayout>
-             {post && <Post post={post} showAll />}
+            {post && <Post post={post} showAll />}
+            {!post && <h2 className='my-5 py-5 h1 text-center text-muted'>Post não encontrado</h2>}
         </MainLayout>
     )
 }
