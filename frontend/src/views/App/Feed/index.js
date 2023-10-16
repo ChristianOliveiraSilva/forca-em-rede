@@ -63,6 +63,10 @@ const App = () => {
         setPosts([post, ...posts])
     }
 
+    const removePostFromList = (postId) => {
+        setPosts(posts.filter(e => e.id !== postId))
+    }
+
     const loadPosts = async () => {
         try {
             const { data } = await api.get('post')
@@ -86,7 +90,7 @@ const App = () => {
             <section className='feed-container'>
                 <HeaderApp addPostToList={addPostToList} />
 
-                {posts.map((e, i) => <Post key={i} post={e} />)}
+                {posts.map((e, i) => <Post key={i} post={e} removePostFromList={removePostFromList} />)}
             </section>
         </MainLayout>
     )

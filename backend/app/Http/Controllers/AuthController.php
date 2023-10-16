@@ -30,7 +30,7 @@ class AuthController extends Controller
             return $this->sendSuccess(['token' => null], 'A senha fornecida está incorreta', 403);
           }
       
-          return $this->sendSuccess(['token' => $user->createToken('auth')->plainTextToken]);
+          return $this->sendSuccess(['token' => $user->createToken('auth')->plainTextToken, 'user' => $user]);
         } catch (\Throwable $th) {
           return $this->sendError('Erro ao logar', $th);
         }

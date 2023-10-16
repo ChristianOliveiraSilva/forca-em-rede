@@ -21,9 +21,11 @@ const Component = () => {
         try {
             const { data } = await api.post('auth/login', {email, password})
             const token = data.data.token
+            const user = data.data.user
     
             if (token) {
                 localStorage.setItem('token', token)
+                localStorage.setItem('user', JSON.stringify(user))
                 navigate('/app')
             }
         } catch (error) {

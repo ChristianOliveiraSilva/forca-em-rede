@@ -1,6 +1,9 @@
 import { Link } from 'react-router-dom'
 import '../../../../../assets/scss/components/post.scss'
 import { BsThreeDots, BsHandThumbsUpFill } from "react-icons/bs"
+import { getUser } from '../../../../../utility/Utils'
+import api from '../../../../../services/api'
+import { toast } from 'react-toastify'
 
 
 const generateLabelHeader = (user) => {
@@ -39,7 +42,33 @@ const generateLabelHeader = (user) => {
     return label
 }
 
-const Post = ({post}) => {
+const Post = ({post, removePostFromList}) => {
+    const user = getUser()
+    let canDelete = user.id === post.user_id
+
+    const deleteAction = async () => {
+        if (!canDelete) {
+            return
+        }
+
+        canDelete = false
+
+        try {
+            const { data } = await api.delete(`post/${post.id}`)
+
+            console.log(data)
+
+            if (data.data.result === true) {
+                removePostFromList(post.id)
+            } else {
+                toast.error('Não foi possivel deletar o post')   
+            }
+        } catch (error) {
+            console.log(error)
+            toast.error('Não foi possivel deletar o post')   
+        }
+    }
+
     return (
         <section className='post'>
             <div className='header-container'>
@@ -55,9 +84,21 @@ const Post = ({post}) => {
                 <div className='options-container'>
                     <BsThreeDots className="options-btn" />
                     <div className="dropdown-content">
-                        <p>Link 1</p>
-                        <p>Link 2</p>
-                        <p>Link 3</p>
+                        {user.id === post.user_id && (
+                            <>
+                                <p onClick={deleteAction}>Deletar</p>
+                            </>
+                        )}
+
+                        {user.id !== post.user_id && (
+                            <>
+                                <p>Denunciar</p>
+                            </>
+                        )}
+
+
+                        {/* <p>Link 2</p>
+                        <p>Link 3</p> */}
                     </div> 
                 </div>
             </div>
