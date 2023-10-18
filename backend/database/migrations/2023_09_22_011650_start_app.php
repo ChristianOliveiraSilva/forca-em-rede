@@ -9,6 +9,7 @@ return new class extends Migration
     public function up()
     {
         Schema::table('users', function (Blueprint $table) {
+            $table->string('picture');
             $table->string('username');
             $table->string('phone')->nullable();
             $table->boolean('is_memory')->default(false);
@@ -53,6 +54,7 @@ return new class extends Migration
             $table->text('description')->nullable();
             $table->dateTime('start_date');
             $table->dateTime('end_date')->nullable();
+            $table->string('picture');
             $table->timestamps();
             $table->softDeletes();
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');

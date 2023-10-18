@@ -1,39 +1,70 @@
 import MainLayout from '../../../layouts/MainLayout'
 
-const img = 'http://localhost/media/anonimo.webp'
-const img2 = 'https://img.freepik.com/fotos-gratis/paisagem-de-nevoeiro-matinal-e-montanhas-com-baloes-de-ar-quente-ao-nascer-do-sol_335224-794.jpg'
 import '../../../assets/scss/pages/profile.scss'
 import Post from '../../../components/Post'
+
+import { useEffect, useState } from 'react'
+import { toast } from 'react-toastify'
+import api from '../../../services/api'
 import { BsFillGearFill } from 'react-icons/bs'
-import { Link } from 'react-router-dom'
+import { Link, useParams } from 'react-router-dom'
+import { getUser } from '../../../utility/Utils'
 
 const App = () => {
+    const { profileId } = useParams()
+    const currentUser = getUser()
+    
+    const [user, setUser] = useState(null)
+
+    const loadUser = async () => {
+        try {
+            const { data } = await api.get(`user/${profileId}`)
+
+            if (data.status === true) {
+                setUser(data.data.user)
+            } else {
+                toast.error('Erro ao obter Usuário, tente novamente ou contate um administrador')            
+            }
+        } catch (error) {
+            console.error(error)
+            toast.error('Erro ao obter Usuário, tente novamente ou contate um administrador')            
+        }
+    }
+
+    useEffect(() => {
+        loadUser()
+    }, [])
+
+    if (!user) {
+        return ''
+    }
+
     return (
         <MainLayout>
             <section className='profile-container'>
                 <header>
-                    <img src={img} className='picture' />
-                    <h3 className='in-memory-text'>Em Memória de</h3>
-                    <h2 className='title'>Nome</h2>
+                    <img src={`${process.env.REACT_APP_MEDIA_URL}anonimo.webp`} className='picture' />
+                    {user.is_memory && <h3 className='in-memory-text'>Em Memória de</h3>}
+                    <h2 className='title'>{user.name} • @{user.username}</h2>
                 </header>
 
                 <section className='card-container info-container'>
-                    <Link to='/app/config'>
-                        <BsFillGearFill className='float-end h4 text-secondary' style={{cursor: 'pointer'}} />
-                    </Link>
+                    {currentUser.id === user.id && (
+                        <Link to='/app/config'>
+                            <BsFillGearFill className='float-end h4 text-secondary' style={{cursor: 'pointer'}} />
+                        </Link>
+                    )}
                     <h3>Dados</h3>
 
                     <div className='row'>
-                        <div className='item'>xxxx</div>
-                        <div className='item'>xxxx</div>
-                        <div className='item'>xxxx</div>
-                        <div className='item'>xxxx</div>
-                        <div className='item'>xxxx</div>
-                        <div className='item'>xxxx</div>
-                        <div className='item'>xxxx</div>
-                        <div className='item'>xxxx</div>
-                        <div className='item'>xxxx</div>
-                        <div className='item'>xxxx</div>
+                        <div className='item'>{user.info.gender}</div>
+                        <div className='item'>{user.info.birthdate.split('-').reverse().join('/')}</div>
+                        <div className='item'>{user.info.pronouns}</div>
+                        <div className='item'>{user.info.address}</div>
+                        <div className='item'>{user.info.city}</div>
+                        <div className='item'>{user.info.state}</div>
+                        <div className='item'>{user.info.job}</div>
+                        <div className='item'>{user.info.workplace}</div>
                     </div>
                 </section>
 
@@ -41,26 +72,53 @@ const App = () => {
                     <h3>Eventos</h3>
 
                     <div className='event-container'>
-                        {(new Array(4)).fill(1).map((e, i) => (
-                            <div className='event'>
+                        {user.responsible_events.length === 0 && <h5 className='text-center text-muted my-1'>SEM EVENTOS</h5>}
+
+                        {user.responsible_events.map((e, i) => (
+                            <div className='event' key={i} >
                                 <div className='image-wrapper'>
-                                    <img src={img2} />
-                                    <p className='date'>xxx - xxx</p>
+                                    <img src={`${process.env.REACT_APP_MEDIA_URL}anonimo.webp`} />
+                                    <p className='date'>
+                                        {e.start_date.split('-').reverse().join('/')} - {e.end_date.split('-').reverse().join('/')}
+                                    </p>
                                 </div>
-                                <h3 className='title'>XXXX XXXX XXXX XXXX XXXX</h3>
-                                <p className='description'><small>xxx</small></p>
+                                <h3 className='title'>{e.title}</h3>
+                                <p className='description'><small>{e.description}</small></p>
                             </div>
                         ))}
                     </div>
                 </section>
 
-                <h3>Posts</h3>
+                {currentUser.id === user.id && (
+                    <section className='card-container'>
+                        <h3>Amigos</h3>
 
-                <h3 className='text-center text-muted my-5 d-none'>SEM POSTS</h3>
+                        <div className='event-container'>
+                            {user.friends.length === 0 && <h5 className='text-center text-muted my-1'>SEM AMIZADES</h5>}
 
-                {(new Array(10)).fill(1).map((e, i) => (
-                    <Post key={i} />
-                ))}
+                            {user.friends.map((e, i) => (
+                                <div className='event' key={i} >
+                                    <div className='image-wrapper'>
+                                        <img src={`${process.env.REACT_APP_MEDIA_URL}anonimo.webp`} />
+                                        <p className='date'>xxx - xxx</p>
+                                    </div>
+                                    <h3 className='title'>XXXX XXXX XXXX XXXX XXXX</h3>
+                                    <p className='description'><small>xxx</small></p>
+                                </div>
+                            ))}
+                        </div>
+                    </section>
+                )}
+
+                <section>
+                    <h3>Posts</h3>
+
+                    {user.posts.length === 0 && <h3 className='text-center text-muted my-5'>SEM POSTS</h3>}
+
+                    {user.posts.map((e) => (
+                        <Post key={e.id} post={e} />
+                    ))}
+                </section>
 
             </section>
         </MainLayout>

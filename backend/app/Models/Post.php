@@ -12,7 +12,9 @@ class Post extends Model
     use HasFactory;
 
     protected $with = [
-        'medias'
+        'likes',
+        'comments',
+        'medias',
     ];
 
     public function user()

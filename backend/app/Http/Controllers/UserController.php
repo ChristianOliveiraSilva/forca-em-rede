@@ -14,10 +14,10 @@ class UserController extends Controller
     public function show($id)
     {
         try {
-            $user = User::find($id)->with('comments', 'posts')->first();
+            $user = User::where('id', $id)->with('posts.user.info', 'friends', 'responsibleEvents')->first();
 
             if ($user) {
-                return $this->sendSuccess($user, 'User returned');
+                return $this->sendSuccess(['user' => $user], 'User returned');
             } else {
                 return $this->sendSuccess(null, 'User not found');
             }

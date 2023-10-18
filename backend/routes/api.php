@@ -81,7 +81,7 @@ Route::prefix('v1')->group(function () {
         })->middleware(['auth:sanctum', 'adasds']);
 
         Route::prefix('user')->group(function () {
-            Route::get('', [UserController::class, 'show']);
+            Route::get('{id}', [UserController::class, 'show']);
             Route::put('{user}', [UserController::class, 'update']);
             Route::delete('{user}', [UserController::class, 'destroy']);
             Route::post('registerDeath/{user}', [UserController::class, 'registerDeath']);
