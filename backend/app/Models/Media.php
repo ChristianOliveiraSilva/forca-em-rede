@@ -11,6 +11,8 @@ class Media extends Model
     use SoftDeletes;
     use HasFactory;
 
+    protected $table = 'medias';
+
     public function post()
     {
         return $this->belongsTo(Post::class);
