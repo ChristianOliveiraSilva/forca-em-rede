@@ -132,7 +132,7 @@ const Post = ({post, showAll, removePostFromList}) => {
                     {post.content}
                 </div>
 
-                {post.medias.map(e => <img className='media' src={e} />)}
+                {post.medias.map(e => <img className='media' src={process.env.REACT_APP_MEDIA_URL + e.media_url} />)}
             </div>
 
             <div className='statics-container'>

@@ -9,7 +9,7 @@ class MediaFactory extends Factory
     public function definition()
     {
         return [
-            'media_url' => 'anonimo.webp',
+            'media_url' => 'media-default.png',
         ];
     }
 }
