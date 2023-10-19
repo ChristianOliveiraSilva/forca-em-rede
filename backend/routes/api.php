@@ -31,8 +31,8 @@ Route::prefix('v1')->group(function () {
         Route::prefix('chat')->group(function () {
             Route::post('message', [ChatController::class, 'storeMessage']);
             Route::post('deleteMessage/{privateMessage}', [ChatController::class, 'deleteMessage']);
+            Route::get('contacts', [ChatController::class, 'contacts']);
             Route::get('{otherUser}', [ChatController::class, 'showConversation']);
-            Route::get('registerVisualization/{otherUser}', [ChatController::class, 'registerSeen']);
         });
 
         Route::prefix('comment')->group(function () {

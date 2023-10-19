@@ -12,7 +12,7 @@ const Chat = ({selectedContact, msgs, loadMsgs}) => {
     const handleSendMessage = async () => {
         try {
             const { data } = await api.post('chat/message', {
-                receiver_id: selectedContact.id,
+                receiver_id: selectedContact.user.id,
                 message_content: msg
             })
 
@@ -32,8 +32,8 @@ const Chat = ({selectedContact, msgs, loadMsgs}) => {
     return (
         <section className='chat-display-container'>
             <section className='header-chat-display-container'>
-                <img src={selectedContact.picture} className='contact-image' />
-                <h1 className='contact-name'>{selectedContact.name}</h1>
+                <img src={selectedContact.user.picture} className='contact-image' />
+                <h1 className='contact-name'>{selectedContact.user.name}</h1>
 
                 <Link to='/chat'>
                     <button className="btn">Voltar</button>

@@ -60,6 +60,18 @@
                     text-overflow: ellipsis;
                 }
 
+                .unread-messages-count {
+                    display: grid;
+                    place-items: center;
+                    background-color: $primary-color;
+                    color: white;
+                    padding: 0;
+                    width: 30px;
+                    height: 30px;
+                    margin-left: auto;
+                    border-radius: 100%;
+                }
+
                 &:hover, &.active {
                     background-color: $primary-color;
                     color: white;
@@ -173,6 +185,18 @@
             background-color: $primary-color;
             color: white;
         }
+    }
+}
+
+.loading-chat-container {
+    display: grid;
+    place-items: center;
+    height: 100vh;
+
+    .btn {
+        display: block;
+        background-color: $primary-color;
+        color: white;
     }
 }
 

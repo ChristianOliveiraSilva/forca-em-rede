@@ -12,8 +12,7 @@ class ChatController extends Controller
     public function storeMessage(Request $request)
     {
         try {
-            PrivateMessage::where('sender_id', $request->receiver_id)
-                ->where('receiver_id', Auth::id())->update(['seen_at' => now()]);
+            PrivateMessage::where(['sender_id' => $request->receiver_id, 'receiver_id' => Auth::id()])->update(['seen_at' => now()]);
 
             $privateMessage = new PrivateMessage();
             $privateMessage->sender_id = Auth::id();
@@ -36,6 +35,40 @@ class ChatController extends Controller
         }
     }
 
+    public function contacts(Request $request)
+    {
+        try {
+            $users = User::where('id', '!=', Auth::id())->get();
+
+            $contacts = [];
+    
+            foreach ($users as $user) {
+                $lastMessage = PrivateMessage::where(function($query) use ($user) {
+                    $query->where('sender_id', Auth::id())
+                        ->where('receiver_id', $user->id)
+                        ->orWhere(function($query) use ($user) {
+                            $query->where('sender_id', $user->id)
+                                ->where('receiver_id', Auth::id());
+                        });
+                })->latest()->first() ?? [];
+    
+                $unreadMessagesCount = PrivateMessage::where('receiver_id', Auth::id())
+                    ->where('sender_id', $user->id)
+                    ->where('seen_at', null)
+                    ->count();
+    
+                $contacts[] = [
+                    'user' => $user,
+                    'last_message' => $lastMessage,
+                    'unread_messages_count' => $unreadMessagesCount
+                ];
+            }
+            return $this->sendSuccess(['contacts' => $contacts], 'Private Message created', 201);
+        } catch (\Throwable $th) {
+            return $this->sendError('Error to create Private Message', $th);
+        }
+    }
+
     public function showConversation(Request $request, int $otherUser)
     {
         try {
@@ -47,24 +80,14 @@ class ChatController extends Controller
                 $query->where('sender_id', $otherUser)
                     ->where('receiver_id', Auth::id());
             })
-            ->orderBy('created_at', 'desc')
+            ->orderBy('created_at', 'asc')
             ->get();
+
+            PrivateMessage::whereIn('id', $privateMessages->pluck('id'))->update(['seen_at' => now()]);
 
             return $this->sendSuccess(['chat' => $privateMessages], 'Conversation returned');
         } catch (\Throwable $th) {
             return $this->sendError('Error to get Conversation', $th);
-        }
-    }
-
-    public function registerVisualization(PrivateMessage $privateMessage)
-    {
-        try {
-            $privateMessage->seen_at = now();
-            $privateMessage->save();
-
-            return $this->sendSuccess($privateMessage, 'Registered', 201);
-        } catch (\Throwable $th) {
-            return $this->sendError('Error to Registered seen in Private Message', $th);
         }
     }
 }
