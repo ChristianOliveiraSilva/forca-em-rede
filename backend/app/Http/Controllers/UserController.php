@@ -10,7 +10,17 @@ use Illuminate\Support\Facades\DB;
 
 class UserController extends Controller
 {
-    
+    public function index(Request $request)
+    {
+        try {
+            $users = User::all();
+
+            return $this->sendSuccess(['users' => $users], 'Users retrieved');
+        } catch (\Throwable $th) {
+            return $this->sendError('Error retrieving Users', $th);
+        }
+    }
+
     public function show($id)
     {
         try {

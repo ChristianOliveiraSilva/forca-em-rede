@@ -16,6 +16,7 @@ class LikeController extends Controller
             $like->user_id = Auth::id();
             $like->post_id = $request->post_id;
             $like->save();
+            $like->load('user');
     
             return $this->sendSuccess(['like' => $like], 'Like created', 201);
         } catch (\Throwable $th) {

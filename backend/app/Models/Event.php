@@ -11,6 +11,10 @@ class Event extends Model
     use SoftDeletes;
     use HasFactory;
 
+    protected $with = [
+        'owner'
+    ];
+
     public function owner()
     {
         return $this->belongsTo(User::class);

@@ -48,7 +48,11 @@ const Post = ({post, showAll, removePostFromList}) => {
     const navigate = useNavigate()
     let canDelete = user.id === post.user_id
 
-    const [like, setLike] = useState(post.likes.find(e => e.user_id === user.id))
+    const [liked, setLiked] = useState(post.likes.find(e => e.user_id === user.id))
+    const [commentInput, setCommentInput] = useState('')
+
+    const [likes, setLikes] = useState(post.likes)
+    const [comments, setComments] = useState(post.comments)
 
     const deleteAction = async () => {
         if (!canDelete) {
@@ -77,22 +81,45 @@ const Post = ({post, showAll, removePostFromList}) => {
 
     const toggleLikeAction = async () => {
         try {
-            if (!like) {
+            if (!liked) {
                 const { data } = await api.post(`like`, {post_id: post.id})
     
                 if (data.status === true) {
-                    setLike(data.data.like)
+                    setLiked(data.data.like)
+                    setLikes([data.data.like, ...likes])
+                    console.log([data.data.like, ...likes], data.data.like.id)
                 }
             } else {
-                const { data } = await api.delete(`like/${like.id}`, {post_id: post.id})
+                const { data } = await api.delete(`like/${liked.id}`, {post_id: post.id})
     
                 if (data.status === true) {
-                    setLike(null)
+                    console.log(likes, liked.id)
+                    setLikes(likes.filter(e => e.id !== liked.id))
+                    setLiked(null)
                 }
             }
         } catch (error) {
             console.log(error)
             toast.error('Não foi possivel curtir o post')   
+        }
+    }
+
+    const publishCommentAction = async () => {
+        try {
+            const { data } = await api.post(`comment`, {
+                post_id: post.id,
+                content: commentInput
+            })
+
+            if (data.status === true) {
+                setComments([data.data.comment, ...comments])
+                setCommentInput('')
+            } else {
+                toast.error('Não foi possivel comentar no post')   
+            }
+        } catch (error) {
+            console.log(error)
+            toast.error('Não foi possivel comentar no post')   
         }
     }
 
@@ -105,7 +132,7 @@ const Post = ({post, showAll, removePostFromList}) => {
                 <div className='info-container'>
                     <p className='h6 m-0'>{post.user.name}</p>
                     <p className='text-muted small'>
-                        @{post.user.name} • {generateLabelHeader(post.user)}
+                        @{post.user.username} • {generateLabelHeader(post.user)}
                     </p>
                 </div>
                 <div className='options-container'>
@@ -132,16 +159,22 @@ const Post = ({post, showAll, removePostFromList}) => {
                     {post.content}
                 </div>
 
-                {post.medias.map(e => <img className='media' src={process.env.REACT_APP_MEDIA_URL + e.media_url} />)}
+                <section className='medias-container'>
+                    {post.medias.map(e => (
+                        <div key={e.id} className='media'>
+                            <img src={process.env.REACT_APP_MEDIA_URL + e.media_url} />
+                        </div>
+                    ))}
+                </section>
             </div>
 
             <div className='statics-container'>
                 <Link to={`/app/post/${post.id}`}>
-                    <p>{post.likes.length} curtida(s) • {post.comments.length} comentário(s)</p>
+                    <p>{likes.length} curtida(s) • {comments.length} comentário(s)</p>
                 </Link>
 
                 <BsHandThumbsUpFill
-                    className={like ? 'like-button liked' : 'like-button'}
+                    className={liked ? 'like-button liked' : 'like-button'}
                     onClick={toggleLikeAction}
                 />
             </div>
@@ -149,19 +182,19 @@ const Post = ({post, showAll, removePostFromList}) => {
             {showAll && (
                 <>
                     <div className='create-comment-container'>
-                        <img src='https://web.whatsapp.com/img/native-desktop-hero_a22b846aefcd2de817624e95873b2064.png' className='profile-picture' />
-                        <textarea className='create-comment-textarea' placeholder='Publique sua ideia sobre o post'></textarea>
-                        <button className='publish-button'>Publicar</button>
+                        <img src={`${process.env.REACT_APP_MEDIA_URL}anonimo.webp`} className='profile-picture' />
+                        <textarea className='create-comment-textarea' placeholder='Publique sua ideia sobre o post' value={commentInput} onChange={e => setCommentInput(e.target.value)}></textarea>
+                        <button className='publish-button' onClick={publishCommentAction}>Publicar</button>
                     </div>
 
                     <div className='comment-list-container'>
-                        {(new Array(3)).fill().map((e, i) => (
-                            <div key={i} className='comment'>
-                                <img src='https://web.whatsapp.com/img/native-desktop-hero_a22b846aefcd2de817624e95873b2064.png' className='profile-picture' />
+                        {comments.map((e) => (
+                            <div key={e.id} className='comment'>
+                                <img src={`${process.env.REACT_APP_MEDIA_URL}anonimo.webp`} className='profile-picture' />
                                 <section>
-                                    <p className='info'>@nickname • dados</p>
+                                    <p className='info'><b>@{e.user.username}</b> • {generateLabelHeader(e.user)}</p>
                                     <p className='comment-content'>
-                                        Oii boa tarde, queria sabe se vc pode me ajuda na última coisa,🤦🏻‍♀️ seu pai tem carretinha n é? Será q ele te emprestava pra trazer minhas coisas
+                                        {e.content}
                                     </p>
                                 </section>
                             </div>

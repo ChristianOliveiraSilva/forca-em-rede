@@ -17,8 +17,9 @@ class CommentController extends Controller
             $comment->post_id = $request->post_id;
             $comment->content = $request->content;
             $comment->save();
+            $comment->load('user');
 
-            return $this->sendSuccess($comment, 'Comment created', 201);
+            return $this->sendSuccess(['comment' => $comment], 'Comment created', 201);
         } catch (\Throwable $th) {
             return $this->sendError('Error creating comment', $th);
         }
@@ -27,7 +28,7 @@ class CommentController extends Controller
     public function show(Comment $comment)
     {
         try {
-            return $this->sendSuccess($comment, 'Comment retrieved');
+            return $this->sendSuccess(['comment' => $comment], 'Comment retrieved');
         } catch (\Throwable $th) {
             return $this->sendError('Error retrieving comment', $th);
         }
@@ -38,7 +39,7 @@ class CommentController extends Controller
         try {
             $comments = Comment::where('user_id', $userId)->get();
 
-            return $this->sendSuccess($comments, 'Comments retrieved by user');
+            return $this->sendSuccess(['comments' => $comments], 'Comments retrieved by user');
         } catch (\Throwable $th) {
             return $this->sendError('Error retrieving comments by user', $th);
         }
@@ -49,7 +50,7 @@ class CommentController extends Controller
         try {
             $comments = Comment::where('post_id', $postId)->get();
 
-            return $this->sendSuccess($comments, 'Comments retrieved by post');
+            return $this->sendSuccess(['comments' => $comments], 'Comments retrieved by post');
         } catch (\Throwable $th) {
             return $this->sendError('Error retrieving comments by post', $th);
         }
@@ -61,7 +62,7 @@ class CommentController extends Controller
             $comment->content = $request->content;
             $comment->save();
 
-            return $this->sendSuccess($comment, 'Comment updated');
+            return $this->sendSuccess(['comment' => $comment], 'Comment updated');
         } catch (\Throwable $th) {
             return $this->sendError('Error updating comment', $th);
         }

@@ -20,7 +20,7 @@ Route::prefix('v1')->group(function () {
     });
 
     Route::prefix('auth')->group(function () {
-        Route::post('login', [AuthController::class, 'login']);
+        Route::post('login', [AuthController::class, 'login'])->name('login');
         Route::post('register', [AuthController::class, 'register']);
         Route::post('logout', [AuthController::class, 'logout']);
         Route::post('checkEmail', [AuthController::class, 'checkEmail']);
@@ -31,8 +31,8 @@ Route::prefix('v1')->group(function () {
         Route::prefix('chat')->group(function () {
             Route::post('message', [ChatController::class, 'storeMessage']);
             Route::post('deleteMessage/{privateMessage}', [ChatController::class, 'deleteMessage']);
-            Route::get('showConversation/{otherUser}', [ChatController::class, 'showConversation']);
-            Route::post('registerSeen/{privateMessage}', [ChatController::class, 'registerSeen']);
+            Route::get('{otherUser}', [ChatController::class, 'showConversation']);
+            Route::get('registerVisualization/{otherUser}', [ChatController::class, 'registerSeen']);
         });
 
         Route::prefix('comment')->group(function () {
@@ -81,6 +81,7 @@ Route::prefix('v1')->group(function () {
         })->middleware(['auth:sanctum', 'adasds']);
 
         Route::prefix('user')->group(function () {
+            Route::get('', [UserController::class, 'index']);
             Route::get('{id}', [UserController::class, 'show']);
             Route::put('{user}', [UserController::class, 'update']);
             Route::delete('{user}', [UserController::class, 'destroy']);

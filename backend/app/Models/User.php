@@ -33,7 +33,7 @@ class User extends Authenticatable
     ];
 
     protected $with = [
-        'info'
+        'info',
     ];
 
     public function info()
@@ -94,7 +94,7 @@ class User extends Authenticatable
     protected function name(): Attribute
     {
         return Attribute::make(
-            get: fn (string $value) => $this->info->social_name ?? $value,
+            get: fn (string $value) => $this->info->social_name ? $this->info->social_name : $value,
         );
     }
 

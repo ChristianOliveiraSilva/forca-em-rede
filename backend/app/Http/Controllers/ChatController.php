@@ -12,6 +12,9 @@ class ChatController extends Controller
     public function storeMessage(Request $request)
     {
         try {
+            PrivateMessage::where('sender_id', $request->receiver_id)
+                ->where('receiver_id', Auth::id())->update(['seen_at' => now()]);
+
             $privateMessage = new PrivateMessage();
             $privateMessage->sender_id = Auth::id();
             $privateMessage->receiver_id = $request->receiver_id;
@@ -36,27 +39,24 @@ class ChatController extends Controller
     public function showConversation(Request $request, int $otherUser)
     {
         try {
-            $user1 = Auth::id();
-            $perPage = $request->perPage ?? 10;
-            
-            $privateMessages = PrivateMessage::where(function ($query) use ($user1, $otherUser) {
-                $query->where('sender_id', $user1)
+            $privateMessages = PrivateMessage::where(function ($query) use ($otherUser) {
+                $query->where('sender_id', Auth::id())
                     ->where('receiver_id', $otherUser);
             })
-            ->orWhere(function ($query) use ($user1, $otherUser) {
+            ->orWhere(function ($query) use ($otherUser) {
                 $query->where('sender_id', $otherUser)
-                    ->where('receiver_id', $user1);
+                    ->where('receiver_id', Auth::id());
             })
             ->orderBy('created_at', 'desc')
-            ->paginate($perPage);
+            ->get();
 
-            return $this->sendSuccess($privateMessages, 'Conversation returned');
+            return $this->sendSuccess(['chat' => $privateMessages], 'Conversation returned');
         } catch (\Throwable $th) {
             return $this->sendError('Error to get Conversation', $th);
         }
     }
 
-    public function registerSeen(PrivateMessage $privateMessage)
+    public function registerVisualization(PrivateMessage $privateMessage)
     {
         try {
             $privateMessage->seen_at = now();

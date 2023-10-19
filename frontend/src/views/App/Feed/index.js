@@ -2,6 +2,7 @@ import Card from 'react-bootstrap/Card'
 
 import MainLayout from '../../../layouts/MainLayout'
 import Post from '../../../components/Post'
+
 const img = 'http://localhost/media/anonimo.webp'
 
 import '../../../assets/scss/pages/feed.scss'
@@ -12,9 +13,14 @@ import api from '../../../services/api'
 import { Link } from 'react-router-dom'
 
 const HeaderApp = ({addPostToList}) => {
+    const textMaxSize = 400
     const [content, setContent] = useState('')
 
     const handlePublish = async () => {
+        if (!content) {
+            return
+        }
+
         try {
             const { data } = await api.post('post', {content})
 
@@ -25,6 +31,14 @@ const HeaderApp = ({addPostToList}) => {
         } catch (error) {
             console.error(error)
             toast.error('Erro ao fazer post, tente novamente ou contate um administrador')
+        }
+    }
+
+    const handleContent = (event) => {
+        const { value } = event.target
+
+        if (value.length <= textMaxSize) {
+            setContent(value)
         }
     }
 
@@ -41,7 +55,8 @@ const HeaderApp = ({addPostToList}) => {
                     </div>
 
                     <div className='create-post-container'>
-                        <textarea placeholder='Como você está se sentindo agora?' value={content} onChange={e => setContent(e.target.value)} />
+                        <p className='text-muted small text-end'><small>{content.length}/{textMaxSize}</small></p>
+                        <textarea placeholder='Como você está se sentindo agora?' value={content} onChange={handleContent} />
                         <input type='file' id='file-upload' className='d-none' onChange={handleUpload} />
 
                         <div className='row align-items-center'>

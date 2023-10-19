@@ -18,7 +18,8 @@ const App = () => {
 
     const loadUser = async () => {
         try {
-            const { data } = await api.get(`user/${profileId}`)
+            const url = profileId ? `user/${profileId}` : `user/${currentUser.id}`
+            const { data } = await api.get(url)
 
             if (data.status === true) {
                 setUser(data.data.user)
@@ -79,7 +80,7 @@ const App = () => {
                                 <div className='image-wrapper'>
                                     <img src={`${process.env.REACT_APP_MEDIA_URL}anonimo.webp`} />
                                     <p className='date'>
-                                        {e.start_date.split('-').reverse().join('/')} - {e.end_date.split('-').reverse().join('/')}
+                                        {e.start_date.split(' ')[0].split('-').reverse().join('/')} - {e.end_date.split(' ')[0].split('-').reverse().join('/')}
                                     </p>
                                 </div>
                                 <h3 className='title'>{e.title}</h3>

@@ -11,10 +11,10 @@ use Illuminate\Support\Facades\DB;
 
 class PostController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
         try {
-            $posts = Post::all()->load('user.info')->load('likes')->load('comments');
+            $posts = Post::with('user.info', 'likes', 'comments')->get();
 
             return $this->sendSuccess(['posts' => $posts], 'Posts retrieved');
         } catch (\Throwable $th) {
