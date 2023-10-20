@@ -17,7 +17,9 @@
 
         .img-container {
             img {
-                max-height: 60px;
+                height: 60px;
+                aspect-ratio: 1;
+                object-fit: cover;
                 border-radius: 100%;
             }
         }
@@ -82,7 +84,7 @@
             .media {
                 flex: 1;
 
-                img {
+                img, video {
                     display: block;
                     margin: 0px auto;
     
@@ -135,6 +137,7 @@
 
         .profile-picture {
             width: min(100px, 33%);
+            aspect-ratio: 1;
             border-radius: 100%;
             transition: .4s transform;
 
@@ -178,6 +181,7 @@
 
             .profile-picture {
                 width: min(70px, 33%);
+                aspect-ratio: 1;
                 border-radius: 100%;
                 transition: .4s transform;
     

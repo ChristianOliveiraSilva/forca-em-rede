@@ -8,7 +8,7 @@ import { toast } from 'react-toastify'
 import api from '../../../services/api'
 import { BsFillGearFill } from 'react-icons/bs'
 import { Link, useParams } from 'react-router-dom'
-import { getUser } from '../../../utility/Utils'
+import { getUser, getGender, convertToDMY } from '../../../utility/Utils'
 
 const App = () => {
     const { profileId } = useParams()
@@ -44,7 +44,11 @@ const App = () => {
         <MainLayout>
             <section className='profile-container'>
                 <header>
-                    <img src={`${process.env.REACT_APP_MEDIA_URL}anonimo.webp`} className='picture' />
+                    {currentUser.id === user.id ? (
+                        <img src={process.env.REACT_APP_MEDIA_URL + user.picture} className='picture' />
+                    ) : (
+                        <img src={process.env.REACT_APP_MEDIA_URL + user.picture} className='picture' />
+                    )}
                     {user.is_memory && <h3 className='in-memory-text'>Em Memória de</h3>}
                     <h2 className='title'>{user.name} • @{user.username}</h2>
                 </header>
@@ -58,14 +62,14 @@ const App = () => {
                     <h3>Dados</h3>
 
                     <div className='row'>
-                        <div className='item'>{user.info.gender}</div>
-                        <div className='item'>{user.info.birthdate.split('-').reverse().join('/')}</div>
+                        <div className='item'>{getGender(user.info.gender)}</div>
+                        <div className='item'>{convertToDMY(user.info.birthdate)}</div>
                         <div className='item'>{user.info.pronouns}</div>
-                        <div className='item'>{user.info.address}</div>
-                        <div className='item'>{user.info.city}</div>
-                        <div className='item'>{user.info.state}</div>
-                        <div className='item'>{user.info.job}</div>
-                        <div className='item'>{user.info.workplace}</div>
+                        <div className='item full'>{user.info.address}</div>
+                        <div className='item semi-full'>{user.info.city}</div>
+                        <div className='item semi-full'>{user.info.state}</div>
+                        <div className='item semi-full'>{user.info.job}</div>
+                        <div className='item semi-full'>{user.info.workplace}</div>
                     </div>
                 </section>
 

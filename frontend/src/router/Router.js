@@ -2,8 +2,6 @@ import {
     createBrowserRouter
 } from "react-router-dom"
 
-import BlankLayout from '../layouts/BlankLayout'
-
 import Miscellaneous from './routes/Miscellaneous'
 import Apps from './routes/Apps'
 import Chat from './routes/Chat'

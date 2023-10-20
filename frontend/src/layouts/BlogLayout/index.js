@@ -10,7 +10,8 @@ const BlogLayout = (props) => {
                 <nav>
                     <Link to='/blog'>Todos</Link>
                     <Link to='/blog/search'>Pesquisar</Link>
-                    <Link to='/'>Home</Link>                    
+                    <Link to='/'>Home</Link>
+                    <Link to='/app'>App</Link>
                 </nav>
             </header>
 

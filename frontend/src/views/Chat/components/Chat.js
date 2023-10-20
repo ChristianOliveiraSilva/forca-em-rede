@@ -32,7 +32,7 @@ const Chat = ({selectedContact, msgs, loadMsgs}) => {
     return (
         <section className='chat-display-container'>
             <section className='header-chat-display-container'>
-                <img src={selectedContact.user.picture} className='contact-image' />
+                <img src={process.env.REACT_APP_MEDIA_URL + selectedContact.user.picture} className='contact-image' />
                 <h1 className='contact-name'>{selectedContact.user.name}</h1>
 
                 <Link to='/chat'>

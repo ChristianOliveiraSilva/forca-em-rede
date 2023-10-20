@@ -47,13 +47,15 @@ const App = () => {
 
     return (
         <MainLayout>
-            <section className='notification-container'>
-                {notifications.map((e) => (
-                    <div className={e.seen_at ? 'item seen' : 'item'} onClick={() => handleNotificationSeen(e.id)}>
-                        {e.notification_content}
-                    </div>
-                ))}
-            </section>
+            {notifications.length === 0 ? <p className='my-5 text-muted text-center h1'>Não há notificações</p> : (
+                <section className='notification-container'>
+                    {notifications.map((e) => (
+                        <div className={e.seen_at ? 'item seen' : 'item'} onClick={() => handleNotificationSeen(e.id)}>
+                            {e.notification_content}
+                        </div>
+                    ))}
+                </section>
+            )}
         </MainLayout>
     )
 }

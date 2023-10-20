@@ -1,7 +1,7 @@
 import { Link, useNavigate } from 'react-router-dom'
 import '../../assets/scss/components/post.scss'
 import { BsThreeDots, BsHandThumbsUpFill } from "react-icons/bs"
-import { getUser } from '../../utility/Utils'
+import { getGender, getUser } from '../../utility/Utils'
 import api from '../../services/api'
 import { toast } from 'react-toastify'
 import { useState } from 'react'
@@ -13,7 +13,7 @@ const generateLabelHeader = (user) => {
     const maxInfoInLabel = 3
 
     if (user.info.gender) {
-        label += user.info.gender
+        label += getGender(user.info.gender)
         data++
     }
 
@@ -127,10 +127,15 @@ const Post = ({post, showAll, removePostFromList}) => {
         <section className='post'>
             <div className='header-container'>
                 <div className='img-container'>
-                    <img src={`${process.env.REACT_APP_MEDIA_URL}anonimo.webp`} />
+                    <Link to={`/app/profile/${post.user.id}`}>
+                        <img src={process.env.REACT_APP_MEDIA_URL + post.user.picture} />
+                    </Link>
                 </div>
                 <div className='info-container'>
-                    <p className='h6 m-0'>{post.user.name}</p>
+                    <Link to={`/app/profile/${post.user.id}`}>
+                        <p className='h6 m-0'>{post.user.name}</p>
+                    </Link>
+
                     <p className='text-muted small'>
                         @{post.user.username} • {generateLabelHeader(post.user)}
                     </p>
@@ -182,7 +187,7 @@ const Post = ({post, showAll, removePostFromList}) => {
             {showAll && (
                 <>
                     <div className='create-comment-container'>
-                        <img src={`${process.env.REACT_APP_MEDIA_URL}anonimo.webp`} className='profile-picture' />
+                        <img src={process.env.REACT_APP_MEDIA_URL + post.user.picture} className='profile-picture' />
                         <textarea className='create-comment-textarea' placeholder='Publique sua ideia sobre o post' value={commentInput} onChange={e => setCommentInput(e.target.value)}></textarea>
                         <button className='publish-button' onClick={publishCommentAction}>Publicar</button>
                     </div>
@@ -190,7 +195,7 @@ const Post = ({post, showAll, removePostFromList}) => {
                     <div className='comment-list-container'>
                         {comments.map((e) => (
                             <div key={e.id} className='comment'>
-                                <img src={`${process.env.REACT_APP_MEDIA_URL}anonimo.webp`} className='profile-picture' />
+                                <img src={process.env.REACT_APP_MEDIA_URL + e.user.picture} className='profile-picture' />
                                 <section>
                                     <p className='info'><b>@{e.user.username}</b> • {generateLabelHeader(e.user)}</p>
                                     <p className='comment-content'>

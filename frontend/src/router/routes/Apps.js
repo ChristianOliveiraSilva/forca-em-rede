@@ -4,30 +4,37 @@ import ProfileComponent from '../../views/App/Profile'
 import PostComponent from '../../views/App/Post'
 import NotificationsComponent from '../../views/App/Notifications'
 import ConfigComponent from '../../views/App/Config'
+import { redirectIfNotLogged } from '../validation/redirects'
 
 export default [
     {
         path: "app",
-        element: <AppComponent />
+        element: <AppComponent />,
+        loader: redirectIfNotLogged
     },
     {
         path: "app/config",
-        element: <ConfigComponent />
+        element: <ConfigComponent />,
+        loader: redirectIfNotLogged
     },
     {
         path: "app/notifications",
-        element: <NotificationsComponent />
+        element: <NotificationsComponent />,
+        loader: redirectIfNotLogged
     },
     {
         path: "app/profile/:profileId",
-        element: <ProfileComponent />
+        element: <ProfileComponent />,
+        loader: redirectIfNotLogged
     },
     {
         path: "app/profile",
-        element: <ProfileComponent />
+        element: <ProfileComponent />,
+        loader: redirectIfNotLogged
     },
     {
         path: "app/post/:postId",
-        element: <PostComponent />
+        element: <PostComponent />,
+        loader: redirectIfNotLogged
     }
 ]

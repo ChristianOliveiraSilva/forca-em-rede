@@ -13,7 +13,7 @@ const ContactList = ({contactId, contacts}) => {
                         <Link key={e.user.id} to={`/chat/${e.user.id}`}>
                             <div className={parseInt(contactId) === e.user.id ? 'contact-item active' : 'contact-item'}>
                                 <div>
-                                    <img src={e.user.picture} className='contact-image' />
+                                    <img src={process.env.REACT_APP_MEDIA_URL + e.user.picture} className='contact-image' />
                                 </div>
 
                                 <div style={{width: '100%'}}>

@@ -1,12 +1,15 @@
 import ChatComponent from '../../views/Chat/index'
+import { redirectIfNotLogged } from '../validation/redirects'
 
 export default [
     {
         path: "chat",
-        element: <ChatComponent />
+        element: <ChatComponent />,
+        loader: redirectIfNotLogged
     },
     {
         path: "chat/:contactId",
-        element: <ChatComponent />
+        element: <ChatComponent />,
+        loader: redirectIfNotLogged
     }
 ]
