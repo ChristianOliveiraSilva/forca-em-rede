@@ -2,6 +2,7 @@
 
 .main-blog-container {
     display: flex;
+    flex-direction: column;
 
     .content {
         flex: 4;
@@ -61,4 +62,10 @@
     width: 100%;
     outline: none;
     padding: 1rem;
+}
+
+@media (min-width: 576px) {
+    .main-blog-container {
+        flex-direction: row;        
+    }
 }

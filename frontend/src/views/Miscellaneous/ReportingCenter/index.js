@@ -37,7 +37,7 @@ const Page = () => {
     if (result === true) {
         return (
             <MiscellaneousLayout>
-                <div className="container my-5 py-5">
+                <div className="container my-3 py-3 my-md-5 py-md-5">
                     <h2 className='mb-5'>Denúncia registrado com <span className='text-success'>sucesso</span>!</h2>
                     <Link to='/'>
                         <button className='btn btn-primary'>Voltar para home</button>
@@ -50,7 +50,7 @@ const Page = () => {
     if (result === false) {
         return (
             <MiscellaneousLayout>
-                <div className="container my-5 py-5">
+                <div className="container my-3 py-3 my-md-5 py-md-5">
                     <h2 className='mb-5'>Denúncia <span className='text-danger'>não foi registrada</span>! Contate um administrador ou tente novamente.</h2>
                     <Link to='/'>
                         <button className='btn btn-primary'>Voltar para home</button>
@@ -62,7 +62,7 @@ const Page = () => {
 
     return (
         <MiscellaneousLayout>
-            <div className="container my-5 py-5">
+            <div className="container my-3 py-3 my-md-5 py-md-5">
                 <h1>Central de Denúncias</h1>
                 <p className='mb-5'>
                     Se você deseja fazer uma denúncia sobre algum usuário ou postagem, por favor, esteja ciente do que constitui abuso das regras da plataforma.

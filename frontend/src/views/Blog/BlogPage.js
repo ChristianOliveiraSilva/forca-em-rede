@@ -1,7 +1,5 @@
 import BlogLayout from '../../layouts/BlogLayout/index'
 
-import Comment from './components/Comment'
-
 import '../../assets/scss/pages/blog-page.scss'
 import BlogService from '../../services/BlogService'
 import { useState, useEffect } from 'react'

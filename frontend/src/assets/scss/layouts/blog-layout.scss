@@ -6,9 +6,10 @@
     
     header.main-header {
         display: flex;
-        flex-wrap: nowrap;
+        flex-direction: column;
         justify-content: space-between;
         align-items: center;
+        gap: 1rem;
         padding: 1.5rem;
         background-color: $primary-color;
         color: $secondary-color;
@@ -44,6 +45,15 @@
             &:hover {
                 text-decoration: underline;
             }
+        }
+    }
+}
+
+@media (min-width: 576px) {
+    .blog-layout {
+        header.main-header {
+            flex-direction: row;
+            gap: 0;
         }
     }
 }

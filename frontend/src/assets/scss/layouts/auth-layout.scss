@@ -28,6 +28,12 @@
     .content-container {
         background-color: $primary-color;
         overflow-y: auto;
+
+        img.logo-center {
+            display: block;
+            margin: 2rem auto;
+            height: 150px;
+        }
     }
 
     .form-container {
@@ -54,6 +60,12 @@
         .promo-container {
             display: grid;
             place-items: center;
+        }
+
+        .content-container {
+            img.logo-center {
+                display: none;
+            }
         }
 
         .form-container {

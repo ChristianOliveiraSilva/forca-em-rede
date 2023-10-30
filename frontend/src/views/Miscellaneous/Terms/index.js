@@ -7,7 +7,7 @@ import logo from '../../../assets/images/logo.png'
 const Page = () => {
     return (
         <MiscellaneousLayout>
-            <div className='terms-container container my-5 py-5'>
+            <div className='terms-container container my-3 py-3 my-md-5 py-md-5'>
                 <h1>Termos de Uso da Rede Social Força em Rede</h1>
 
                 <p className='my-3'><small>Última atualização: 30 de setembro de 2023</small></p>

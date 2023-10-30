@@ -67,57 +67,57 @@ const Page = () => {
                 <p>O objetivo é ajudar a imprensa a nos dilvugar! De uma lida 👇</p>
 
                 <section className='row'>
-                    <div className="container col-4 mt-5">
+                    <div className="container col-12 col-md-4 mt-5">
                         <h5>Comunicados de Imprensa</h5>
                         <p className='text-muted'><small>Por enquanto não há Comunicados de Imprensa</small></p>
                     </div>
 
-                    <div className="container col-4 mt-5">
+                    <div className="container col-12 col-md-4 mt-5">
                         <h5>Contatos de Mídia</h5>
                         <p className='text-muted'><small>Por enquanto não há Contatos de Mídia</small></p>
                     </div>
 
-                    <div className="container col-4 mt-5">
+                    <div className="container col-12 col-md-4 mt-5">
                         <h5>Recursos Multimídia</h5>
                         <p className='text-muted'><small>Por enquanto não há Recursos Multimídia</small></p>
                     </div>
 
-                    <div className="container col-4 mt-5">
+                    <div className="container col-12 col-md-4 mt-5">
                         <h5>Informações sobre Nós!</h5>
                         <p>Você pode ler sobre nós <Link to='/about' className='link'>Aqui</Link>!</p>
                     </div>
 
-                    <div className="container col-4 mt-5">
+                    <div className="container col-12 col-md-4 mt-5">
                         <h5>Estatísticas</h5>
                         <p className='text-muted'><small>Como a plataforma está em seu inicio não há Estatísticas ainda 😉📉</small></p>
                     </div>
 
-                    <div className="container col-4 mt-5">
+                    <div className="container col-12 col-md-4 mt-5">
                         <h5>Materiais Adicionais</h5>
                         <p className='text-muted'><small>Por enquanto não há Materiais Adicionais</small></p>
                     </div>
 
-                    <div className="container col-4 mt-5">
+                    <div className="container col-12 col-md-4 mt-5">
                         <h5>Links de Redes Sociais</h5>
                         
                     </div>
 
-                    <div className="container col-4 mt-5">
+                    <div className="container col-12 col-md-4 mt-5">
                         <h5>Informações de Eventos</h5>
                         <p className='text-muted'><small>Ainda não há Eventos confirmados! A plataforma suporta os usuários criarem eventos, de uma olhada!</small></p>
                     </div>
 
-                    <div className="container col-4 mt-5">
+                    <div className="container col-12 col-md-4 mt-5">
                         <h5>FAQ para a Mídia</h5>
                         <p className='text-muted'><small>Em construção ⚙️⚙️</small></p>
                     </div>
 
-                    <div className="container col-4 mt-5">
+                    <div className="container col-12 col-md-4 mt-5">
                         <h5>Políticas de Uso de Conteúdo</h5>
                         <p className='text-muted'><small>Por enquanto não há Políticas de Uso de Conteúdo</small></p>
                     </div>
 
-                    <div className="container col-4 mt-5">
+                    <div className="container col-12 col-md-4 mt-5">
                         <h5>Links Relacionados</h5>
                         <p className='text-muted'><small>Por enquanto não há Links Relacionados</small></p>
                     </div>
