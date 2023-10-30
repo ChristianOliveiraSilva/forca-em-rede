@@ -1,3 +1,4 @@
+import { BsThreeDotsVertical } from "react-icons/bs"
 
 const Header = () => {
     return (
@@ -5,7 +6,7 @@ const Header = () => {
             <h1 className="title col-4">Chat</h1>
 
             <div className="col-8 text-end">
-                aaa
+                <BsThreeDotsVertical />
             </div>
         </header>
     )

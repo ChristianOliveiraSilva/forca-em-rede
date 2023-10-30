@@ -17,7 +17,7 @@ const ContactList = ({contactId, contacts}) => {
                                 </div>
 
                                 <div style={{width: '100%'}}>
-                                    <p className='last-msg-time'>{e.last_message.created_at}</p>
+                                    <p className='last-msg-time'>{e.last_message.created_at ? (new Date(e.last_message.created_at)).toLocaleDateString() : ''}</p>
                                     <h1 className='contact-name'>{e.user.name}</h1>
                                     <p className='last-msg'>{e.last_message.message_content}</p>
                                     <span className='unread-messages-count'>{e.unread_messages_count}</span>

@@ -19,7 +19,9 @@ const AuthLayout = (props) => {
                 {props.promo ? props.promo : <DefaultComponent />}
             </div>
             <div className='content-container'>
-                <img className='logo-center' src={image} />
+                <Link to="/">
+                    <img className='logo-center' src={image} />
+                </Link>
                 {props.children}
             </div>
         </div>
