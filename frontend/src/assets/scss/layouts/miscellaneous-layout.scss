@@ -5,33 +5,41 @@
     background-color: $background-color;
 
     header.minimal-header {
-        padding: 3px 5rem;
+        padding: 0.25rem 1rem;
+        display: grid;
+        place-items: center;
         background-color: $secondary-color;
         color: white;
-        height: 25px;
-        font-size: 12px;
-        border: 0;
+        height: calc(60px + 0.25rem * 2);
         text-align: center;
-        vertical-align: middle;
+        font-size: 12px;
     }
     
     header.main-header {
-        border: 0;
         display: flex;
         flex-wrap: nowrap;
         justify-content: space-between;
         align-items: center;
-        padding: 1.5rem;
+        padding-right: 2rem;
         background-color: $primary-color;
         color: white;
         height: 105px;
 
         .title {
-            font-size: 1.8em;
+            font-size: 1.6em;
             font-weight: bold;
             line-height: normal !important;
             margin-bottom: 0;
             color: white;
+        }
+
+        .menu-icon{
+            font-size: 44px;
+            cursor: pointer;
+        }
+
+        .menu-links {
+            display: none;
         }
 
         a {
@@ -56,16 +64,31 @@
         }
     }
 
+    .menu-links-block {
+        padding: 1rem;
+        background-color: $primary-color;
+        user-select: none;
+
+        a {
+            text-align: center;
+            display: block;
+            color: white;
+            padding: .75rem;
+        }
+    }
+
     .content-container {
         min-height: 50vh;
     }
 
-    footer.main-footer{
+    footer.main-footer {
         display: flex;
+        flex-wrap: wrap;
+        gap: 3rem;
         justify-content: space-between;
         padding: 3rem;
         background-color: $primary-color;
-        border-top: 12rem solid $secondary-color;
+        border-top: 9rem solid $secondary-color;
         color: white;
 
         .footer-column {
@@ -73,7 +96,9 @@
         }
 
         .logo {
-            background-color: white;
+            max-width: 100%;
+            display: block;
+            margin: auto;
         }
 
         p {
@@ -95,16 +120,47 @@
     }
 }
 
-@media screen and (min-width: 970px) {
+@media (min-width: 576px) {
+    .miscellaneous-layout {
+        header.minimal-header {
+            padding: 0;
+            height: 25px;
+        }
+        
+        header.main-header {
+            padding: 1.5rem;
+
+            .title {
+                font-size: 1.8em;
+            }
+
+            .menu-icon{
+                display: none;
+            }
+
+            .menu-links {
+                display: block;
+            }
+        }
+
+        .menu-links-block {
+            display: none;    
+        }
+    }
+}
+
+@media (min-width: 992px) {
     .miscellaneous-layout {
         header.main-header {
             .title {
                 font-size: 2.4em;
             }
         }
+
+        footer.main-footer {
+            flex-wrap: nowrap;
+            padding: 1.8rem;
+            border-top: 12rem solid $secondary-color;
+        }
     }
-}
-
-@media screen and (min-width: 570px) {
-
 }

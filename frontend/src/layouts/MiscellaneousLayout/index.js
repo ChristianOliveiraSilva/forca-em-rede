@@ -4,19 +4,26 @@ import facebook from '../../assets/images/social-media/icons8-facebook.svg'
 import instagram from '../../assets/images/social-media/icons8-instagram.svg'
 import twitter from '../../assets/images/social-media/icons8-twitter.svg'
 import { Link } from 'react-router-dom'
+import { BsList, BsX } from "react-icons/bs"
+import { useState } from 'react'
 
 const MiscellaneousLayout = (props) => {
+
+    const [showMenu, setShowMenu] = useState(false)
+
     return (
         <div className='miscellaneous-layout'>
             <header className='minimal-header'>
-                <b>Atenção!</b> Você está em um ambiente de demonstração da plataforma! <Link to='/bug-report' className='link'>Reporte bugs aqui</Link>
+                <p>
+                    <b>Atenção!</b> Você está em um ambiente de demonstração da plataforma! <Link to='/bug-report' className='link'>Reporte bugs aqui</Link>
+                </p>
             </header>
             <header className='main-header'>
                 <Link to='/'>
                     <h3 className='title'>Força em Rede</h3>
                 </Link>
 
-                <nav>
+                <nav className='menu-links'>
                     <Link to="/blog">Blog</Link>
                     <Link to="/about">Sobre</Link>
                     <Link to="/terms">Termos</Link>
@@ -29,7 +36,30 @@ const MiscellaneousLayout = (props) => {
                         Cadastrar
                     </Link>
                 </nav>
+
+
+                {showMenu ? (
+                    <BsX className='menu-icon' onClick={() => setShowMenu(!showMenu)} />
+                ) : (
+                    <BsList className='menu-icon' onClick={() => setShowMenu(!showMenu)} />
+                )}
             </header>
+
+            {showMenu && (
+                <nav className='menu-links-block'>
+                    <Link to="/blog">Blog</Link>
+                    <Link to="/about">Sobre</Link>
+                    <Link to="/terms">Termos</Link>
+                    
+                    <Link to="/login">
+                        Logar
+                    </Link>
+                    
+                    <Link to="/register">
+                        Cadastrar
+                    </Link>
+                </nav>
+            )}
 
             <section className='content-container'>
                 {props.children}
@@ -53,19 +83,19 @@ const MiscellaneousLayout = (props) => {
                 </div>
                 <div className='footer-column'>
                     <h3 title='Informações para contato'>Informações para contato</h3>
-                    <table className='table text-light small'>
+                    <table className='table table-borderless text-light small'>
                         <tbody>
                             <tr>
-                                <td>Email institucional:</td>
-                                <td>institucional@forcaemrede.com</td>
+                                <td style={{verticalAlign: 'middle'}}>Email institucional:</td>
+                                <td style={{verticalAlign: 'middle'}}>institucional@forcaemrede.com</td>
                             </tr>
                             <tr>
-                                <td>Telefone institucional:</td>
-                                <td>(XX) XXXX-XXXX</td>
+                                <td style={{verticalAlign: 'middle'}}>Telefone institucional:</td>
+                                <td style={{verticalAlign: 'middle'}}>(XX) XXXX-XXXX</td>
                             </tr>
                             <tr>
-                                <td>Whatsapp institucional:</td>
-                                <td>(XX) XXXXX-XXXX</td>
+                                <td style={{verticalAlign: 'middle'}}>Whatsapp institucional:</td>
+                                <td style={{verticalAlign: 'middle'}}>(XX) XXXXX-XXXX</td>
                             </tr>
                         </tbody>
                     </table>

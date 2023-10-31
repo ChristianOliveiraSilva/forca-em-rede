@@ -13,6 +13,7 @@ import fecitecx from '../../../assets/images/about/fecitecx.png'
 import fecitel from '../../../assets/images/about/fecitel.png'
 import fetec from '../../../assets/images/about/fetec.png'
 import febrace from '../../../assets/images/about/febrace.png'
+import { BsArrowRight } from 'react-icons/bs'
 
 const Page = () => {
     return (
@@ -25,7 +26,7 @@ const Page = () => {
                         <h3 className='subtitle'>Juntos, somos mais fortes! Conecte-se à Força em Rede e encontre apoio para sua jornada contra o câncer.</h3>
                         <Link to="/login">
                             <button>
-                                Entre na plataforma
+                                Entre na plataforma <BsArrowRight />
                             </button>
                         </Link>
                     </div>
