@@ -131,12 +131,11 @@
         justify-content: space-between;
         align-items: center;
         margin-bottom: 3rem;
-        padding-left: 1rem;
         border-top: 1px solid #ddd;
         border-bottom: 1px solid #ddd;
 
         .profile-picture {
-            width: min(100px, 33%);
+            width: min(100px, 20%);
             aspect-ratio: 1;
             border-radius: 100%;
             transition: .4s transform;
@@ -148,8 +147,8 @@
 
         .create-comment-textarea {
             width: 100%;
-            padding: 1rem;
-            margin: 2rem;
+            padding: 0.75rem;
+            margin: 1rem;
             resize: none;
             border-radius: 1rem;
             border: 0;
@@ -198,7 +197,7 @@
     }
 }
 
-@media screen and (min-width: 700px) {
+@media screen and (min-width: 678px) {
     .post {
         .statics-container {
             a {
@@ -209,6 +208,18 @@
                 font-size: 22px;
             }
         }
+
+        .create-comment-container {
+            padding-left: 1rem;
+
+            .profile-picture {
+                width: min(100px, 33%);
+            }
+
+            .create-comment-textarea {
+                padding: 1rem;
+                margin: 2rem;
+            }
+        }
     }
-    
 }
