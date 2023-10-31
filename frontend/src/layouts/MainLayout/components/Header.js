@@ -35,34 +35,38 @@ const Header = (props) => {
     }, [])
 
     return (
-        <header className="main-header">
-            <section className="logo-container">
-                <img src={logo} />
-            </section>
+        <>
+            <img className="sm-logo" src={logo} />
 
-            <nav className="nav-container">
-                <Link to='/app'>Feed</Link>
-                <Link to='/chat'>Chat</Link>
-                <Link to='/blog'>Blog</Link>
-            </nav>
+            <header className="main-header">
+                <section className="logo-container">
+                    <img src={logo} />
+                </section>
 
-            <section className="search-container">
-                <div className="icon-container">
-                    <div className="input-icon"><BsSearch /></div>
-                    <input placeholder="Pesquise algum tema" />
-                </div>
-            </section>
+                <nav className="nav-container">
+                    <Link to='/app'>Feed</Link>
+                    <Link to='/chat'>Chat</Link>
+                    <Link to='/blog'>Blog</Link>
+                </nav>
 
-            <section className="auth-container">
-                <Link to='/app/notifications' className={notifications.every(e => e.seen_at !== null) ? 'notification-icon' : 'notification-icon  notificated'}>
-                    <BsBellFill />
-                </Link>
-    
-                <Link to='/app/profile'>
-                    <img src={img} className='contact-image' />
-                </Link>
-            </section>
-        </header>
+                <section className="search-container">
+                    <div className="icon-container">
+                        <div className="input-icon"><BsSearch /></div>
+                        <input placeholder="Pesquise algum tema" />
+                    </div>
+                </section>
+
+                <section className="auth-container">
+                    <Link to='/app/notifications' className={notifications.every(e => e.seen_at !== null) ? 'notification-icon' : 'notification-icon  notificated'}>
+                        <BsBellFill />
+                    </Link>
+        
+                    <Link to='/app/profile'>
+                        <img src={img} className='contact-image' />
+                    </Link>
+                </section>
+            </header>
+        </>
     )
 }
 
