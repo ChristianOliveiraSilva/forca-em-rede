@@ -17,7 +17,7 @@ class DevelopmentSeeder extends Seeder
         // users
         User::factory()
             ->count(50)
-            ->hasInfo(5)
+            ->hasInfo(1)
             ->has(
                 Post::factory()->hasMedias(3)->count(5)
             )

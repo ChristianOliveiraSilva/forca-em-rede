@@ -81,11 +81,14 @@ class AuthController extends Controller
     public function logout(Request $request)
     {
         try {
-          $result = Auth::user()->tokens()->delete();
+          $result = ['result' => false];
+
+          if (Auth::user()) {
+            $result = ['result' => Auth::user()->tokens()->delete()];
+          }
 
           return $this->sendSuccess($result, 'Logout realizado com sucesso');
         } catch (\Throwable $th) {
-          DB::rollback();
           return $this->sendError('Erro ao criar abordagem', $th);
         }
     }

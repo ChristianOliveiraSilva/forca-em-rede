@@ -38,6 +38,10 @@ class UserController extends Controller
 
     public function update(Request $request, User $user)
     {
+        if (Auth::id() != $user->id) {
+            return $this->sendError("User is not yours", null, 403);
+        }
+
         try {
             DB::beginTransaction();
 
@@ -57,60 +61,60 @@ class UserController extends Controller
 
             $userProfile = $user->info;
             
-            if ($request->gender) {
-                $userProfile = $request->gender;
+            if ($request->info['gender']) {
+                $userProfile->gender = $request->info['gender'];
             }
             
-            if ($request->birthdate) {
-                $userProfile = $request->birthdate;
+            if ($request->info['birthdate']) {
+                $userProfile->birthdate = $request->info['birthdate'];
             }
             
-            if ($request->pronouns) {
-                $userProfile = $request->pronouns;
+            if ($request->info['pronouns']) {
+                $userProfile->pronouns = $request->info['pronouns'];
             }
             
-            if ($request->social_name) {
-                $userProfile = $request->social_name;
+            if ($request->info['social_name']) {
+                $userProfile->social_name = $request->info['social_name'];
             }
             
-            if ($request->disease) {
-                $userProfile = $request->disease;
+            if ($request->info['disease']) {
+                $userProfile->disease = $request->info['disease'];
             }
             
-            if ($request->stage) {
-                $userProfile = $request->stage;
+            if ($request->info['stage']) {
+                $userProfile->stage = $request->info['stage'];
             }
             
-            if ($request->place_treatment) {
-                $userProfile = $request->place_treatment;
+            if ($request->info['place_treatment']) {
+                $userProfile->place_treatment = $request->info['place_treatment'];
             }
             
-            if ($request->address) {
-                $userProfile = $request->address;
+            if ($request->info['address']) {
+                $userProfile->address = $request->info['address'];
             }
             
-            if ($request->city) {
-                $userProfile = $request->city;
+            if ($request->info['city']) {
+                $userProfile->city = $request->info['city'];
             }
             
-            if ($request->state) {
-                $userProfile = $request->state;
+            if ($request->info['state']) {
+                $userProfile->state = $request->info['state'];
             }
             
-            if ($request->job) {
-                $userProfile = $request->job;
+            if ($request->info['job']) {
+                $userProfile->job = $request->info['job'];
             }
             
-            if ($request->workplace) {
-                $userProfile = $request->workplace;
+            if ($request->info['workplace']) {
+                $userProfile->workplace = $request->info['workplace'];
             }
             
-            if ($request->cpf) {
-                $userProfile = $request->cpf;
+            if ($request->info['cpf']) {
+                $userProfile->cpf = $request->info['cpf'];
             }
             
-            if ($request->rg) {
-                $userProfile = $request->rg;
+            if ($request->info['rg']) {
+                $userProfile->rg = $request->info['rg'];
             }
 
             $userProfile->save();
@@ -128,7 +132,9 @@ class UserController extends Controller
     public function destroy(User $user)
     {
         try {
-            $user = User::find($id);
+            if (Auth::id() != $user->id) {
+                return $this->sendError("User is not yours", null, 403);
+            }
 
             return $this->sendSuccess(['result' => $user->delete()], 'User deleted');
         } catch (\Throwable $th) {

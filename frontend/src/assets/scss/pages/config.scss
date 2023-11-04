@@ -7,11 +7,25 @@
         border: 1px solid #ddd;
         
         .item {
+            display: block;
             border-bottom: 1px solid #ddd;
             padding: 1rem;
+            cursor: pointer;
+
+            &:hover {
+                color: unset;
+                background-color: #eaeaea;
+            }
+
+            &:first-child {
+                border-top-right-radius: 1rem;
+                border-top-left-radius: 1rem;
+            }
 
             &:last-child {
                 border-bottom: 0;
+                border-bottom-right-radius: 1rem;
+                border-bottom-left-radius: 1rem;
             }
         }
     }

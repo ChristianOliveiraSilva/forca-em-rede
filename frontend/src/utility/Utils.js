@@ -17,10 +17,26 @@ const convertToDMY = (dateYMD, separator = '-', newSeparator = '/') => {
     return dateYMD.split(separator).reverse().join(newSeparator)    
 }
 
+const getNestedProperty = (obj, path) => {
+    const keys = path.split('.')
+    let current = obj
+  
+    for (const key of keys) {
+      if (current[key] === undefined) {
+        return undefined
+      }
+
+      current = current[key]
+    }
+  
+    return current
+}
+
 export {
     getCuriosity,
     getUser,
     getGender,
     convertToDMY,
-    hasUser
+    hasUser,
+    getNestedProperty
 }
