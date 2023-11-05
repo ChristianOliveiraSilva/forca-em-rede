@@ -1,7 +1,7 @@
 import AuthLayout from '../../../layouts/AuthLayout/index'
 
 import { Link, useNavigate } from 'react-router-dom'
-import { useState } from 'react'
+import { useCallback, useEffect, useState } from 'react'
 import api from '../../../services/api'
 
 const Component = () => {
@@ -11,6 +11,9 @@ const Component = () => {
     const navigate = useNavigate()
 
     const handleLogin = async () => {
+
+        console.log({email, password})
+
         if (email === '' || password === '') {
             setMsg('Preencha todos os dados')
             return
@@ -33,6 +36,21 @@ const Component = () => {
             setMsg(data.message)
         }
     }
+
+    const handleKeyDown = (event) => {
+        if (event.key === 'Enter') {
+            console.log(email)
+            handleLogin()
+        }
+    }
+
+    useEffect(() => {
+        window.addEventListener('keydown', handleKeyDown)
+
+        return () => {
+            window.removeEventListener('keydown', handleKeyDown)
+        }
+    }, [handleKeyDown])
 
     return (
         <AuthLayout>

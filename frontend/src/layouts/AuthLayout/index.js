@@ -16,7 +16,7 @@ const AuthLayout = (props) => {
     return (
         <div className='auth-layout'>
             <div className='promo-container'>
-                {props.promo ? props.promo : <DefaultComponent />}
+                <DefaultComponent />
             </div>
             <div className='content-container'>
                 <Link to="/">

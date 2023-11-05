@@ -43,23 +43,6 @@ const BlogPage = () => {
                 <div dangerouslySetInnerHTML={{ __html: blog.content }}></div>
 
                 <img className='img' src={blog.img} />
-
-                {/* <div className='my-3'>
-                    <button>Curtir</button>
-                    <button>Comentar</button>
-                    <button>Compartilhar</button>
-                </div>
-
-                <section className='mt-5'>
-                    <h3>Comentários</h3>
-
-                    {(new Array(10)).fill(1).map(
-                        (e, i) => (
-                            <Comment key={i} />
-                        )
-                    )}
-                </section> */}
-
             </section>
         </BlogLayout>
     )

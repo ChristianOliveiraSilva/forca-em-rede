@@ -16,32 +16,10 @@ import { toast } from 'react-toastify'
 
 import { Link, useNavigate } from 'react-router-dom'
 
-const objMock = {
-    name: `aaa${(Math.random() * 100)}`,
-    socialName: `aaaa${(Math.random() * 100)}`,
-    phone: `aaaa${(Math.random() * 100)}`,
-    username: `a${(Math.random() * 100)}`,
-    email: `a${(Math.random() * 100)}`,
-    password: `a${(Math.random() * 100)}`,
-    gender: `male`,
-    birthdate: `2023-10-13`,
-    pronouns: `aa${(Math.random() * 100)}`,
-    address: `aqa${(Math.random() * 100)}`,
-    city: `a${(Math.random() * 100)}`,
-    state: `a${(Math.random() * 100)}`,
-    job: `aa${(Math.random() * 100)}`,
-    workplace: `aa${(Math.random() * 100)}`,
-    cpf: `aa${(Math.random() * 100)}`,
-    rg: `aa${(Math.random() * 100)}`,
-    disease: `aaa${(Math.random() * 100)}`,
-    stage: `1`,
-    place_treatment: `aa${(Math.random() * 100)}`
-}
-
 const Component = () => {
     const [msg, setMsg] = useState('')
-    const [stage, setStage] = useState(4)
-    const [bodydata, setBodyData] = useState(objMock)
+    const [stage, setStage] = useState(0)
+    const [bodydata, setBodyData] = useState({})
     const navigate = useNavigate()
 
     const addData = (key, value) => {
