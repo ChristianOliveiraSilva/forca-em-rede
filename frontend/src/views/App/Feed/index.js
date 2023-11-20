@@ -4,6 +4,7 @@ import MainLayout from '../../../layouts/MainLayout'
 import Post from '../../../components/Post'
 
 const img = 'http://localhost/media/anonimo.webp'
+import logo from '../../../assets/images/logo.png'
 
 import '../../../assets/scss/pages/feed.scss'
 import { BsFillCalendarEventFill, BsFilePlus } from "react-icons/bs"
@@ -77,6 +78,7 @@ const HeaderApp = ({addPostToList}) => {
 
 const App = () => {
     const [posts, setPosts] = useState([])
+    const [loading, setLoading] = useState(true)
 
     const addPostToList = (post) => {
         console.log([post, ...posts])
@@ -89,10 +91,12 @@ const App = () => {
 
     const loadPosts = async () => {
         try {
+            setLoading(true)
             const { data } = await api.get('post')
 
             if (data.status === true) {
                 console.log(data.data)
+                setLoading(false)
                 setPosts(data.data.posts)
             }
         } catch (error) {
@@ -110,7 +114,19 @@ const App = () => {
             <section className='feed-container'>
                 <HeaderApp addPostToList={addPostToList} />
 
-                {posts.map((e, i) => <Post key={i} post={e} removePostFromList={removePostFromList} />)}
+                {
+                    loading ? (
+                        <section className='loading-container'>
+                            <img src={logo} />
+                            <h3 className='title'>Carregando postagens</h3>
+                        </section>
+                    ) : (
+                        <>
+                            {posts.length === 0 && <h3 className='text-muted h3 my-5 text-center'>Não há postagens disponíves, seja o primeiro a postar! ╰(*°▽°*)╯</h3>}
+                            {posts.map((e, i) => <Post key={i} post={e} removePostFromList={removePostFromList} />)}
+                        </>
+                    )
+                }
             </section>
         </MainLayout>
     )
