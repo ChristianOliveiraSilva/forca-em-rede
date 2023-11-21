@@ -1,8 +1,8 @@
 import { Link, useNavigate } from 'react-router-dom'
-import '../../assets/scss/components/post.scss'
+import '../../../assets/scss/components/post.scss'
 import { BsThreeDots, BsHandThumbsUpFill } from "react-icons/bs"
-import { getGender, getUser } from '../../utility/Utils'
-import api from '../../services/api'
+import { getGender, getUser } from '../../../utility/Utils'
+import api from '../../../services/api'
 import { toast } from 'react-toastify'
 import { useState } from 'react'
 
@@ -124,7 +124,7 @@ const Post = ({post, showAll, removePostFromList}) => {
     }
 
     return (
-        <section className='post'>
+        <section className='post-component'>
             <div className='header-container'>
                 <div className='img-container'>
                     <Link to={`/app/profile/${post.user.id}`}>

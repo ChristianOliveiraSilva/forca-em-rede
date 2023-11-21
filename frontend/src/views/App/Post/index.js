@@ -5,7 +5,7 @@ import { BsThreeDots, BsHandThumbsUpFill } from "react-icons/bs"
 import { useParams } from 'react-router-dom'
 import { toast } from 'react-toastify'
 import api from '../../../services/api'
-import Post from '../../../components/Post'
+import Post from '../../../components/Feed/Post'
 
 const App = () => {
     const { postId } = useParams()

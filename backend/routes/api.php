@@ -11,6 +11,7 @@ use App\Http\Controllers\FriendshipController;
 use App\Http\Controllers\LikeController;
 use App\Http\Controllers\NotificationController;
 use App\Http\Controllers\PostController;
+use App\Http\Controllers\FeedController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\ReportController;
 
@@ -71,6 +72,11 @@ Route::prefix('v1')->group(function () {
             Route::get('view/{notification}', [NotificationController::class, 'view']);
         });
 
+        Route::prefix('feed')->group(function () {
+            Route::get('', [FeedController::class, 'index']);
+            Route::get('search/{term}', [FeedController::class, 'search']);
+        });
+
         Route::prefix('post')->group(function () {
             Route::get('', [PostController::class, 'index']);
             Route::post('', [PostController::class, 'store']);
@@ -78,7 +84,7 @@ Route::prefix('v1')->group(function () {
             Route::get('showByUser/{userId}', [PostController::class, 'showByUser']);
             Route::put('{post}', [PostController::class, 'update']);
             Route::delete('{post}', [PostController::class, 'destroy']);
-        })->middleware(['auth:sanctum', 'adasds']);
+        });
 
         Route::prefix('user')->group(function () {
             Route::get('', [UserController::class, 'index']);

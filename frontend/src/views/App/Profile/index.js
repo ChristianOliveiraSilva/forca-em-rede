@@ -1,7 +1,7 @@
 import MainLayout from '../../../layouts/MainLayout'
 
 import '../../../assets/scss/pages/profile.scss'
-import Post from '../../../components/Post'
+import Post from '../../../components/Feed/Post'
 
 import { useEffect, useState } from 'react'
 import { toast } from 'react-toastify'

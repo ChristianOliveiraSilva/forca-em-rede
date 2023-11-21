@@ -1,7 +1,7 @@
 
 @import "../_base.scss";
 
-.post {
+.post-component {
     width: 100%;
     margin: 2rem auto;
     padding: 1rem;
@@ -198,7 +198,7 @@
 }
 
 @media screen and (min-width: 678px) {
-    .post {
+    .post-component {
         .statics-container {
             a {
                 font-size: 1em;

@@ -1,7 +1,11 @@
 import Card from 'react-bootstrap/Card'
 
 import MainLayout from '../../../layouts/MainLayout'
-import Post from '../../../components/Post'
+import Post from '../../../components/Feed/Post'
+import Ad from '../../../components/Feed/Ad'
+import Event from '../../../components/Feed/Event'
+import Friendship from '../../../components/Feed/Friendship'
+import Message from '../../../components/Feed/Message'
 
 import logo from '../../../assets/images/logo.png'
 import { getUser } from '../../../utility/Utils'
@@ -109,28 +113,42 @@ const HeaderApp = ({addPostToList}) => {
     )
 }
 
+const ContentManager = ({content, removeFromList}) => {
+    switch (content.type) {
+        case 'post':
+            return <Post post={content} removeFromList={removeFromList} />
+        case 'ad':
+            return <Ad content={content} />
+        case 'event':
+            return <Event content={content} />
+        case 'friendship':
+            return <Friendship content={content} />
+        default:
+            return <Message msg='O conteúdo carregado está com problemas 🛠️' />
+    }
+}
+
 const App = () => {
-    const [posts, setPosts] = useState([])
+    const [content, setContent] = useState([])
     const [loading, setLoading] = useState(true)
 
     const addPostToList = (post) => {
-        console.log([post, ...posts])
-        setPosts([post, ...posts])
+        post.type = 'post'
+        setContent([post, ...content])
     }
 
-    const removePostFromList = (postId) => {
-        setPosts(posts.filter(e => e.id !== postId))
+    const removeFromList = (postId) => {
+        setContent(content.filter(e => e.id !== postId))
     }
 
-    const loadPosts = async () => {
+    const loadContent = async () => {
         try {
             setLoading(true)
-            const { data } = await api.get('post')
+            const { data } = await api.get('feed')
 
             if (data.status === true) {
-                console.log(data.data)
+                setContent(data.data.feed)
                 setLoading(false)
-                setPosts(data.data.posts)
             }
         } catch (error) {
             console.error(error)
@@ -139,7 +157,7 @@ const App = () => {
     }
 
     useEffect(() => {
-        loadPosts()
+        loadContent()
     }, [])
 
     return (
@@ -155,8 +173,8 @@ const App = () => {
                         </section>
                     ) : (
                         <>
-                            {posts.length === 0 && <h3 className='text-muted h3 my-5 text-center'>Não há postagens disponíves, seja o primeiro a postar! ╰(*°▽°*)╯</h3>}
-                            {posts.map((e, i) => <Post key={i} post={e} removePostFromList={removePostFromList} />)}
+                            {content.length === 0 && <h3 className='text-muted h3 my-5 text-center'>Não há postagens disponíves, seja o primeiro a postar! ╰(*°▽°*)╯</h3>}
+                            {content.map((e, i) => <ContentManager key={i} content={e} removeFromList={removeFromList} />)}
                         </>
                     )
                 }
