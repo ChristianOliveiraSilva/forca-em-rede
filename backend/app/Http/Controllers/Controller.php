@@ -6,10 +6,23 @@ use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Foundation\Bus\DispatchesJobs;
 use Illuminate\Foundation\Validation\ValidatesRequests;
 use Illuminate\Routing\Controller as BaseController;
+use Illuminate\Support\Facades\Log;
 
 class Controller extends BaseController
 {
     use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
+
+    public function displayMemoryUsage($message = '') {
+        $memoryUsage = memory_get_usage(true) / (1024 * 1024); // megabytes
+    
+        Log::info("Memória usada {$message}: {$memoryUsage} MB");
+    }
+
+    private function log() {
+        if (request()->route()->uri !== 'api/v1/notification') {
+            $this->displayMemoryUsage("Api: ".request()->route()->uri);
+        }
+    }
 
     public function sendSuccess($result, $message = null, $code = 200) {
         $response = ['data' => $result, 'status' => true];
@@ -18,6 +31,7 @@ class Controller extends BaseController
             $response['message'] = $message;
         }
 
+        $this->log();
         return response()->json($response, $code);
     }
 
@@ -33,6 +47,7 @@ class Controller extends BaseController
             $response['error']['trace'] = $exception->getTraceAsString();
         }
 
+        $this->log();
         return response()->json($response, $code);
     }
 }

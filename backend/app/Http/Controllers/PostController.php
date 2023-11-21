@@ -14,7 +14,9 @@ class PostController extends Controller
     public function index(Request $request)
     {
         try {
+            $this->displayMemoryUsage('before get post');
             $posts = Post::with('user.info', 'likes', 'comments')->get();
+            $this->displayMemoryUsage('after get post');
 
             return $this->sendSuccess(['posts' => $posts], 'Posts retrieved');
         } catch (\Throwable $th) {
