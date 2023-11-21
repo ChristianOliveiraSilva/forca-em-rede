@@ -3,6 +3,13 @@ $primary-color: #b3b3ff;
 $secondary-color: #6141ac;
 $tertiary-color: #81ecec;
 
-$background-color: #fdfdfd;
+$white-color: #fcfcfc;
+$black-color: #212529;
+$gray-color: #fafafa;
+$background-color: $gray-color;
+
+$error-color: #ff4444;
+$success-color: #44ff44;
+
 
 $primary-font: 'Poppins', sans-serif;

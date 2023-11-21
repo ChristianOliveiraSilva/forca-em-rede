@@ -42,7 +42,7 @@ p {
 
 .form-control {
   border: 0;
-  background-color: #f4f4f4;
+  background-color: $gray-color;
 
   &.error {
     border: 1px solid rgb(var(--bs-danger-rgb));

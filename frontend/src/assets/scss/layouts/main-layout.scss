@@ -73,7 +73,7 @@
                 margin-inline: 1rem;
                 font-size: 1.2rem;
                 cursor: pointer;
-                color: #212529;
+                color: $black-color;
 
                 &.notificated::after {
                     content: "";

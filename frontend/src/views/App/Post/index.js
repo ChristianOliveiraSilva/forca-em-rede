@@ -1,6 +1,5 @@
 import { useEffect, useState } from 'react'
 import MainLayout from '../../../layouts/MainLayout'
-const img = 'http://localhost/media/anonimo.webp'
 
 import { BsThreeDots, BsHandThumbsUpFill } from "react-icons/bs"
 import { useParams } from 'react-router-dom'

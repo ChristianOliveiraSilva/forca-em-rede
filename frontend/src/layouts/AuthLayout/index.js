@@ -1,12 +1,12 @@
 import '../../assets/scss/layouts/auth-layout.scss'
-import image from '../../assets/images/logo.png'
+import logo from '../../assets/images/logo.png'
 import { Link } from 'react-router-dom'
 
 const DefaultComponent = () => {
     return (
         <div>
             <Link to="/">
-                <img src={image} />
+                <img src={logo} />
             </Link>
         </div>
     )
@@ -20,7 +20,7 @@ const AuthLayout = (props) => {
             </div>
             <div className='content-container'>
                 <Link to="/">
-                    <img className='logo-center' src={image} />
+                    <img className='logo-center' src={logo} />
                 </Link>
                 {props.children}
             </div>

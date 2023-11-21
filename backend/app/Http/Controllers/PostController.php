@@ -32,12 +32,13 @@ class PostController extends Controller
             $post->user_id = Auth::id();
             $post->save();
 
-            if ($request->file('medias')) {
-                foreach ($request->file('medias') as $media) {
-                    $path = Storage::putFile('media', $media);
-                    
+            if ($request->hasFile('medias')) {
+                foreach ($request->file('medias') as $file) {
+                    $fileName = uniqid('post_') . '.' . $file->getClientOriginalExtension();
+                    $file->move(public_path('media'), $fileName);
+
                     $media = new Media();
-                    $media->media_url = $path;
+                    $media->media_url = $fileName;
                     $media->post_id = $post->id;
                     $media->save();
                 }

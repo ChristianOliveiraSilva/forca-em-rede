@@ -7,7 +7,7 @@
     .contact-left-container {
         padding: 2rem;
         margin: 2rem;
-        background-color: #f4f5f9;
+        background-color: $background-color;
         border-radius: 1rem;
         flex: 1;
 
@@ -132,7 +132,7 @@
                 }
 
                 &.to {
-                    background-color: #c2befd;
+                    background-color: $primary-color;
                 }
             }
         }
@@ -148,7 +148,7 @@
                 outline: none;
                 resize: none;
                 border: 2px solid #eee;
-                background-color: #fafafa;
+                background-color: $white-color;
                 border-radius: 1rem;
             }
 
@@ -157,7 +157,7 @@
                 margin-left: auto;
                 border: 2px solid #ddd;
                 color: #444;
-                background-color: #f1f1f1;
+                background-color: $white-color;
                 padding: 1rem;
                 border-radius: 1rem;
             }

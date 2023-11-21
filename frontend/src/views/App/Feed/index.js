@@ -3,8 +3,8 @@ import Card from 'react-bootstrap/Card'
 import MainLayout from '../../../layouts/MainLayout'
 import Post from '../../../components/Post'
 
-const img = 'http://localhost/media/anonimo.webp'
 import logo from '../../../assets/images/logo.png'
+import { getUser } from '../../../utility/Utils'
 
 import '../../../assets/scss/pages/feed.scss'
 import { BsFillCalendarEventFill, BsFilePlus } from "react-icons/bs"
@@ -14,8 +14,10 @@ import api from '../../../services/api'
 import { Link } from 'react-router-dom'
 
 const HeaderApp = ({addPostToList}) => {
+    const currentUser = getUser()
     const textMaxSize = 400
     const [content, setContent] = useState('')
+    const [files, setFiles] = useState([])
 
     const handlePublish = async () => {
         if (!content) {
@@ -23,11 +25,23 @@ const HeaderApp = ({addPostToList}) => {
         }
 
         try {
-            const { data } = await api.post('post', {content})
+            const formData = new FormData()
+            files.forEach((file, index) => {
+                formData.append(`medias[${index}]`, file)
+            })
+
+            formData.append('content', content)
+
+            const { data } = await api.post('post',  formData, {
+                headers: {
+                  'Content-Type': 'multipart/form-data'
+                }
+            })
 
             if (data.status === true) {
                 addPostToList(data.data.post)
                 setContent('')
+                setFiles([])
             }
         } catch (error) {
             console.error(error)
@@ -44,7 +58,7 @@ const HeaderApp = ({addPostToList}) => {
     }
 
     const handleUpload = (event) => {
-        
+        setFiles([...event.target.files])
     }
 
     return (
@@ -52,13 +66,13 @@ const HeaderApp = ({addPostToList}) => {
             <Card.Body>
                 <section className='header-app-container'>
                     <div className='img-container'>
-                        <img src={img} />
+                        <img src={process.env.REACT_APP_MEDIA_URL + currentUser.picture} />
                     </div>
 
                     <div className='create-post-container'>
                         <p className='text-muted small text-end'><small>{content.length}/{textMaxSize}</small></p>
                         <textarea placeholder='Como você está se sentindo agora?' value={content} onChange={handleContent} />
-                        <input type='file' id='file-upload' className='d-none' onChange={handleUpload} />
+                        <input type='file' id='file-upload' className='d-none' onChange={handleUpload} multiple />
 
                         <div className='row align-items-center'>
                             <div className='options-container col-6 col-md-10 h4'>

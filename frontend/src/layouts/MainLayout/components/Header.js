@@ -5,11 +5,11 @@ import { BsSearch, BsBellFill } from "react-icons/bs"
 import { useEffect, useState } from "react"
 import { toast } from 'react-toastify'
 import api from '../../../services/api'
-
-const img = 'http://localhost/media/anonimo.webp'
+import { getUser } from '../../../utility/Utils'
 
 const Header = (props) => {
     const [notifications, setNotifications] = useState([])
+    const currentUser = getUser()
 
     const loadNotifications = async () => {
         try {
@@ -62,7 +62,7 @@ const Header = (props) => {
                     </Link>
         
                     <Link to='/app/profile'>
-                        <img src={img} className='contact-image' />
+                        <img src={process.env.REACT_APP_MEDIA_URL + currentUser.picture} className='contact-image' />
                     </Link>
                 </section>
             </header>

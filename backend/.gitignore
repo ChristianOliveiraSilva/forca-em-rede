@@ -2,6 +2,9 @@
 /public/build
 /public/hot
 /public/storage
+/public/media/*
+!/public/media/anonimo.webp
+!/public/media/media-default.png
 /storage/*.key
 /vendor
 .env
