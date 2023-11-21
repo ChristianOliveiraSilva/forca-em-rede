@@ -39,6 +39,32 @@
                 color: white;
             }
         }
+
+        .img-upload-container {
+            margin-block: 1rem;
+
+            .img-box {
+                display: inline-block;
+                position: relative;
+                cursor: pointer;
+                
+                .close {
+                    position: absolute;
+                    top: 10px;
+                    right: 10px;
+                }
+
+                img {
+                    width: 150px;
+                    border-radius: 2rem;
+                    transition: .3s;
+                    
+                    &:hover {
+                        transform: scale(1.05);
+                    }
+                }
+            }
+        }
     }
 
     .loading-container {

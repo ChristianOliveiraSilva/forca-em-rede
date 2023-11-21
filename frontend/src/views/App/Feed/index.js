@@ -58,7 +58,17 @@ const HeaderApp = ({addPostToList}) => {
     }
 
     const handleUpload = (event) => {
-        setFiles([...event.target.files])
+        const uploadedFiles = [...event.target.files]
+
+        if (uploadedFiles.length > 6) {
+            toast.error('Você não pode fazer o upload de mais de 6 arquivos')
+        }
+
+        setFiles(uploadedFiles.slice(0, 6))
+    }
+
+    const handleRemoveImg = (index) => {
+        setFiles(files.filter((e, i) => i !== index))
     }
 
     return (
@@ -82,6 +92,15 @@ const HeaderApp = ({addPostToList}) => {
                             <div className='col'>
                                 <button className='btn' onClick={handlePublish}>Postar</button>
                             </div>
+                        </div>
+
+                        <div className='img-upload-container'>
+                            {files.map((file, index) => (
+                                <div key={index} className='img-box'>
+                                    <img src={URL.createObjectURL(file)} />
+                                    <div className='close' onClick={() => handleRemoveImg(index)}>✖️</div>
+                                </div>
+                            ))}
                         </div>
                     </div>
                 </section>

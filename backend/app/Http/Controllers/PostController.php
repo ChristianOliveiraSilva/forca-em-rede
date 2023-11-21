@@ -32,8 +32,13 @@ class PostController extends Controller
             $post->user_id = Auth::id();
             $post->save();
 
+            $maxUploadFiles = 6;
             if ($request->hasFile('medias')) {
                 foreach ($request->file('medias') as $file) {
+                    if ($maxUploadFiles-- < 0) {
+                        break;
+                    }
+
                     $fileName = uniqid('post_') . '.' . $file->getClientOriginalExtension();
                     $file->move(public_path('media'), $fileName);
 
